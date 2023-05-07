@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  rewrites: () => [{ source: "/tech", destination: "/tech/index.html" }],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
