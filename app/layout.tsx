@@ -1,6 +1,6 @@
+import { Metadata } from "next";
 import { Allerta_Stencil } from "next/font/google";
 import "./globals.css";
-import { Metadata } from "next";
 
 const allertaStencil = Allerta_Stencil({ weight: "400", subsets: ["latin"] });
 
