@@ -1,5 +1,7 @@
 import { formatDistanceToNow, setHours } from "date-fns";
-import { Fragment, use } from "react";
+import { Fragment } from "react";
+
+export const revalidate = 60;
 
 namespace Songkick {
   export interface Event {
@@ -80,15 +82,13 @@ namespace Songkick {
   }
 }
 
-export default function Home() {
-  const nextShow: Songkick.Event = use(
-    fetch(
-      `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
-      { next: { revalidate: 3600 } }
-    )
-      .then((res) => res.json())
-      .then((res) => res.resultsPage?.results?.event?.[0])
-  );
+export default async function Home() {
+  const nextShow: Songkick.Event = await fetch(
+    `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
+    { next: { revalidate: 60 } }
+  )
+    .then((res) => res.json())
+    .then((res) => res.resultsPage?.results?.event?.[0]);
 
   return (
     <>
