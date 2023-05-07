@@ -46,7 +46,7 @@ export default function RootLayout({
       >
         {children}
         <div hidden>
-          <div itemProp="brand">Power-Thrash</div>
+          <div itemProp="brand">Power Thrash Metal</div>
           <div itemProp="member" itemScope itemType="http://schema.org/Person">
             <span itemProp="name">Stefan Jensen</span>
             <span itemProp="jobTitle">Singer</span>
