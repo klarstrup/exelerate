@@ -1,7 +1,7 @@
 import { formatDistanceToNow, setHours } from "date-fns";
 import { Fragment, use } from "react";
 
-export namespace Songkick {
+namespace Songkick {
   export interface Event {
     id: number;
     displayName: string;
