@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { Allerta_Stencil } from "next/font/google";
+import { Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
-const allertaStencil = Allerta_Stencil({ weight: "400", subsets: ["latin"] });
+const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: { default: "Exelerate", template: "%s | Exelerate" },
@@ -29,7 +29,7 @@ export default function RootLayout({
         <meta name="author" content="Mads Nikolai Sørensen" />
       </head>
       <body
-        className={allertaStencil.className}
+        className={bebasNeue.className}
         style={{
           margin: 0,
           height: "100vh",
