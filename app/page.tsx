@@ -1,5 +1,7 @@
 import { formatDistanceToNow, setHours } from "date-fns";
 import { Fragment } from "react";
+import FTVLogo from "./ftv-logo.png";
+import Image from "next/image";
 
 export const revalidate = 60;
 
@@ -115,7 +117,6 @@ export default async function Home() {
         <div
           id="exeleLinks"
           style={{
-            marginTop: "2.5%",
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
@@ -149,6 +150,23 @@ export default async function Home() {
             target="_blank"
           >
             YouTube
+          </a>
+          <a
+            href="https://fromthevaults.dk/"
+            target="_blank"
+            title="From The Vaults"
+            className="ftvLink"
+            style={{ position: "fixed", top: "5vh", right: "5vw" }}
+          >
+            <Image
+              src={FTVLogo}
+              alt="From The Vaults"
+              style={{
+                maxWidth: "7.5vh",
+                height: "auto",
+                marginTop: "0.125em",
+              }}
+            />
           </a>
         </div>
         {nextShow ? (

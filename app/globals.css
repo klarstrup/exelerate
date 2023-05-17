@@ -424,9 +424,8 @@ table {
 
 body {
   background-color: black;
-  font-family: "Allerta Stencil", sans-serif;
+  font-family: sans-serif;
   color: #ccc;
-  font-weight: bold;
   height: 100%;
   text-rendering: optimizeLegibility;
   position: relative;
@@ -459,6 +458,19 @@ a:active {
     font-size: 1em;
     line-height: 0.9;
   }
+}
+
+#exeleLinks a {
+  line-height: 0.9;
+  margin-bottom: 1vw;
+}
+a.ftvLink img {
+  filter: invert(25%) sepia(85%) saturate(1638%) hue-rotate(2deg)
+    brightness(108%) contrast(102%);
+}
+a.ftvLink:hover img {
+  filter: invert(20%) sepia(85%) saturate(1638%) hue-rotate(2deg)
+    brightness(108%) contrast(102%);
 }
 @keyframes blurIn {
   0% {
