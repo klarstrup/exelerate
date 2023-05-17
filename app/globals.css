@@ -478,9 +478,8 @@ a:active {
 .nextGig time,
 .nextGig .venue,
 .nextGig .otherHeadliners em {
-  margin: 0 0.1em;
   color: white;
-  font-size: 1.1em;
+  font-size: 1.25em;
   font-weight: bold;
   font-style: normal;
 }
@@ -492,8 +491,6 @@ a:active {
 
 .otherHeadliners a::after {
   white-space: normal;
-  margin-left: -0.1em;
-  margin-right: 0.2em;
   content: ", ";
   font-weight: inherit;
   color: #ccc;

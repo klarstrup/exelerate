@@ -108,6 +108,8 @@ export default async function Home() {
           textShadow: "0 0 12px rgba(0,0,0,1)",
           flexWrap: "wrap",
           alignItems: "flex-start",
+          paddingTop: "5vh",
+          paddingBottom: "10vh",
         }}
       >
         <div

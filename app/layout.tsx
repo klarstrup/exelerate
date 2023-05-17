@@ -19,7 +19,7 @@ export default function RootLayout({
       lang="en"
       itemScope
       itemType="http://schema.org/Organization"
-      style={{ height: " 100vh", width: "100vw" }}
+      style={{ height: "100vh", width: "100vw" }}
     >
       <head>
         <meta name="author" content="Exelerate" />
@@ -32,7 +32,7 @@ export default function RootLayout({
         className={bebasNeue.className}
         style={{
           margin: 0,
-          height: "100vh",
+          minHeight: "100vh",
           width: "100vw",
           display: "flex",
           flexDirection: "column",
@@ -41,6 +41,7 @@ export default function RootLayout({
           backgroundSize: "cover",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
           animation: "blurIn 666ms forwards ease-out",
         }}
       >
