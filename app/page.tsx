@@ -173,10 +173,15 @@ export default async function Home() {
             <a
               className="venue"
               target="_blank"
-              href={`https://maps.google.com/maps?q=${nextShow.venue.displayName}`}
+              href={`https://maps.google.com/maps?q=${
+                (nextShow.venue.id && nextShow.venue.displayName) ||
+                nextShow.location.city
+              }`}
             >
               <span style={{ whiteSpace: "nowrap" }}>
-                {nextShow.venue.displayName}
+                {nextShow.series?.displayName ||
+                  (nextShow.venue.id && nextShow.venue.displayName) ||
+                  nextShow.location.city}
               </span>
             </a>
             {nextShow.performance.length > 1 ? (

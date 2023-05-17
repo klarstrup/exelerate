@@ -503,9 +503,6 @@ a:active {
 .otherHeadliners a:last-child::after {
   content: "";
 }
-.otherHeadliners a:first-child::after {
-  content: "";
-}
 
 .otherHeadliners a::before {
   white-space: normal;
