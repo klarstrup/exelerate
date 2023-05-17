@@ -498,7 +498,6 @@ a:active {
   font-weight: inherit;
   color: #ccc;
   font-size: 0.9em;
-  letter-spacing: -0.1em;
 }
 .otherHeadliners a:last-child::after {
   content: "";
@@ -510,7 +509,6 @@ a:active {
   font-weight: inherit;
   color: #ccc;
   font-size: 0.9em;
-  letter-spacing: -0.1em;
 }
 .otherHeadliners a:last-child::before {
   content: "& ";
