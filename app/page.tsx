@@ -129,15 +129,14 @@ export default async function Home() {
             paddingBottom: "10vh",
           }}
         >
-          <div
-            id="exeleLinks"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "center",
-              marginBottom: "2.5%",
-            }}
-          >
+          <div id="exeleLinks">
+            <a
+              href="https://targetgroup.bandcamp.com/album/exelerate"
+              title="CD & LP"
+              target="_blank"
+            >
+              CD & LP
+            </a>
             <a
               href="https://www.facebook.com/Exelerateband"
               title="Main social"

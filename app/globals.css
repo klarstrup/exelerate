@@ -442,13 +442,30 @@ a:active {
 }
 
 .nextGig {
-  padding: 0 2vw;
+  padding: 0 1vw;
   padding-bottom: 0;
-  line-height: 0.9;
+  line-height: 1.225em;
   font-weight: lighter;
+
+  text-align: center;
+  @media (min-width: 767px) {
+    width: 50%;
+    text-align: left;
+  }
 }
 #exeleLinks {
-  font-size: 1.1em;
+  line-height: 1em;
+  padding: 0 1vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.5%;
+  font-size: 1.25em;
+  text-align: center;
+
+  @media (min-width: 767px) {
+    width: 50%;
+    text-align: right;
+  }
 }
 @media (max-width: 768px) {
   .nextGig {
@@ -456,13 +473,10 @@ a:active {
   }
   #exeleLinks {
     font-size: 1em;
-    line-height: 0.9;
   }
 }
 
 #exeleLinks a {
-  line-height: 0.9;
-  margin-bottom: 1vw;
 }
 a.ftvLink img {
   filter: invert(25%) sepia(85%) saturate(1638%) hue-rotate(2deg)
