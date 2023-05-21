@@ -23,6 +23,7 @@ export default function RootLayout({
       style={{ height: "100vh", width: "100vw" }}
     >
       <head>
+        <meta itemProp="name" content="Exelerate" />
         <meta name="author" content="Exelerate" />
         <meta name="author" content="Io Klarstrup" />
         <meta name="author" content="Stefan Jensen" />
