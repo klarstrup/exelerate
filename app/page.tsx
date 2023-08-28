@@ -83,15 +83,89 @@ namespace Songkick {
     lat: number | null;
     lng: number | null;
   }
+
+  export interface EventDetails {
+    location: Location;
+    popularity: number;
+    uri: string;
+    displayName: string;
+    id: number;
+    type: string;
+    start: Start;
+    ageRestriction: string;
+    performance: Performance[];
+    venue: VenueDetails;
+    status: string;
+    series?: Series;
+  }
+
+  export interface Location {
+    city: string;
+    lng: number;
+    lat: number;
+  }
+
+  export interface Performance {
+    artist: City;
+    displayName: string;
+    billingIndex: number;
+    id: number;
+    billing: Billing;
+  }
+
+  export interface City {
+    uri: string;
+    displayName: string;
+    id: number;
+    identifier?: Identifier[];
+    country?: Country;
+  }
+
+  export interface Country {
+    displayName: string;
+  }
+
+  export interface Identifier {
+    href: string;
+    mbid: string;
+  }
+
+  export interface Start {
+    time: string;
+    date: Date;
+    datetime: string;
+  }
+
+  export interface VenueDetails {
+    metroArea: City;
+    city: City;
+    zip: string;
+    lat: number;
+    lng: number;
+    uri: string;
+    displayName: string;
+    street: string;
+    id: number;
+    website: string;
+    phone: string;
+    capacity: number;
+    description: string;
+  }
 }
 
 export default async function Home() {
-  const nextShow: Songkick.Event = await fetch(
+  const nextShow2: Songkick.Event = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
     { next: { revalidate: 60 } }
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event?.[0]);
+  const nextShow: Songkick.EventDetails = await fetch(
+    `https://api.songkick.com/api/3.0/events/${nextShow2.id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
+    { next: { revalidate: 60 } }
+  )
+    .then((res) => res.json())
+    .then((res) => res.resultsPage?.results?.event);
 
   return (
     <>
@@ -207,10 +281,13 @@ export default async function Home() {
               <a
                 className="venue"
                 target="_blank"
-                href={`https://maps.google.com/maps?q=${
-                  (nextShow.venue.id && nextShow.venue.displayName) ||
-                  nextShow.location.city
-                }`}
+                href={
+                  nextShow.venue.website ||
+                  `https://maps.google.com/maps?q=${
+                    (nextShow.venue.id && nextShow.venue.displayName) ||
+                    nextShow.location.city
+                  }`
+                }
               >
                 <span style={{ whiteSpace: "nowrap" }}>
                   {nextShow.series?.displayName ||
