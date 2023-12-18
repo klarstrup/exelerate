@@ -534,7 +534,7 @@ a.ftvLink:hover img {
   font-size: 0.9em;
 }
 .otherHeadliners a:last-child::before {
-  content: "& ";
+/*  content: "& ";*/
 }
 .otherHeadliners a:first-child::before {
   content: "";

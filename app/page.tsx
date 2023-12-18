@@ -1,4 +1,4 @@
-import { formatDistanceToNow, setHours } from "date-fns";
+import { formatDistanceToNowStrict, setHours } from "date-fns";
 import Image from "next/image";
 import { Fragment } from "react";
 import FTVLogo from "./ftv-logo.png";
@@ -154,15 +154,15 @@ namespace Songkick {
 }
 
 export default async function Home() {
-  const nextShow2: Songkick.Event = await fetch(
+  const nextShows: Songkick.Event[] = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
-    { next: { revalidate: 60 } }
+    { next: { revalidate: 1200 } }
   )
     .then((res) => res.json())
-    .then((res) => res.resultsPage?.results?.event?.[0]);
+    .then((res) => res.resultsPage?.results?.event);
   const nextShow: Songkick.EventDetails = await fetch(
-    `https://api.songkick.com/api/3.0/events/${nextShow2.id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-    { next: { revalidate: 60 } }
+    `https://api.songkick.com/api/3.0/events/${nextShows[0]?.id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
+    { next: { revalidate: 1200 } }
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
@@ -267,12 +267,13 @@ export default async function Home() {
                     title={`${nextShow.start.date}  ${nextShow.start.time}`}
                     dateTime={nextShow.start.datetime || undefined}
                   >
-                    {formatDistanceToNow(
+                    {formatDistanceToNowStrict(
                       new Date(
                         nextShow.start.datetime ||
                           setHours(new Date(nextShow.start.date), 16) ||
                           ""
-                      )
+                      ),
+                      { unit: "day" }
                     )}
                   </time>
                 </a>{" "}
@@ -312,6 +313,17 @@ export default async function Home() {
                       ))}
                   </div>
                 </>
+              ) : null}
+              {nextShows.length > 1 ? (
+                <div style={{ whiteSpace: "nowrap" }}>
+                  +{" "}
+                  <a
+                    target="_blank"
+                    href={`https://www.songkick.com/artists/6777179-exelerate`}
+                  >
+                    <big>{nextShows.length - 1} more shows</big>
+                  </a>
+                </div>
               ) : null}
             </div>
           ) : null}
