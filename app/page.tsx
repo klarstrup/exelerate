@@ -1,4 +1,4 @@
-import { formatDistanceToNowStrict, setHours } from "date-fns";
+import { formatDistanceToNowStrict, isToday, setHours } from "date-fns";
 import Image from "next/image";
 import { Fragment } from "react";
 import FTVLogo from "./ftv-logo.png";
@@ -160,6 +160,7 @@ export default async function Home() {
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
+  console.log(nextShows);
   const nextShow: Songkick.EventDetails = await fetch(
     `https://api.songkick.com/api/3.0/events/${nextShows[0]?.id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
     { next: { revalidate: 1200 } }
@@ -261,19 +262,23 @@ export default async function Home() {
             <div className="nextGig">
               Next show is
               <div>
-                in{" "}
+                {isToday(new Date(nextShow.start.datetime)) ? null : <>in </>}
                 <a target="_blank" href={nextShow.uri}>
                   <time
                     title={`${nextShow.start.date}  ${nextShow.start.time}`}
                     dateTime={nextShow.start.datetime || undefined}
                   >
-                    {formatDistanceToNowStrict(
-                      new Date(
-                        nextShow.start.datetime ||
-                          setHours(new Date(nextShow.start.date), 16) ||
-                          ""
-                      ),
-                      { unit: "day" }
+                    {isToday(new Date(nextShow.start.datetime)) ? (
+                      <>today</>
+                    ) : (
+                      formatDistanceToNowStrict(
+                        new Date(
+                          nextShow.start.datetime ||
+                            setHours(new Date(nextShow.start.date), 16) ||
+                            ""
+                        ),
+                        { unit: "day" }
+                      )
                     )}
                   </time>
                 </a>{" "}
