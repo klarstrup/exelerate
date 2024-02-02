@@ -160,7 +160,6 @@ export default async function Home() {
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
-  console.log(nextShows);
   const nextShow: Songkick.EventDetails = await fetch(
     `https://api.songkick.com/api/3.0/events/${nextShows[0]?.id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
     { next: { revalidate: 1200 } }
