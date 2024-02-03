@@ -170,9 +170,11 @@ export default async function Home() {
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={logoImg.src}
         alt="Exelelogo"
+        width={300}
+        height={378}
         style={{
           display: "block",
           marginLeft: "auto",
@@ -234,6 +236,8 @@ export default async function Home() {
             >
               <Image
                 src={FTVLogo}
+                width={75}
+                height={85}
                 alt="From The Vaults"
                 style={{
                   maxWidth: "7.5vh",
