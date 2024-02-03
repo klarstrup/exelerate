@@ -463,7 +463,9 @@ a:active {
   font-weight: lighter;
 
   text-align: center;
-  @media (min-width: 767px) {
+}
+@media (min-width: 767px) {
+  .nextGig {
     flex: 1;
     text-align: left;
   }
@@ -476,8 +478,9 @@ a:active {
   margin-bottom: 2.5%;
   font-size: 1.25em;
   text-align: center;
-
-  @media (min-width: 767px) {
+}
+@media (min-width: 767px) {
+  #exeleLinks {
     flex: 1;
     text-align: right;
   }
