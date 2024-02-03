@@ -188,21 +188,7 @@ export default async function Home() {
           alignItems: "center",
         }}
       >
-        <div
-          style={{
-            textTransform: "uppercase",
-            justifyContent: "space-evenly",
-            position: "relative",
-            display: "flex",
-            fontSize: "3em",
-            flexDirection: "row",
-            textShadow: "0 0 12px rgba(0,0,0,1)",
-            flexWrap: "wrap",
-            alignItems: "flex-start",
-            paddingTop: "5vh",
-            paddingBottom: "10vh",
-          }}
-        >
+        <div className="mainStuff">
           <div id="exeleLinks">
             <a
               href="https://targetgroup.bandcamp.com/album/exelerate"

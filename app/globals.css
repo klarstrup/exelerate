@@ -440,7 +440,20 @@ a:hover,
 a:active {
   color: #fefa00;
 }
-
+.mainStuff {
+  text-transform: uppercase;
+  justify-content: space-evenly;
+  position: relative;
+  display: grid;
+  font-size: 3em;
+  @media (min-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  text-shadow: 0 0 12px rgba(0, 0, 0, 1);
+  align-items: flex-start;
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+}
 .nextGig {
   padding: 0 1vw;
   padding-bottom: 0;
@@ -449,7 +462,7 @@ a:active {
 
   text-align: center;
   @media (min-width: 767px) {
-    width: 50%;
+    flex: 1;
     text-align: left;
   }
 }
@@ -463,7 +476,7 @@ a:active {
   text-align: center;
 
   @media (min-width: 767px) {
-    width: 50%;
+    flex: 1;
     text-align: right;
   }
 }
@@ -474,9 +487,6 @@ a:active {
   #exeleLinks {
     font-size: 1em;
   }
-}
-
-#exeleLinks a {
 }
 a.ftvLink img {
   filter: invert(25%) sepia(85%) saturate(1638%) hue-rotate(2deg)
@@ -534,7 +544,7 @@ a.ftvLink:hover img {
   font-size: 0.9em;
 }
 .otherHeadliners a:last-child::before {
-/*  content: "& ";*/
+  /*  content: "& ";*/
 }
 .otherHeadliners a:first-child::before {
   content: "";
