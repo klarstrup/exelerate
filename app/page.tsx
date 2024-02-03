@@ -297,7 +297,7 @@ export default async function Home() {
                         <Fragment key={p.artist.id}>
                           {i ? <> </> : null}
                           <a target="_blank" href={p.artist.uri}>
-                            <em>{p.displayName}</em>
+                            <em>{p.displayName.replace(" (DK)", "")}</em>
                           </a>
                         </Fragment>
                       ))}
