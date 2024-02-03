@@ -310,8 +310,9 @@ export default async function Home() {
                   <a
                     target="_blank"
                     href={`https://www.songkick.com/artists/6777179-exelerate`}
+                    style={{ fontSize: "0.8em" }}
                   >
-                    <big>{nextShows.length - 1} more shows</big>
+                    <big>{nextShows.length - 1} future shows</big>
                   </a>
                 </div>
               ) : null}

@@ -446,13 +446,15 @@ a:active {
   position: relative;
   display: grid;
   font-size: 3em;
-  @media (min-width: 767px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
   text-shadow: 0 0 12px rgba(0, 0, 0, 1);
   align-items: flex-start;
   padding-top: 5vh;
   padding-bottom: 10vh;
+}
+@media (min-width: 767px) {
+  .mainStuff {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .nextGig {
   padding: 0 1vw;
@@ -543,9 +545,7 @@ a.ftvLink:hover img {
   color: #ccc;
   font-size: 0.9em;
 }
-.otherHeadliners a:last-child::before {
-  /*  content: "& ";*/
-}
+
 .otherHeadliners a:first-child::before {
   content: "";
 }
