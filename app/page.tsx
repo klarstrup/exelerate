@@ -277,9 +277,9 @@ export default async function Home() {
                 className="venue"
                 target="_blank"
                 href={
-                  nextShow.venue.website ||
+                  nextShow.venue?.website ||
                   `https://maps.google.com/maps?q=${
-                    (nextShow.venue.id && nextShow.venue.displayName) ||
+                    (nextShow.venue && nextShow.venue.displayName) ||
                     nextShow.location.city
                   }`
                 }
