@@ -1,0 +1,262 @@
+<html>
+  <head>
+    <title>Exelerate - Stage & Inputs</title>
+    <link
+      href="//fonts.googleapis.com/css?family=Allerta+Stencil"
+      rel="stylesheet prefetch"
+      type="text/css"
+    />
+  </head>
+  <body
+    style="
+      font-family: 'Allerta Stencil', sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px;
+    "
+  >
+    <center>
+      <h1 style="margin-bottom: 0; font-size: 32px">
+        Exelerate - Stage, Inputs, Mixes & Lights
+      </h1>
+      <h3 style="margin-top: 0; margin-bottom: 0">
+        Per 2024.20.01 - tech@exelerate.dk
+      </h3>
+      <h2 style="margin-bottom: 0; margin-top: 0">Stage Plot</h2>
+      <svg viewBox="0 0 1000 600">
+        <style>
+          @media print {
+            .no-print-fill {
+              fill: transparent !important;
+            }
+          }
+        </style>
+        <rect
+          width="1000"
+          height="600"
+          style="
+            fill: rgba(255, 127, 0, 0.25);
+            stroke-width: 2;
+            stroke: rgb(0, 0, 0);
+          "
+          class="no-print-fill"
+        ></rect>
+        <text x="455" y="25" font-size="20">Upstage</text>
+        <text x="440" y="590" font-size="20">Downstage</text>
+
+        <rect
+          x="245"
+          y="50"
+          width="100"
+          height="50"
+          style="
+            fill: rgba(0, 255, 177, 0.5);
+            stroke-width: 2;
+            stroke: rgb(0, 0, 0);
+          "
+          class="no-print-fill"
+        ></rect>
+        <text x="253" y="80" font-size="14">Guitar Stack</text>
+        <text x="253" y="120">#2 Guitar Mic</text>
+        <text x="253" y="130" font-size="12">on speaker</text>
+        <text x="295" y="40" font-size="30">🔌</text>
+
+        <rect
+          x="785"
+          y="50"
+          width="100"
+          height="50"
+          style="
+            fill: rgba(0, 200, 255, 0.5);
+            stroke-width: 2;
+            stroke: rgb(0, 0, 0);
+          "
+          class="no-print-fill"
+        ></rect>
+        <text x="800" y="120">#1 Guitar Mic</text>
+        <text x="800" y="130" font-size="12">on speaker</text>
+        <text x="793" y="80" font-size="14">Guitar Stack</text>
+
+        <text x="715" y="40" font-size="30">🔌 🔌</text>
+        <rect
+          x="650"
+          y="50"
+          width="100"
+          height="50"
+          style="
+            fill: rgba(255, 255, 0, 0.5);
+            stroke-width: 2;
+            stroke: rgb(0, 0, 0);
+          "
+          class="no-print-fill"
+        ></rect>
+        <text x="665" y="80" font-size="14">Bass Stack</text>
+        <text x="665" y="120">#3 Bass DI</text>
+        <text x="665" y="130" font-size="12">from amp</text>
+
+        <rect
+          x="215"
+          y="500"
+          width="105"
+          height="45"
+          style="fill: #fff; stroke-width: 2; stroke: rgb(0, 0, 0)"
+          class="no-print-fill"
+        ></rect>
+        <text x="210" y="470" font-size="40">Mads</text>
+        <text x="221" y="525">Vocal Mic</text>
+        <text x="221" y="535" font-size="12">on boom stand</text>
+        <text x="180" y="530" font-size="30">🔌</text>
+
+        <rect
+          x="445"
+          y="500"
+          width="105"
+          height="45"
+          style="fill: #fff; stroke-width: 2; stroke: rgb(0, 0, 0)"
+          class="no-print-fill"
+        ></rect>
+        <text x="430" y="470" font-size="40">Stefan</text>
+        <text x="451" y="525">Vocal Mic</text>
+        <text x="451" y="535" font-size="12">on boom stand</text>
+        <text x="410" y="530" font-size="30">🔌</text>
+
+        <rect
+          x="700"
+          y="500"
+          width="105"
+          height="45"
+          style="fill: #fff; stroke-width: 2; stroke: rgb(0, 0, 0)"
+          class="no-print-fill"
+        ></rect>
+        <text x="737" y="470" font-size="40">Io</text>
+        <text x="705" y="525">Vocal Mic</text>
+        <text x="705" y="535" font-size="12">on boom stand</text>
+        <text x="665" y="530" font-size="30">🔌</text>
+
+        <rect
+          x="375"
+          y="50"
+          width="250"
+          height="200"
+          style="
+            fill: rgba(255, 0, 255, 0.5);
+            stroke-width: 2;
+            stroke: rgb(0, 0, 0);
+          "
+          class="no-print-fill"
+        ></rect>
+        <text x="453" y="150">#9+ Drumkit</text>
+        <text
+          x="466"
+          y="120"
+          font-size="40"
+          style="
+            fill: rgb(0, 0, 0);
+            stroke-width: 1;
+            stroke: rgb(255, 255, 255);
+          "
+        >
+          Stig
+        </text>
+      </svg>
+      <style>
+        h1 {
+          font-size: 3em;
+        }
+        table {
+          width: 100%;
+        }
+        td {
+          padding: 2px;
+        }
+        td:first-child {
+          text-align: center;
+        }
+        @media print {
+          tr {
+            background-color: transparent !important;
+          }
+        }
+      </style>
+      <div
+        style="display: flex; justify-content: space-around; margin-top: -12px"
+      >
+        <div style="flex: 1; padding: 0 4px">
+          <h2 style="margin-bottom: 0">Input List</h2>
+          <table border="1" style="border-collapse: collapse">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Instrument</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background-color: rgba(0, 200, 255, 0.5)">
+                <td>#1</td>
+                <td>Rhythm Guitar</td>
+                <td>Mic on speaker</td>
+              </tr>
+              <tr style="background-color: rgba(0, 255, 177, 0.5)">
+                <td>#2</td>
+                <td>Lead Guitar</td>
+                <td>Mic on speaker</td>
+              </tr>
+              <tr style="background-color: rgba(255, 255, 0, 0.5)">
+                <td>#3</td>
+                <td>Bass Guitar</td>
+                <td>DI from amp</td>
+              </tr>
+              <tr>
+                <td>#4</td>
+                <td>Vocals</td>
+                <td>Mic on vocalist</td>
+              </tr>
+              <tr>
+                <td>#5</td>
+                <td>Vocals</td>
+                <td>Mic on vocalist</td>
+              </tr>
+              <tr>
+                <td>#6</td>
+                <td>Vocals</td>
+                <td>Mic on vocalist</td>
+              </tr>
+              <tr style="background-color: rgba(255, 0, 255, 0.5)">
+                <td>#7<small>+</small></td>
+                <td>
+                  5-Piece Drumkit<br /><small>2 rack toms, 1 floor tom</small>
+                </td>
+                <td>Mics as needed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="flex: 1; padding: 0 4px">
+          <h2 style="margin-bottom: 0">Lighting</h2>
+          <p style="font-size: 14px">
+            Keep the color palette to white, orange, yellow and blue. Avoid
+            purple, pink and cyan.<br />Strobes, blinders, smoke and fire
+            encouraged.
+          </p>
+          <h2 style="margin-bottom: 0">Notes</h2>
+          <p style="font-size: 14px">
+            We carry one backdrop (3x3m) that we would like to fly behind the
+            drumkit.
+          </p>
+        </div>
+      </div>
+      <a href="/">
+        <img
+          src="/img/exelerate_textlogo.png"
+          alt="Exelelogo"
+          style="
+            width: 25%;
+            height: auto;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+          "
+      /></a>
+    </center>
+  </body>
+</html>
