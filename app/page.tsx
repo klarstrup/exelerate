@@ -154,18 +154,20 @@ namespace Songkick {
 }
 
 export default async function Home() {
-  const nextShows: Songkick.Event[] = await fetch(
+  const nextShows: Songkick.Event[] | undefined = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
     { next: { revalidate: 1200 } }
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
-  const nextShow: Songkick.EventDetails = await fetch(
-    `https://api.songkick.com/api/3.0/events/${nextShows[0]?.id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-    { next: { revalidate: 1200 } }
-  )
-    .then((res) => res.json())
-    .then((res) => res.resultsPage?.results?.event);
+  const nextShow: Songkick.EventDetails | undefined =
+    nextShows &&
+    (await fetch(
+      `https://api.songkick.com/api/3.0/events/${nextShows[0].id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
+      { next: { revalidate: 1200 } }
+    )
+      .then((res) => res.json())
+      .then((res) => res.resultsPage?.results?.event));
 
   return (
     <>
@@ -308,7 +310,7 @@ export default async function Home() {
                   </div>
                 </>
               ) : null}
-              {nextShows.length > 1 ? (
+              {nextShows && nextShows.length > 1 ? (
                 <div style={{ whiteSpace: "nowrap" }}>
                   +{" "}
                   <a
