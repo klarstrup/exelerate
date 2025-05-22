@@ -171,7 +171,6 @@ export default async function Home() {
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <Image
         src={logoImg.src}
         alt="Exelelogo"
