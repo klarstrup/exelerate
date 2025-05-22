@@ -192,8 +192,14 @@ export default async function Home() {
           alignItems: "center",
         }}
       >
-        <div className="mainStuff">
-          <div id="exeleLinks">
+        <div
+          className="mainStuff"
+          style={!nextShow ? { gridTemplateColumns: "initial" } : undefined}
+        >
+          <div
+            id="exeleLinks"
+            style={!nextShow ? { textAlign: "center" } : undefined}
+          >
             <a
               href="https://targetgroup.bandcamp.com/album/exelerate"
               title="CD & LP"
