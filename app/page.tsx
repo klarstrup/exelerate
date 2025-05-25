@@ -444,7 +444,13 @@ export default async function Home() {
 
                     {testimonial.score ? (
                       <div className="text-5xl font-bold">
-                        {testimonial.score}/{testimonial.scoreMax}
+                        {testimonial.score}
+                        <span className="text-3xl font-normal">
+                          /
+                          <span className="text-2xl font-normal">
+                            {testimonial.scoreMax}
+                          </span>
+                        </span>
                       </div>
                     ) : null}
                   </div>
