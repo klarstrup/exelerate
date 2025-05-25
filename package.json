@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lionralfs/discogs-client": "^4.1.3",
     "@tailwindcss/postcss": "^4.1.7",
     "@types/node": "22.15.21",
     "@types/react": "19.1.5",

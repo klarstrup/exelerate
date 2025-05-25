@@ -1,10 +1,12 @@
+import { DiscogsClient } from "@lionralfs/discogs-client";
 import { formatDistanceToNowStrict, isToday, setHours } from "date-fns";
 import Image from "next/image";
 import { Fragment } from "react";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
+import { testimonials } from "./reviews";
 
-export const revalidate = 60;
+export const revalidate = 600;
 
 namespace Songkick {
   export interface Event {
@@ -156,7 +158,7 @@ namespace Songkick {
 export default async function Home() {
   const nextShows: Songkick.Event[] | undefined = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
-    { next: { revalidate: 1200 } }
+    { next: { revalidate: 12000 } }
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
@@ -164,7 +166,7 @@ export default async function Home() {
     nextShows &&
     (await fetch(
       `https://api.songkick.com/api/3.0/events/${nextShows[0].id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-      { next: { revalidate: 1200 } }
+      { next: { revalidate: 12000 } }
     )
       .then((res) => res.json())
       .then((res) => res.resultsPage?.results?.event));
@@ -177,12 +179,10 @@ export default async function Home() {
         width={300}
         height={378}
         style={{
-          display: "block",
-          marginLeft: "auto",
-          marginRight: "auto",
           height: "40vh",
           width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
         }}
+        className="mx-auto block"
       />
       <div
         style={{
@@ -238,8 +238,8 @@ export default async function Home() {
               href="https://fromthevaults.dk/"
               target="_blank"
               title="From The Vaults"
-              className="ftvLink"
-              style={{ position: "fixed", top: "5vh", right: "5vw" }}
+              className="ftvLink fixed"
+              style={{ top: "5vh", right: "5vw" }}
             >
               <Image
                 src={FTVLogo}
@@ -248,9 +248,9 @@ export default async function Home() {
                 alt="From The Vaults"
                 style={{
                   maxWidth: "7.5vh",
-                  height: "auto",
                   marginTop: "0.125em",
                 }}
+                className="h-auto"
               />
             </a>
           </div>
@@ -291,7 +291,7 @@ export default async function Home() {
                   }`
                 }
               >
-                <span style={{ whiteSpace: "nowrap" }}>
+                <span className="whitespace-nowrap">
                   {nextShow.series?.displayName ||
                     (nextShow.venue.id && nextShow.venue.displayName) ||
                     nextShow.location.city}
@@ -316,7 +316,7 @@ export default async function Home() {
                 </>
               ) : null}
               {nextShows && nextShows.length > 1 ? (
-                <div style={{ whiteSpace: "nowrap" }}>
+                <div className="whitespace-nowrap">
                   +{" "}
                   <a
                     target="_blank"
@@ -330,6 +330,141 @@ export default async function Home() {
             </div>
           ) : null}
         </div>
+        {/* Testimonials section, styled with tailwind!!! */}
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 max-w-5xl mx-auto px-4 py-8 gap-x-4">
+          {await Promise.all(
+            testimonials.map(async (testimonial) => {
+              const songkickConcert = testimonial.songkickId
+                ? await fetch(
+                    `https://api.songkick.com/api/3.0/events/${testimonial.songkickId}.json?apikey=${process.env.SONGKICK_APIKEY}`,
+                    { next: { revalidate: 12000 } }
+                  )
+                    .then((res) => res.json())
+                    .then(
+                      (res) =>
+                        res.resultsPage?.results?.event as
+                          | Songkick.EventDetails
+                          | undefined
+                    )
+                : undefined;
+              const discogsRelease = testimonial.discogsId?.startsWith("r")
+                ? await new DiscogsClient({
+                    userAgent: "exelerate.dk/1.0 +https://exelerate.dk",
+                  })
+                    .database()
+                    .getRelease(testimonial.discogsId.replace("r", ""))
+                : undefined;
+              const discogsMaster = testimonial.discogsId?.startsWith("m")
+                ? await new DiscogsClient({
+                    userAgent: "exelerate.dk/1.0 +https://exelerate.dk",
+                  })
+                    .database()
+                    .getMaster(testimonial.discogsId.replace("m", ""))
+                : undefined;
+
+              return (
+                <li
+                  key={testimonial.url}
+                  className="p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm"
+                >
+                  <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
+                    <div className="flex flex-col">
+                      <span className="font-bold text-xl">
+                        {testimonial.source}
+                      </span>
+                      {testimonial.type === "concert" ? (
+                        <a
+                          href={`https://www.songkick.com/concerts/${testimonial.songkickId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-shadow-md text-shadow-black/40"
+                        >
+                          {songkickConcert ? (
+                            <>
+                              live at{" "}
+                              <span className="whitespace-nowrap">
+                                {songkickConcert.venue?.displayName ||
+                                  songkickConcert.location.city}
+                              </span>{" "}
+                              on{" "}
+                              <time
+                                title={`${songkickConcert.start.date}  ${songkickConcert.start.time}`}
+                                dateTime={new Date(
+                                  songkickConcert.start.datetime ||
+                                    setHours(
+                                      new Date(songkickConcert.start.date),
+                                      16
+                                    ) ||
+                                    ""
+                                ).toString()}
+                              >
+                                {new Date(
+                                  songkickConcert.start.datetime ||
+                                    setHours(
+                                      new Date(songkickConcert.start.date),
+                                      16
+                                    ) ||
+                                    ""
+                                ).toLocaleDateString("da-DK")}
+                              </time>
+                            </>
+                          ) : (
+                            "Concert"
+                          )}
+                        </a>
+                      ) : testimonial.type === "release" ? (
+                        <a
+                          href={
+                            testimonial.discogsId.startsWith("m")
+                              ? `https://www.discogs.com/master/${testimonial.discogsId.replace(
+                                  "m",
+                                  ""
+                                )}`
+                              : `https://www.discogs.com/release/${testimonial.discogsId.replace(
+                                  "r",
+                                  ""
+                                )}`
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-shadow-md text-shadow-black/40"
+                        >
+                          &quot;
+                          {testimonial.discogsId.startsWith("m")
+                            ? discogsMaster?.data.title
+                            : discogsRelease?.data.title}
+                          &quot; (
+                          {testimonial.discogsId.startsWith("m")
+                            ? discogsMaster?.data.year
+                            : discogsRelease?.data.year}
+                          )
+                        </a>
+                      ) : null}
+                    </div>
+
+                    {testimonial.score ? (
+                      <div className="text-5xl font-bold">
+                        {testimonial.score}/{testimonial.scoreMax}
+                      </div>
+                    ) : null}
+                  </div>
+                  <p className="text-gray-800 text-shadow-md text-lg text-shadow-white/10 flex-1 text-justify text-pretty">
+                    {testimonial.pullQuote}
+                    <span className="px-2" />
+                    <a
+                      href={testimonial.archiveUrl || testimonial.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-shadow-md text-shadow-black/40 text-sm whitespace-nowrap"
+                    >
+                      Read more
+                    </a>
+                  </p>
+                </li>
+              );
+            })
+          )}
+        </ul>
       </div>
     </>
   );
