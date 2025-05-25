@@ -467,7 +467,7 @@ export default async function Home() {
                     {testimonial.pullQuote}
                     <span className="px-2" />
                     <a
-                      href={testimonial.archiveUrl || testimonial.url}
+                      href={testimonial.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-shadow-md text-shadow-black/40 text-sm whitespace-nowrap"
