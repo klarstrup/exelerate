@@ -331,7 +331,7 @@ export default async function Home() {
           ) : null}
         </div>
         {/* Testimonials section, styled with tailwind!!! */}
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 max-w-5xl mx-auto px-4 py-8 gap-x-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 max-w-6xl mx-auto px-4 py-8 gap-x-4">
           {await Promise.all(
             testimonials.map(async (testimonial) => {
               const songkickConcert = testimonial.songkickId
@@ -454,7 +454,16 @@ export default async function Home() {
                       </div>
                     ) : null}
                   </div>
-                  <p className="text-gray-800 text-shadow-md text-lg text-shadow-white/10 flex-1 text-justify text-pretty">
+                  <p
+                    className={
+                      "text-gray-800 text-shadow-md text-shadow-white/10 flex-1 text-justify text-pretty " +
+                      (testimonial.pullQuote.length > 50
+                        ? " text-xl"
+                        : testimonial.pullQuote.length > 25
+                        ? " text-3xl"
+                        : " text-5xl")
+                    }
+                  >
                     {testimonial.pullQuote}
                     <span className="px-2" />
                     <a
