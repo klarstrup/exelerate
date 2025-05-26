@@ -1,5 +1,10 @@
 import { DiscogsClient } from "@lionralfs/discogs-client";
-import { formatDistanceToNowStrict, isToday, setHours } from "date-fns";
+import {
+  compareDesc,
+  formatDistanceToNowStrict,
+  isToday,
+  setHours,
+} from "date-fns";
 import Image from "next/image";
 import { Fragment } from "react";
 import FTVLogo from "./ftv-logo.png";
@@ -338,158 +343,160 @@ export default async function Home() {
         {/* Testimonials section, styled with tailwind!!! */}
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 max-w-7xl mx-auto px-4 py-8 gap-x-4">
           {await Promise.all(
-            testimonials.map(async (testimonial) => {
-              const songkickConcert = testimonial.songkickId
-                ? await fetch(
-                    `https://api.songkick.com/api/3.0/events/${testimonial.songkickId}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-                    { next: { revalidate: 12000 } }
-                  )
-                    .then((res) => res.json())
-                    .then(
-                      (res) =>
-                        res.resultsPage?.results?.event as
-                          | Songkick.EventDetails
-                          | undefined
+            Array.from(testimonials)
+              .sort((a, b) => compareDesc(a.date, b.date))
+              .map(async (testimonial) => {
+                const songkickConcert = testimonial.songkickId
+                  ? await fetch(
+                      `https://api.songkick.com/api/3.0/events/${testimonial.songkickId}.json?apikey=${process.env.SONGKICK_APIKEY}`,
+                      { next: { revalidate: 12000 } }
                     )
-                : undefined;
+                      .then((res) => res.json())
+                      .then(
+                        (res) =>
+                          res.resultsPage?.results?.event as
+                            | Songkick.EventDetails
+                            | undefined
+                      )
+                  : undefined;
 
-              const discogsRelease = testimonial.discogsId?.startsWith("r")
-                ? await discogsDb
-                    .getRelease(testimonial.discogsId.replace("r", ""))
-                    .catch(() => {})
-                : undefined;
-              const discogsMaster = testimonial.discogsId?.startsWith("m")
-                ? await discogsDb
-                    .getMaster(testimonial.discogsId.replace("m", ""))
-                    .catch(() => {})
-                : undefined;
+                const discogsRelease = testimonial.discogsId?.startsWith("r")
+                  ? await discogsDb
+                      .getRelease(testimonial.discogsId.replace("r", ""))
+                      .catch(() => {})
+                  : undefined;
+                const discogsMaster = testimonial.discogsId?.startsWith("m")
+                  ? await discogsDb
+                      .getMaster(testimonial.discogsId.replace("m", ""))
+                      .catch(() => {})
+                  : undefined;
 
-              return (
-                <li
-                  key={testimonial.url}
-                  className="p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm"
-                >
-                  <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
-                    <div className="flex flex-col flex-1">
-                      <a
-                        href={testimonial.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-shadow-md text-shadow-black/40 font-bold text-xl whitespace-nowrap"
-                      >
-                        {testimonial.source}
-                      </a>
-                      {testimonial.type === "concert" ? (
+                return (
+                  <li
+                    key={testimonial.url}
+                    className="p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm"
+                  >
+                    <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
+                      <div className="flex flex-col flex-1">
                         <a
-                          href={`https://www.songkick.com/concerts/${testimonial.songkickId}`}
+                          href={testimonial.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ color: "white !important" }}
-                          className="text-shadow-md text-shadow-black/40 whitespace-nowrap"
+                          className="text-shadow-md text-shadow-black/40 font-bold text-xl whitespace-nowrap"
                         >
-                          {songkickConcert ? (
-                            <>
-                              <span>
-                                {songkickConcert.venue?.displayName ||
-                                  songkickConcert.location.city}
-                              </span>
-                              ,{" "}
-                              <time
-                                title={`${songkickConcert.start.date}  ${songkickConcert.start.time}`}
-                                dateTime={new Date(
-                                  songkickConcert.start.datetime ||
-                                    setHours(
-                                      new Date(songkickConcert.start.date),
-                                      16
-                                    ) ||
-                                    ""
-                                ).toString()}
-                              >
-                                {new Date(
-                                  songkickConcert.start.datetime ||
-                                    setHours(
-                                      new Date(songkickConcert.start.date),
-                                      16
-                                    ) ||
-                                    ""
-                                ).toLocaleDateString("da-DK")}
-                              </time>
-                            </>
-                          ) : (
-                            "Concert"
-                          )}
+                          {testimonial.source}
                         </a>
-                      ) : testimonial.type === "release" ? (
-                        <a
-                          href={
-                            testimonial.discogsId?.startsWith("m")
-                              ? `https://www.discogs.com/master/${testimonial.discogsId?.replace(
-                                  "m",
-                                  ""
-                                )}`
-                              : `https://www.discogs.com/release/${testimonial.discogsId?.replace(
-                                  "r",
-                                  ""
-                                )}`
-                          }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-shadow-md text-shadow-black/40"
-                          style={{ color: "white !important" }}
-                        >
-                          &quot;
-                          {testimonial.discogsId?.startsWith("m")
-                            ? discogsMaster?.data.title
-                            : discogsRelease?.data.title}
-                          &quot; (
-                          {testimonial.discogsId?.startsWith("m")
-                            ? discogsMaster?.data.year
-                            : discogsRelease?.data.year}
+                        {testimonial.type === "concert" ? (
+                          <a
+                            href={`https://www.songkick.com/concerts/${testimonial.songkickId}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: "white !important" }}
+                            className="text-shadow-md text-shadow-black/40 whitespace-nowrap"
+                          >
+                            {songkickConcert ? (
+                              <>
+                                <span>
+                                  {songkickConcert.venue?.displayName ||
+                                    songkickConcert.location.city}
+                                </span>
+                                ,{" "}
+                                <time
+                                  title={`${songkickConcert.start.date}  ${songkickConcert.start.time}`}
+                                  dateTime={new Date(
+                                    songkickConcert.start.datetime ||
+                                      setHours(
+                                        new Date(songkickConcert.start.date),
+                                        16
+                                      ) ||
+                                      ""
+                                  ).toString()}
+                                >
+                                  {new Date(
+                                    songkickConcert.start.datetime ||
+                                      setHours(
+                                        new Date(songkickConcert.start.date),
+                                        16
+                                      ) ||
+                                      ""
+                                  ).toLocaleDateString("da-DK")}
+                                </time>
+                              </>
+                            ) : (
+                              "Concert"
+                            )}
+                          </a>
+                        ) : testimonial.type === "release" ? (
+                          <a
+                            href={
+                              testimonial.discogsId?.startsWith("m")
+                                ? `https://www.discogs.com/master/${testimonial.discogsId?.replace(
+                                    "m",
+                                    ""
+                                  )}`
+                                : `https://www.discogs.com/release/${testimonial.discogsId?.replace(
+                                    "r",
+                                    ""
+                                  )}`
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-shadow-md text-shadow-black/40"
+                            style={{ color: "white !important" }}
+                          >
+                            &quot;
+                            {testimonial.discogsId?.startsWith("m")
+                              ? discogsMaster?.data.title
+                              : discogsRelease?.data.title}
+                            &quot; (
+                            {testimonial.discogsId?.startsWith("m")
+                              ? discogsMaster?.data.year
+                              : discogsRelease?.data.year}
+                            )
+                          </a>
+                        ) : null}
+                      </div>
+
+                      {testimonial.score
+                        ? new Array(
+                            testimonial.scoreMax === 100
+                              ? testimonial.scoreMax / 10
+                              : testimonial.scoreMax
                           )
-                        </a>
-                      ) : null}
-                    </div>
-
-                    {testimonial.score
-                      ? new Array(
-                          testimonial.scoreMax === 100
-                            ? testimonial.scoreMax / 10
-                            : testimonial.scoreMax
-                        )
-                          .fill(0)
-                          .map((_, i) =>
-                            false ? (
-                              <svg
-                                key={i}
-                                xmlns="http://www.w3.org/2000/svg"
-                                version="1.1"
-                                preserveAspectRatio="none"
-                                x="0px"
-                                y="0px"
-                                width="27.5px"
-                                height="20px"
-                                viewBox="0 0 550 400"
-                                style={{
-                                  color:
-                                    i <
-                                    Math.round(
-                                      testimonial.scoreMax === 100
-                                        ? testimonial.score! / 10
-                                        : testimonial.score!
-                                    )
-                                      ? "#ffd400"
-                                      : "rgba(255, 255, 255, 0.75)",
-                                  marginLeft: "-8px",
-                                }}
-                              >
-                                <path
-                                  fill="currentColor"
-                                  stroke="none"
+                            .fill(0)
+                            .map((_, i) =>
+                              false ? (
+                                <svg
+                                  key={i}
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  version="1.1"
+                                  preserveAspectRatio="none"
+                                  x="0px"
+                                  y="0px"
+                                  width="27.5px"
+                                  height="20px"
+                                  viewBox="0 0 550 400"
                                   style={{
-                                    filter:
-                                      "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                    color:
+                                      i <
+                                      Math.round(
+                                        testimonial.scoreMax === 100
+                                          ? testimonial.score! / 10
+                                          : testimonial.score!
+                                      )
+                                        ? "#ffd400"
+                                        : "rgba(255, 255, 255, 0.75)",
+                                    marginLeft: "-8px",
                                   }}
-                                  d="
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    stroke="none"
+                                    style={{
+                                      filter:
+                                        "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                    }}
+                                    d="
 M 463.15 316.5
 L 334.55 298.15
 Q 292.9 287.15 279.8 253.15 276.6 247.7 281.5 240.65
@@ -521,39 +528,39 @@ M 50.2 140.7
 L 50.2 122.2
 Q 50.45 112.75 69.5 105.2 92.15 106.55 104.9 127.7 91 154.9 64.65 164.6 49 170.25 43.35 159.7
 L 50.2 140.7 Z"
-                                />
-                              </svg>
-                            ) : (
-                              <svg
-                                key={i}
-                                xmlns="http://www.w3.org/2000/svg"
-                                version="1.1"
-                                x="0px"
-                                y="0px"
-                                width="20px"
-                                height="40px"
-                                viewBox="260 0 360 500"
-                                style={{
-                                  marginLeft: "-2px",
-                                  color:
-                                    i <
-                                    Math.round(
-                                      testimonial.scoreMax === 100
-                                        ? testimonial.score! / 10
-                                        : testimonial.score!
-                                    )
-                                      ? "#ffd400"
-                                      : "rgba(255, 255, 255, 0.75)",
-                                }}
-                              >
-                                <path
-                                  fill="currentColor"
+                                  />
+                                </svg>
+                              ) : (
+                                <svg
+                                  key={i}
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  version="1.1"
+                                  x="0px"
+                                  y="0px"
+                                  width="20px"
+                                  height="40px"
+                                  viewBox="260 0 360 500"
                                   style={{
-                                    filter:
-                                      "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                    marginLeft: "-2px",
+                                    color:
+                                      i <
+                                      Math.round(
+                                        testimonial.scoreMax === 100
+                                          ? testimonial.score! / 10
+                                          : testimonial.score!
+                                      )
+                                        ? "#ffd400"
+                                        : "rgba(255, 255, 255, 0.75)",
                                   }}
-                                  stroke="none"
-                                  d="
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    style={{
+                                      filter:
+                                        "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                    }}
+                                    stroke="none"
+                                    d="
 M 561.15 207
 L 543.1 244.15
 Q 540.2 250.85 543.75 257.15
@@ -584,33 +591,33 @@ Q 425.5 371.35 424 370.55
 M 458.4 309.55
 Q 445.3 301.6 450.4 287.05 490.05 271.2 534.05 275 535.9 287.7 530.25 300.2 524.5 312.65 492.95 317.45 470.9 318.75 458.4 309.55
 Z"
-                                />
-                              </svg>
+                                  />
+                                </svg>
+                              )
                             )
-                          )
-                      : null}
-                  </div>
-                  <p
-                    className={
-                      "text-gray-900 text-shadow-md text-shadow-white/20 flex-1 text-justify text-pretty " +
-                      (testimonial.pullQuote.length > 192
-                        ? " text-xl"
-                        : testimonial.pullQuote.length > 96
-                        ? " text-2xl"
-                        : testimonial.pullQuote.length > 48
-                        ? " text-3xl"
-                        : testimonial.pullQuote.length > 24
-                        ? " text-4xl"
-                        : testimonial.pullQuote.length > 12
-                        ? " text-5xl"
-                        : " text-6xl")
-                    }
-                  >
-                    {testimonial.pullQuote}
-                  </p>
-                </li>
-              );
-            })
+                        : null}
+                    </div>
+                    <p
+                      className={
+                        "text-gray-900 text-shadow-md text-shadow-white/20 flex-1 text-justify text-pretty " +
+                        (testimonial.pullQuote.length > 192
+                          ? " text-xl"
+                          : testimonial.pullQuote.length > 96
+                          ? " text-2xl"
+                          : testimonial.pullQuote.length > 48
+                          ? " text-3xl"
+                          : testimonial.pullQuote.length > 24
+                          ? " text-4xl"
+                          : testimonial.pullQuote.length > 12
+                          ? " text-5xl"
+                          : " text-6xl")
+                      }
+                    >
+                      {testimonial.pullQuote}
+                    </p>
+                  </li>
+                );
+              })
           )}
         </ul>
       </div>
