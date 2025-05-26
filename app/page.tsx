@@ -601,16 +601,16 @@ Z"
                       className={
                         "text-gray-900 text-shadow-md text-shadow-white/20 flex-1 text-justify text-pretty " +
                         (testimonial.pullQuote.length > 192
-                          ? " text-xl"
+                          ? "text-lg lg:text-xl"
                           : testimonial.pullQuote.length > 96
-                          ? " text-2xl"
+                          ? "text-xl lg:text-2xl"
                           : testimonial.pullQuote.length > 48
-                          ? " text-3xl"
+                          ? "text-2xl lg:text-3xl"
                           : testimonial.pullQuote.length > 24
-                          ? " text-4xl"
+                          ? "text-3xl lg:text-4xl"
                           : testimonial.pullQuote.length > 12
-                          ? " text-5xl"
-                          : " text-6xl")
+                          ? "text-4xl lg:text-5xl"
+                          : "text-5xl lg:text-6xl")
                       }
                     >
                       {testimonial.pullQuote}
