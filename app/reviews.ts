@@ -84,7 +84,7 @@ export const testimonials = [
     discogsId: "m3132144",
     source: "Powerplay Magazine",
     pullQuote:
-      "a bnad that understands the core qualities of great heavy metal and interprets them with adventurous spirit",
+      "a band that understands the core qualities of great heavy metal and interprets them with adventurous spirit",
     url: "https://powerplaymagazine.co.uk/shop/p/powerplay-260-march-2023",
     archiveUrl:
       "https://web.archive.org/web/20250322050724/https://powerplaymagazine.co.uk/shop/p/powerplay-260-march-2023",
