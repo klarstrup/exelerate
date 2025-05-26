@@ -27,7 +27,7 @@ export const testimonials = [
     date: new Date("2015-02-16"),
     source: "Devilution",
     pullQuote:
-      "Der er lidt attitude, noget frisk over dem og det der je ne sais quoi, der adskiller Exelerate fra de evigheder af leverpostej, man får tilsendt som anmelder.",
+      "Der er lidt attitude, noget frisk over dem og det der je ne sais quoi, der adskiller Exelerate fra de evigheder af leverpostej, man får tilsendt som anmelder",
   },
   {
     type: "concert",
@@ -171,7 +171,7 @@ export const testimonials = [
     discogsId: "m3132144",
     date: new Date("2023-03-10"),
     pullQuote:
-      "Exelerate sind keine Band für leichtverdaubare Kost, sondern beweisen, dass man Musik äussert intelligent komponieren und dabei trotzdem einen roten Faden einziehen kann.",
+      "Exelerate sind keine Band für leichtverdaubare Kost, sondern beweisen, dass man Musik äussert intelligent komponieren und dabei trotzdem einen roten Faden einziehen kann",
     score: 9.2,
     scoreMax: 10,
   },
@@ -210,7 +210,7 @@ export const testimonials = [
     date: new Date("2023-03-11"),
     source: "Arrow Lords Of Metal",
     pullQuote:
-      "Bij ‘No Escape’ wordt het gaspedaal flink ingetrapt en kunnen we duidelijk horen dat we hier met vakmensen te maken hebben.",
+      "Bij ‘No Escape’ wordt het gaspedaal flink ingetrapt en kunnen we duidelijk horen dat we hier met vakmensen te maken hebben",
   },
   {
     type: "release",
@@ -310,14 +310,14 @@ export const testimonials = [
     score: 79,
     scoreMax: 100,
     pullQuote:
-      "You’ll have to be a true thrash head -and- an 80’s power metal goon to truly appreciate the class with which they blend these energies into something which is both truly classicist but also approachable.",
+      "You’ll have to be a true thrash head -and- an 80’s power metal goon to truly appreciate the class with which they blend these energies into something which is both truly classicist but also approachable",
   },
   {
     type: "concert",
     songkickId: 41320670,
     date: new Date("2024-02-09"),
     source: "Metal Revolution",
-    pullQuote: "Exelerate showcase just how metal anno 2024 should sound.",
+    pullQuote: "Exelerate showcase just how metal anno 2024 should sound",
     url: "https://www.metal-revolution.com/live/artillery-manticora-demolizer-exelerate-9th-february-2024-studenterhuset-metalized-tour-2024-aalborg-denmark",
     archiveUrl:
       "https://web.archive.org/web/20240418062206/https://www.metal-revolution.com/live/artillery-manticora-demolizer-exelerate-9th-february-2024-studenterhuset-metalized-tour-2024-aalborg-denmark",
@@ -341,7 +341,7 @@ export const testimonials = [
     date: new Date("2024-02-24"),
     source: "Selvtægt",
     pullQuote:
-      "Nærværende artikel nævner Exelerates optræden, men vil afholde sig fra at beskæftige sig mere med den af hensyn til alles integritet, da skribentens bror spiller i bandet.",
+      "Nærværende artikel nævner Exelerates optræden, men vil afholde sig fra at beskæftige sig mere med den af hensyn til alles integritet, da skribentens bror spiller i bandet",
     url: "https://www.selvtaegt.dk/reportage/metalized-tour-bliver-den-samme-leverpostej-smurt-for-tyndt-ud/",
     archiveUrl:
       "https://web.archive.org/web/20240418062206/https://www.selvtaegt.dk/reportage/metalized-tour-bliver-den-samme-leverpostej-smurt-for-tyndt-ud/",

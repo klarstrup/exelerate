@@ -155,6 +155,11 @@ namespace Songkick {
   }
 }
 
+const discogsClient = new DiscogsClient({
+  userAgent: "exelerate.dk/1.0 +https://exelerate.dk",
+});
+const discogsDb = discogsClient.database();
+
 export default async function Home() {
   const nextShows: Songkick.Event[] | undefined = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
@@ -347,19 +352,14 @@ export default async function Home() {
                           | undefined
                     )
                 : undefined;
+
               const discogsRelease = testimonial.discogsId?.startsWith("r")
-                ? await new DiscogsClient({
-                    userAgent: "exelerate.dk/1.0 +https://exelerate.dk",
-                  })
-                    .database()
+                ? await discogsDb
                     .getRelease(testimonial.discogsId.replace("r", ""))
                     .catch(() => {})
                 : undefined;
               const discogsMaster = testimonial.discogsId?.startsWith("m")
-                ? await new DiscogsClient({
-                    userAgent: "exelerate.dk/1.0 +https://exelerate.dk",
-                  })
-                    .database()
+                ? await discogsDb
                     .getMaster(testimonial.discogsId.replace("m", ""))
                     .catch(() => {})
                 : undefined;
@@ -371,19 +371,25 @@ export default async function Home() {
                 >
                   <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
                     <div className="flex flex-col flex-1">
-                      <span className="font-bold text-xl">
+                      <a
+                        href={testimonial.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-shadow-md text-shadow-black/40 font-bold text-xl whitespace-nowrap"
+                      >
                         {testimonial.source}
-                      </span>
+                      </a>
                       {testimonial.type === "concert" ? (
                         <a
                           href={`https://www.songkick.com/concerts/${testimonial.songkickId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-shadow-md text-shadow-black/40"
+                          style={{ color: "white !important" }}
+                          className="text-shadow-md text-shadow-black/40 whitespace-nowrap"
                         >
                           {songkickConcert ? (
                             <>
-                              <span className="whitespace-nowrap">
+                              <span>
                                 {songkickConcert.venue?.displayName ||
                                   songkickConcert.location.city}
                               </span>
@@ -429,6 +435,7 @@ export default async function Home() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-shadow-md text-shadow-black/40"
+                          style={{ color: "white !important" }}
                         >
                           &quot;
                           {testimonial.discogsId?.startsWith("m")
@@ -527,6 +534,7 @@ L 50.2 140.7 Z"
                                 height="40px"
                                 viewBox="260 0 360 500"
                                 style={{
+                                  marginLeft: "-2px",
                                   color:
                                     i <
                                     Math.round(
@@ -584,7 +592,7 @@ Z"
                   </div>
                   <p
                     className={
-                      "text-gray-800 text-shadow-md text-shadow-white/10 flex-1 text-justify text-pretty " +
+                      "text-gray-800 text-shadow-md text-shadow-white/20 flex-1 text-justify text-pretty " +
                       (testimonial.pullQuote.length > 60
                         ? " text-xl"
                         : testimonial.pullQuote.length > 25
@@ -593,15 +601,6 @@ Z"
                     }
                   >
                     {testimonial.pullQuote}
-                    <span className="px-2" />
-                    <a
-                      href={testimonial.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-shadow-md text-shadow-black/40 text-sm whitespace-nowrap"
-                    >
-                      Read more
-                    </a>
                   </p>
                 </li>
               );
