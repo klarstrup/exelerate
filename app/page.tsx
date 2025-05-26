@@ -353,6 +353,7 @@ export default async function Home() {
                   })
                     .database()
                     .getRelease(testimonial.discogsId.replace("r", ""))
+                    .catch(() => {})
                 : undefined;
               const discogsMaster = testimonial.discogsId?.startsWith("m")
                 ? await new DiscogsClient({
@@ -360,6 +361,7 @@ export default async function Home() {
                   })
                     .database()
                     .getMaster(testimonial.discogsId.replace("m", ""))
+                    .catch(() => {})
                 : undefined;
 
               return (
@@ -381,12 +383,11 @@ export default async function Home() {
                         >
                           {songkickConcert ? (
                             <>
-                              live at{" "}
                               <span className="whitespace-nowrap">
                                 {songkickConcert.venue?.displayName ||
                                   songkickConcert.location.city}
-                              </span>{" "}
-                              on{" "}
+                              </span>
+                              ,{" "}
                               <time
                                 title={`${songkickConcert.start.date}  ${songkickConcert.start.time}`}
                                 dateTime={new Date(
@@ -415,12 +416,12 @@ export default async function Home() {
                       ) : testimonial.type === "release" ? (
                         <a
                           href={
-                            testimonial.discogsId.startsWith("m")
-                              ? `https://www.discogs.com/master/${testimonial.discogsId.replace(
+                            testimonial.discogsId?.startsWith("m")
+                              ? `https://www.discogs.com/master/${testimonial.discogsId?.replace(
                                   "m",
                                   ""
                                 )}`
-                              : `https://www.discogs.com/release/${testimonial.discogsId.replace(
+                              : `https://www.discogs.com/release/${testimonial.discogsId?.replace(
                                   "r",
                                   ""
                                 )}`
@@ -430,11 +431,11 @@ export default async function Home() {
                           className="text-shadow-md text-shadow-black/40"
                         >
                           &quot;
-                          {testimonial.discogsId.startsWith("m")
+                          {testimonial.discogsId?.startsWith("m")
                             ? discogsMaster?.data.title
                             : discogsRelease?.data.title}
                           &quot; (
-                          {testimonial.discogsId.startsWith("m")
+                          {testimonial.discogsId?.startsWith("m")
                             ? discogsMaster?.data.year
                             : discogsRelease?.data.year}
                           )
@@ -443,34 +444,45 @@ export default async function Home() {
                     </div>
 
                     {testimonial.score
-                      ? new Array(testimonial.scoreMax).fill(0).map((_, i) =>
-                          false ? (
-                            <svg
-                              key={i}
-                              xmlns="http://www.w3.org/2000/svg"
-                              version="1.1"
-                              preserveAspectRatio="none"
-                              x="0px"
-                              y="0px"
-                              width="27.5px"
-                              height="20px"
-                              viewBox="0 0 550 400"
-                              style={{
-                                color:
-                                  i < testimonial.score!
-                                    ? "#ffd400"
-                                    : "rgba(255, 255, 255, 0.75)",
-                                marginLeft: "-8px",
-                              }}
-                            >
-                              <path
-                                fill="currentColor"
-                                stroke="none"
+                      ? new Array(
+                          testimonial.scoreMax === 100
+                            ? testimonial.scoreMax / 10
+                            : testimonial.scoreMax
+                        )
+                          .fill(0)
+                          .map((_, i) =>
+                            false ? (
+                              <svg
+                                key={i}
+                                xmlns="http://www.w3.org/2000/svg"
+                                version="1.1"
+                                preserveAspectRatio="none"
+                                x="0px"
+                                y="0px"
+                                width="27.5px"
+                                height="20px"
+                                viewBox="0 0 550 400"
                                 style={{
-                                  filter:
-                                    "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                  color:
+                                    i <
+                                    Math.round(
+                                      testimonial.scoreMax === 100
+                                        ? testimonial.score! / 10
+                                        : testimonial.score!
+                                    )
+                                      ? "#ffd400"
+                                      : "rgba(255, 255, 255, 0.75)",
+                                  marginLeft: "-8px",
                                 }}
-                                d="
+                              >
+                                <path
+                                  fill="currentColor"
+                                  stroke="none"
+                                  style={{
+                                    filter:
+                                      "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                  }}
+                                  d="
 M 463.15 316.5
 L 334.55 298.15
 Q 292.9 287.15 279.8 253.15 276.6 247.7 281.5 240.65
@@ -502,33 +514,38 @@ M 50.2 140.7
 L 50.2 122.2
 Q 50.45 112.75 69.5 105.2 92.15 106.55 104.9 127.7 91 154.9 64.65 164.6 49 170.25 43.35 159.7
 L 50.2 140.7 Z"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              key={i}
-                              xmlns="http://www.w3.org/2000/svg"
-                              version="1.1"
-                              x="0px"
-                              y="0px"
-                              width="20px"
-                              height="40px"
-                              viewBox="260 0 360 500"
-                              style={{
-                                color:
-                                  i < testimonial.score!
-                                    ? "#ffd400"
-                                    : "rgba(255, 255, 255, 0.75)",
-                              }}
-                            >
-                              <path
-                                fill="currentColor"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                key={i}
+                                xmlns="http://www.w3.org/2000/svg"
+                                version="1.1"
+                                x="0px"
+                                y="0px"
+                                width="20px"
+                                height="40px"
+                                viewBox="260 0 360 500"
                                 style={{
-                                  filter:
-                                    "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                  color:
+                                    i <
+                                    Math.round(
+                                      testimonial.scoreMax === 100
+                                        ? testimonial.score! / 10
+                                        : testimonial.score!
+                                    )
+                                      ? "#ffd400"
+                                      : "rgba(255, 255, 255, 0.75)",
                                 }}
-                                stroke="none"
-                                d="
+                              >
+                                <path
+                                  fill="currentColor"
+                                  style={{
+                                    filter:
+                                      "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
+                                  }}
+                                  stroke="none"
+                                  d="
 M 561.15 207
 L 543.1 244.15
 Q 540.2 250.85 543.75 257.15
@@ -559,20 +576,20 @@ Q 425.5 371.35 424 370.55
 M 458.4 309.55
 Q 445.3 301.6 450.4 287.05 490.05 271.2 534.05 275 535.9 287.7 530.25 300.2 524.5 312.65 492.95 317.45 470.9 318.75 458.4 309.55
 Z"
-                              />
-                            </svg>
+                                />
+                              </svg>
+                            )
                           )
-                        )
                       : null}
                   </div>
                   <p
                     className={
                       "text-gray-800 text-shadow-md text-shadow-white/10 flex-1 text-justify text-pretty " +
-                      (testimonial.pullQuote.length > 50
+                      (testimonial.pullQuote.length > 60
                         ? " text-xl"
                         : testimonial.pullQuote.length > 25
                         ? " text-3xl"
-                        : " text-5xl")
+                        : " text-6xl")
                     }
                   >
                     {testimonial.pullQuote}
