@@ -374,7 +374,7 @@ export default async function Home() {
                 return (
                   <li
                     key={testimonial.url}
-                    className="p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm"
+                    className="p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm"
                   >
                     <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
                       <div className="flex flex-col flex-1">
