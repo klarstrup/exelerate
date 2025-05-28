@@ -13,7 +13,7 @@ export interface ConcertReview extends Review {
 }
 export interface ReleaseReview extends Review {
   type: "release";
-  discogsId?: string;
+  metalArchivesAlbumId?: number;
 }
 
 export type Testimonial = ConcertReview | ReleaseReview;
@@ -25,7 +25,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20240416012832/https://devilution.dk/anmeldelser/pladeanmeldelser/der-skal-altsa-mere-til",
     date: new Date("2015-02-16"),
-    discogsId: "r29189476",
+    metalArchivesAlbumId: 472825,
     source: "Devilution",
     pullQuote:
       "Der er lidt attitude, noget frisk over dem og det der je ne sais quoi, der adskiller Exelerate fra de evigheder af leverpostej, man får tilsendt som anmelder",
@@ -59,7 +59,7 @@ export const testimonials = [
   {
     type: "release",
     date: new Date("2023-02-1"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Soundcheck",
     pullQuote:
       "Το “Exelerate” είναι ένα αρκετά καλό ντεμπούτο, γεμάτο πάθος και ενέργεια",
@@ -70,7 +70,7 @@ export const testimonials = [
   {
     type: "release",
     date: new Date("2023-02-10"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Musika",
     pullQuote:
       "Kracht en melodie worden samen gekoppeld aan soms agressief klinkende momenten",
@@ -83,7 +83,7 @@ export const testimonials = [
   {
     type: "release",
     date: new Date("2023-02-28"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "HEAVYMETAL.DK",
     pullQuote: "Den er købt!",
     url: "https://heavymetal.dk/anmeldelse/exelerate-exelerate",
@@ -95,7 +95,7 @@ export const testimonials = [
   {
     type: "release",
     date: new Date("2023-03-01"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Powerplay Magazine",
     pullQuote:
       "a band that understands the core qualities of great heavy metal and interprets them with adventurous spirit",
@@ -111,7 +111,7 @@ export const testimonials = [
     url: "https://www.metal-rules.com/2023/03/01/exelerate-exelerate/",
     archiveUrl:
       "https://web.archive.org/web/20250315073601/https://www.metal-rules.com/2023/03/01/exelerate-exelerate/",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Metal-Rules.com",
     pullQuote: "a powerful and thrilling album",
     score: 4,
@@ -120,7 +120,7 @@ export const testimonials = [
   {
     type: "release",
     date: new Date("2023-03-07"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Calles Rock Corner",
     pullQuote: "det er ganske enkelt verdensklasse, det her",
     url: "https://callesrockcorner.dk/?id=blog&news=44327",
@@ -135,7 +135,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250315073601/https://ghostcultmag.com/album-review-exelerate-exelerate-from-the-vaults/",
     date: new Date("2023-03-07"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Ghost Cult Magazine",
     pullQuote:
       "a helluva impressive debut that has all the makings of being a future classic",
@@ -147,6 +147,7 @@ export const testimonials = [
       "https://web.archive.org/web/20250525214318/https://metal-temple.com/review/exelerate-elysium/",
     date: new Date("2023-03-07"),
     source: "Metal Temple",
+    metalArchivesAlbumId: 589033,
     pullQuote: "This single and the video is absolutely BASED",
     score: 10,
     scoreMax: 10,
@@ -157,7 +158,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://metalgodstv.com/exelerate-album-review-exelerate/",
     source: "Metal Gods TV",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-10"),
     pullQuote: "a thunderous assault of thrashy heavy metal",
     score: 9.5,
@@ -169,7 +170,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://heavymusichq.com/heavy-music-hq-album-reviews-week-of-march-10-2023/",
     source: "Heavy Music HQ",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-10"),
     pullQuote:
       "Exelerate moves between brisk thrash, heavy grooves and melodic choruses",
@@ -182,7 +183,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-exelerate",
     source: "METAL FACTORY",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-10"),
     pullQuote:
       "Exelerate sind keine Band für leichtverdaubare Kost, sondern beweisen, dass man Musik äussert intelligent komponieren und dabei trotzdem einen roten Faden einziehen kann",
@@ -195,7 +196,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://www.metal-hammer.de/reviews/exelerate-exelerate/",
     source: "Metal Hammer",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-10"),
     pullQuote:
       "ab ‘Spawn Of Satan’ drücken die [quartett] aufs Pedal – die Drums hauen bis ‘Epilogue’ durch, während sich Riffs und Soli paaren",
@@ -208,7 +209,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://www.metalepidemic.com/exelerate-exelerate/",
     source: "Metal Epidemic",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-10"),
     pullQuote:
       "Exelerate is ready to melt faces just like the gods of metal we worship today commanded",
@@ -220,7 +221,7 @@ export const testimonials = [
     url: "https://www.allaroundmetal.com/component/content/article/26-releases/10227-exelerate,-buon-thrash-dalla-danimarca-sulla-scia-degli-artillery",
     archiveUrl:
       "https://web.archive.org/web/20250216075201/https://www.allaroundmetal.com/component/content/article/26-releases/10227-exelerate,-buon-thrash-dalla-danimarca-sulla-scia-degli-artillery",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-11"),
     source: "Allaround Metal",
     pullQuote:
@@ -233,7 +234,7 @@ export const testimonials = [
     url: "https://www.metallerium.com/exelerate-exelerate-2023",
     archiveUrl:
       "https://web.archive.org/web/20250216075201/https://www.metallerium.com/exelerate-exelerate-2023",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-11"),
     source: "Metallerium",
     pullQuote:
@@ -246,7 +247,7 @@ export const testimonials = [
     url: "https://www.yumpu.com/de/document/read/67683550/starkstrom31",
     archiveUrl:
       "https://web.archive.org/web/20250528195052/https://www.yumpu.com/de/document/read/67683550/starkstrom31",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-20"),
     source: "STARK!STROM",
     pullQuote:
@@ -258,7 +259,7 @@ export const testimonials = [
     url: "https://arrowlordsofmetal.nl/exelerate-exelerate/",
     archiveUrl:
       "https://web.archive.org/web/20250216075201/https://arrowlordsofmetal.nl/exelerate-exelerate/",
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-11"),
     source: "Arrow Lords Of Metal",
     pullQuote:
@@ -270,7 +271,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://www.ever-metal.com/2023/03/20/exelerate-exelerate/",
     date: new Date("2023-03-20"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Ever Metal",
     score: 9,
     scoreMax: 10,
@@ -282,7 +283,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://www.zephyrs-odem.de/exelerate-exelerate-2023-12598",
     date: new Date("2023-03-22"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Zephyr's Odem",
     score: 9.3,
     scoreMax: 10,
@@ -295,7 +296,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525214925/https://transcending-the-mundane.com/wp-content/uploads/2023/04/TTM33.pdf",
     date: new Date("2023-04-01"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Transcending the Mundane",
     pullQuote: "this is a band that should be enjoyed and not overlooked",
   },
@@ -367,7 +368,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20250525223253/https://mystificationzine.com/2023/12/13/ten-heavy-metal-albums-you-missed-2023/",
     date: new Date("2023-12-13"),
-    discogsId: "m3132144",
+    metalArchivesAlbumId: 1104270,
     source: "Mystification Zine",
     score: 79,
     scoreMax: 100,

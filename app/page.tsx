@@ -162,6 +162,27 @@ namespace Songkick {
   }
 }
 
+interface MetallumAlbum {
+  id: string;
+  name: string;
+  type: string;
+  releaseDate: string;
+  catalogID: string;
+  versionDescription: string;
+  label: string;
+  format: string;
+  limitations: string;
+  reviews: string;
+  coverUrl: string;
+  songs: {
+    id: string;
+    number: string;
+    name: string;
+    length: string;
+    lyrics: string;
+  }[];
+}
+
 export default async function Home() {
   const nextShows: Songkick.Event[] | undefined = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
@@ -246,7 +267,7 @@ export default async function Home() {
               target="_blank"
               title="From The Vaults"
               className="ftvLink fixed"
-              style={{ top: "5vh", right: "5vw" }}
+              style={{ top: "4vh", right: "3vw" }}
             >
               <Image
                 src={FTVLogo}
@@ -338,7 +359,7 @@ export default async function Home() {
           ) : null}
         </div>
         {/* Testimonials section, styled with tailwind!!! */}
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 max-w-7xl mx-auto px-4 py-8 gap-x-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto px-4 py-8 gap-x-4 grid-flow-dense">
           {await Promise.all(
             Array.from(testimonials)
               .sort((a, b) => compareDesc(a.date, b.date))
@@ -357,39 +378,39 @@ export default async function Home() {
                       )
                   : undefined;
 
-                const discogsRelease = testimonial.discogsId?.startsWith("r")
-                  ? await fetch(
-                      `https://api.discogs.com/releases/${testimonial.discogsId.replace(
-                        "r",
-                        ""
-                      )}`,
-                      {
-                        headers: { "User-Agent": userAgent },
-                        next: { revalidate: 12000 },
-                      }
-                    )
-                      .then((res) => res.json() as Promise<Release>)
-                      .catch(() => {})
-                  : undefined;
-                const discogsMaster = testimonial.discogsId?.startsWith("m")
-                  ? await fetch(
-                      `https://api.discogs.com/masters/${testimonial.discogsId.replace(
-                        "m",
-                        ""
-                      )}`,
-                      {
-                        headers: { "User-Agent": userAgent },
-                        next: { revalidate: 12000 },
-                      }
-                    )
-                      .then((res) => res.json() as Promise<Release>)
-                      .catch(() => {})
-                  : undefined;
+                const metalArchivesAlbum =
+                  "metalArchivesAlbumId" in testimonial &&
+                  testimonial.metalArchivesAlbumId
+                    ? await fetch(
+                        `https://metal-api.dev/albums/${testimonial.metalArchivesAlbumId}`,
+                        {
+                          headers: { "User-Agent": userAgent },
+                          next: { revalidate: 12000 },
+                        }
+                      )
+                        .then((res) => res.json() as Promise<MetallumAlbum>)
+                        .catch(() => {})
+                    : undefined;
+
+                const particularlyGood =
+                  testimonial.score &&
+                  Math.round(
+                    testimonial.scoreMax === 100
+                      ? testimonial.score! / 10
+                      : testimonial.score!
+                  ) /
+                    (testimonial.scoreMax === 100
+                      ? 10
+                      : testimonial.scoreMax) >=
+                    0.8;
 
                 return (
                   <li
                     key={testimonial.url}
-                    className="p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm"
+                    className={
+                      "p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm " +
+                      (particularlyGood ? "md:col-span-2" : "")
+                    }
                   >
                     <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
                       <div className="flex flex-col flex-1">
@@ -401,7 +422,7 @@ export default async function Home() {
                         >
                           {testimonial.source}
                         </a>
-                        {testimonial.type === "concert" ? (
+                        {testimonial.type === "concert" && songkickConcert ? (
                           <a
                             href={`https://www.songkick.com/concerts/${testimonial.songkickId}`}
                             target="_blank"
@@ -441,33 +462,19 @@ export default async function Home() {
                               "Concert"
                             )}
                           </a>
-                        ) : testimonial.type === "release" ? (
+                        ) : testimonial.type === "release" &&
+                          testimonial.metalArchivesAlbumId ? (
                           <a
-                            href={
-                              testimonial.discogsId?.startsWith("m")
-                                ? `https://www.discogs.com/master/${testimonial.discogsId?.replace(
-                                    "m",
-                                    ""
-                                  )}`
-                                : `https://www.discogs.com/release/${testimonial.discogsId?.replace(
-                                    "r",
-                                    ""
-                                  )}`
-                            }
+                            href={`https://www.metal-archives.com/albums/x/x/${testimonial.metalArchivesAlbumId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-shadow-md text-shadow-black/40"
                             style={{ color: "white !important" }}
                           >
                             &quot;
-                            {testimonial.discogsId?.startsWith("m")
-                              ? discogsMaster?.title
-                              : discogsRelease?.title}
+                            {metalArchivesAlbum?.name}
                             &quot; (
-                            {testimonial.discogsId?.startsWith("m")
-                              ? discogsMaster?.year
-                              : discogsRelease?.year}
-                            )
+                            {metalArchivesAlbum?.releaseDate.split(", ")[1]})
                           </a>
                         ) : null}
                       </div>
@@ -612,24 +619,38 @@ Z"
                             )
                         : null}
                     </div>
-                    <p
-                      className={
-                        "text-gray-900 text-shadow-md text-shadow-white/20 flex-1 text-justify text-pretty " +
-                        (testimonial.pullQuote.length > 192
-                          ? "text-lg lg:text-xl"
-                          : testimonial.pullQuote.length > 96
-                          ? "text-xl lg:text-2xl"
-                          : testimonial.pullQuote.length > 48
-                          ? "text-2xl lg:text-3xl"
-                          : testimonial.pullQuote.length > 24
-                          ? "text-3xl lg:text-4xl"
-                          : testimonial.pullQuote.length > 12
-                          ? "text-4xl lg:text-5xl"
-                          : "text-5xl lg:text-6xl")
-                      }
-                    >
-                      {testimonial.pullQuote}
-                    </p>
+                    <div className="flex-1 flex flex-col justify-center items-center">
+                      <p
+                        className={
+                          "text-gray-900 text-shadow-md text-shadow-white/20 text-justify text-pretty " +
+                          (particularlyGood
+                            ? testimonial.pullQuote.length > 160
+                              ? "text-2xl lg:text-3xl"
+                              : testimonial.pullQuote.length > 80
+                              ? "text-3xl lg:text-4xl"
+                              : testimonial.pullQuote.length > 40
+                              ? "text-4xl lg:text-5xl"
+                              : testimonial.pullQuote.length > 20
+                              ? "text-5xl lg:text-6xl"
+                              : testimonial.pullQuote.length > 10
+                              ? "text-6xl lg:text-7xl"
+                              : "text-7xl lg:text-8xl"
+                            : testimonial.pullQuote.length > 160
+                            ? "text-lg lg:text-xl"
+                            : testimonial.pullQuote.length > 80
+                            ? "text-xl lg:text-2xl"
+                            : testimonial.pullQuote.length > 40
+                            ? "text-2xl lg:text-3xl"
+                            : testimonial.pullQuote.length > 20
+                            ? "text-3xl lg:text-4xl"
+                            : testimonial.pullQuote.length > 10
+                            ? "text-4xl lg:text-5xl"
+                            : "text-5xl lg:text-6xl")
+                        }
+                      >
+                        {testimonial.pullQuote}
+                      </p>
+                    </div>
                   </li>
                 );
               })
