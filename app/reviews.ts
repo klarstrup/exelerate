@@ -68,6 +68,19 @@ export const testimonials = [
   },
   {
     type: "release",
+    date: new Date("2023-02-10"),
+    discogsId: "m3132144",
+    source: "Musika",
+    pullQuote:
+      "Kracht en melodie worden samen gekoppeld aan soms agressief klinkende momenten",
+    url: "https://www.musika.be/2023/02/10/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250322050724/https://www.musika.be/2023/02/10/exelerate-exelerate/",
+    score: 75,
+    scoreMax: 100,
+  },
+  {
+    type: "release",
     date: new Date("2023-02-28"),
     discogsId: "m3132144",
     source: "HEAVYMETAL.DK",
@@ -203,6 +216,44 @@ export const testimonials = [
   },
   {
     type: "release",
+    url: "https://www.allaroundmetal.com/component/content/article/26-releases/10227-exelerate,-buon-thrash-dalla-danimarca-sulla-scia-degli-artillery",
+    archiveUrl:
+      "https://web.archive.org/web/20250216075201/https://www.allaroundmetal.com/component/content/article/26-releases/10227-exelerate,-buon-thrash-dalla-danimarca-sulla-scia-degli-artillery",
+    discogsId: "m3132144",
+    date: new Date("2023-03-11"),
+    source: "Allaround Metal",
+    pullQuote:
+      "è praticamente impossibile rimanere fermi e non fare del furioso headbanging con canzoni decisamente azzeccate",
+    score: 3.5,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    url: "https://www.metallerium.com/exelerate-exelerate-2023",
+    archiveUrl:
+      "https://web.archive.org/web/20250216075201/https://www.metallerium.com/exelerate-exelerate-2023",
+    discogsId: "m3132144",
+    date: new Date("2023-03-11"),
+    source: "Metallerium",
+    pullQuote:
+      "è praticamente impossibile rimanere fermi e non fare del furioso headbanging con canzoni decisamente azzeccate",
+    score: 7.6,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    url: "https://www.yumpu.com/de/document/read/67683550/starkstrom31",
+    archiveUrl:
+      "https://web.archive.org/web/20250528195052/https://www.yumpu.com/de/document/read/67683550/starkstrom31",
+    discogsId: "m3132144",
+    date: new Date("2023-03-20"),
+    source: "STARK!STROM",
+    pullQuote:
+      'Wessen Körper durch die kombinierte Verwendung der Vokabel "Power/Thrash Metal" und "Dänemark" nervösen Zuckungen ausgesetzt ist, liegt hier definitiv richtig',
+  },
+
+  {
+    type: "release",
     url: "https://arrowlordsofmetal.nl/exelerate-exelerate/",
     archiveUrl:
       "https://web.archive.org/web/20250216075201/https://arrowlordsofmetal.nl/exelerate-exelerate/",
@@ -236,6 +287,16 @@ export const testimonials = [
     scoreMax: 10,
     pullQuote:
       "Exelerate sind ein verdammt heißes Eisen und haben schon mit ihrer ersten Platte alles richtig gemacht – Chapeau!",
+  },
+  {
+    type: "release",
+    url: "https://transcending-the-mundane.com/wp-content/uploads/2023/04/TTM33.pdf",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://transcending-the-mundane.com/wp-content/uploads/2023/04/TTM33.pdf",
+    date: new Date("2023-04-01"),
+    discogsId: "m3132144",
+    source: "Transcending the Mundane",
+    pullQuote: "this is a band that should be enjoyed and not overlooked",
   },
   {
     type: "concert",
