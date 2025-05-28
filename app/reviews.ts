@@ -25,6 +25,7 @@ export const testimonials = [
     archiveUrl:
       "https://web.archive.org/web/20240416012832/https://devilution.dk/anmeldelser/pladeanmeldelser/der-skal-altsa-mere-til",
     date: new Date("2015-02-16"),
+    discogsId: "r29189476",
     source: "Devilution",
     pullQuote:
       "Der er lidt attitude, noget frisk over dem og det der je ne sais quoi, der adskiller Exelerate fra de evigheder af leverpostej, man får tilsendt som anmelder",
