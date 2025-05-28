@@ -41,7 +41,7 @@ export default function RootLayout({
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          animation: "blurIn 666ms forwards ease-out",
+//          animation: "blurIn 666ms forwards ease-out",
         }}
       >
         {children}

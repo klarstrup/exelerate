@@ -1,0 +1,413 @@
+export interface Review {
+  date: Date;
+  source: string;
+  pullQuote: string;
+  url: string;
+  archiveUrl: string;
+  score?: number;
+  scoreMax?: number;
+}
+export interface ConcertReview extends Review {
+  type: "concert";
+  songkickId?: number;
+}
+export interface ReleaseReview extends Review {
+  type: "release";
+  metalArchivesAlbumId?: number;
+}
+
+export type Testimonial = ConcertReview | ReleaseReview;
+
+export const testimonials = [
+  {
+    type: "release",
+    url: "https://devilution.dk/anmeldelser/pladeanmeldelser/der-skal-altsa-mere-til",
+    archiveUrl:
+      "https://web.archive.org/web/20240416012832/https://devilution.dk/anmeldelser/pladeanmeldelser/der-skal-altsa-mere-til",
+    date: new Date("2015-02-16"),
+    metalArchivesAlbumId: 472825,
+    source: "Devilution",
+    pullQuote:
+      "Der er lidt attitude, noget frisk over dem og det der je ne sais quoi, der adskiller Exelerate fra de evigheder af leverpostej, man får tilsendt som anmelder",
+  },
+  {
+    type: "concert",
+    url: "https://www.rockfreaks.net/gigs/1112",
+    archiveUrl:
+      "https://web.archive.org/web/20201025191232/http://www.rockfreaks.net/gigs/1112",
+    songkickId: 22700783,
+    date: new Date("2015-04-14"),
+    source: "Rockfreaks.net",
+    pullQuote:
+      "They rock the stage with fast-paced guitar solos and piercing, high-pitched vocals just as it should be",
+    score: 5,
+    scoreMax: 10,
+  },
+  {
+    type: "concert",
+    url: "https://metaladay.dk/anmeldelse/exelerate-og-downfall-paa-rust/",
+    archiveUrl:
+      "https://web.archive.org/web/20240416012832/https://metaladay.dk/anmeldelse/exelerate-og-downfall-paa-rust/",
+    songkickId: 33695399,
+    date: new Date("2018-06-15"),
+    source: "Metal A Day",
+    pullQuote:
+      "et brølende lydbillede, der vekslede mellem elegante passager, kraftfulde vokallinjer og rivende riffs i et rasende tempo",
+    score: 3,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    date: new Date("2023-02-1"),
+    metalArchivesAlbumId: 1104270,
+    source: "Soundcheck",
+    pullQuote:
+      "Το “Exelerate” είναι ένα αρκετά καλό ντεμπούτο, γεμάτο πάθος και ενέργεια",
+    url: "https://soundcheck.network/posts/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250322050724/https://soundcheck.network/posts/exelerate-exelerate/",
+  },
+  {
+    type: "release",
+    date: new Date("2023-02-10"),
+    metalArchivesAlbumId: 1104270,
+    source: "Musika",
+    pullQuote:
+      "Kracht en melodie worden samen gekoppeld aan soms agressief klinkende momenten",
+    url: "https://www.musika.be/2023/02/10/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250322050724/https://www.musika.be/2023/02/10/exelerate-exelerate/",
+    score: 75,
+    scoreMax: 100,
+  },
+  {
+    type: "release",
+    date: new Date("2023-02-28"),
+    metalArchivesAlbumId: 1104270,
+    source: "HEAVYMETAL.DK",
+    pullQuote: "Den er købt!",
+    url: "https://heavymetal.dk/anmeldelse/exelerate-exelerate",
+    archiveUrl:
+      "https://web.archive.org/web/20250322050724/https://heavymetal.dk/anmeldelse/exelerate-exelerate",
+    score: 7,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    date: new Date("2023-03-01"),
+    metalArchivesAlbumId: 1104270,
+    source: "Powerplay Magazine",
+    pullQuote:
+      "a band that understands the core qualities of great heavy metal and interprets them with adventurous spirit",
+    url: "https://powerplaymagazine.co.uk/shop/p/powerplay-260-march-2023",
+    archiveUrl:
+      "https://web.archive.org/web/20250322050724/https://powerplaymagazine.co.uk/shop/p/powerplay-260-march-2023",
+    score: 9,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    date: new Date("2023-03-01"),
+    url: "https://www.metal-rules.com/2023/03/01/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250315073601/https://www.metal-rules.com/2023/03/01/exelerate-exelerate/",
+    metalArchivesAlbumId: 1104270,
+    source: "Metal-Rules.com",
+    pullQuote: "a powerful and thrilling album",
+    score: 4,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    date: new Date("2023-03-07"),
+    metalArchivesAlbumId: 1104270,
+    source: "Calles Rock Corner",
+    pullQuote: "det er ganske enkelt verdensklasse, det her",
+    url: "https://callesrockcorner.dk/?id=blog&news=44327",
+    archiveUrl:
+      "https://web.archive.org/web/20250315073601/https://callesrockcorner.dk/?id=blog&news=44327",
+    score: 5,
+    scoreMax: 6,
+  },
+  {
+    type: "release",
+    url: "https://ghostcultmag.com/album-review-exelerate-exelerate-from-the-vaults/",
+    archiveUrl:
+      "https://web.archive.org/web/20250315073601/https://ghostcultmag.com/album-review-exelerate-exelerate-from-the-vaults/",
+    date: new Date("2023-03-07"),
+    metalArchivesAlbumId: 1104270,
+    source: "Ghost Cult Magazine",
+    pullQuote:
+      "a helluva impressive debut that has all the makings of being a future classic",
+  },
+  {
+    type: "release",
+    url: "https://metal-temple.com/review/exelerate-elysium/",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214318/https://metal-temple.com/review/exelerate-elysium/",
+    date: new Date("2023-03-07"),
+    source: "Metal Temple",
+    metalArchivesAlbumId: 589033,
+    pullQuote: "This single and the video is absolutely BASED",
+    score: 10,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    url: "https://metalgodstv.com/exelerate-album-review-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://metalgodstv.com/exelerate-album-review-exelerate/",
+    source: "Metal Gods TV",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-10"),
+    pullQuote: "a thunderous assault of thrashy heavy metal",
+    score: 9.5,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    url: "https://heavymusichq.com/heavy-music-hq-album-reviews-week-of-march-10-2023/",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://heavymusichq.com/heavy-music-hq-album-reviews-week-of-march-10-2023/",
+    source: "Heavy Music HQ",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-10"),
+    pullQuote:
+      "Exelerate moves between brisk thrash, heavy grooves and melodic choruses",
+    score: 3,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    url: "https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-exelerate",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-exelerate",
+    source: "METAL FACTORY",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-10"),
+    pullQuote:
+      "Exelerate sind keine Band für leichtverdaubare Kost, sondern beweisen, dass man Musik äussert intelligent komponieren und dabei trotzdem einen roten Faden einziehen kann",
+    score: 9.2,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    url: "https://www.metal-hammer.de/reviews/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://www.metal-hammer.de/reviews/exelerate-exelerate/",
+    source: "Metal Hammer",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-10"),
+    pullQuote:
+      "ab ‘Spawn Of Satan’ drücken die [quartett] aufs Pedal – die Drums hauen bis ‘Epilogue’ durch, während sich Riffs und Soli paaren",
+    score: 3.5,
+    scoreMax: 7,
+  },
+  {
+    type: "release",
+    url: "https://www.metalepidemic.com/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://www.metalepidemic.com/exelerate-exelerate/",
+    source: "Metal Epidemic",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-10"),
+    pullQuote:
+      "Exelerate is ready to melt faces just like the gods of metal we worship today commanded",
+    score: 4,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    url: "https://www.allaroundmetal.com/component/content/article/26-releases/10227-exelerate,-buon-thrash-dalla-danimarca-sulla-scia-degli-artillery",
+    archiveUrl:
+      "https://web.archive.org/web/20250216075201/https://www.allaroundmetal.com/component/content/article/26-releases/10227-exelerate,-buon-thrash-dalla-danimarca-sulla-scia-degli-artillery",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-11"),
+    source: "Allaround Metal",
+    pullQuote:
+      "è praticamente impossibile rimanere fermi e non fare del furioso headbanging con canzoni decisamente azzeccate",
+    score: 3.5,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    url: "https://www.metallerium.com/exelerate-exelerate-2023",
+    archiveUrl:
+      "https://web.archive.org/web/20250216075201/https://www.metallerium.com/exelerate-exelerate-2023",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-11"),
+    source: "Metallerium",
+    pullQuote:
+      "è praticamente impossibile rimanere fermi e non fare del furioso headbanging con canzoni decisamente azzeccate",
+    score: 7.6,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    url: "https://www.yumpu.com/de/document/read/67683550/starkstrom31",
+    archiveUrl:
+      "https://web.archive.org/web/20250528195052/https://www.yumpu.com/de/document/read/67683550/starkstrom31",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-20"),
+    source: "STARK!STROM",
+    pullQuote:
+      'Wessen Körper durch die kombinierte Verwendung der Vokabel "Power/Thrash Metal" und "Dänemark" nervösen Zuckungen ausgesetzt ist, liegt hier definitiv richtig',
+  },
+
+  {
+    type: "release",
+    url: "https://arrowlordsofmetal.nl/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250216075201/https://arrowlordsofmetal.nl/exelerate-exelerate/",
+    metalArchivesAlbumId: 1104270,
+    date: new Date("2023-03-11"),
+    source: "Arrow Lords Of Metal",
+    pullQuote:
+      "Bij ‘No Escape’ wordt het gaspedaal flink ingetrapt en kunnen we duidelijk horen dat we hier met vakmensen te maken hebben",
+  },
+  {
+    type: "release",
+    url: "https://www.ever-metal.com/2023/03/20/exelerate-exelerate/",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://www.ever-metal.com/2023/03/20/exelerate-exelerate/",
+    date: new Date("2023-03-20"),
+    metalArchivesAlbumId: 1104270,
+    source: "Ever Metal",
+    score: 9,
+    scoreMax: 10,
+    pullQuote: "whiplash-inducing Power/Thrash Metal",
+  },
+  {
+    type: "release",
+    url: "https://www.zephyrs-odem.de/exelerate-exelerate-2023-12598",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://www.zephyrs-odem.de/exelerate-exelerate-2023-12598",
+    date: new Date("2023-03-22"),
+    metalArchivesAlbumId: 1104270,
+    source: "Zephyr's Odem",
+    score: 9.3,
+    scoreMax: 10,
+    pullQuote:
+      "Exelerate sind ein verdammt heißes Eisen und haben schon mit ihrer ersten Platte alles richtig gemacht – Chapeau!",
+  },
+  {
+    type: "release",
+    url: "https://transcending-the-mundane.com/wp-content/uploads/2023/04/TTM33.pdf",
+    archiveUrl:
+      "https://web.archive.org/web/20250525214925/https://transcending-the-mundane.com/wp-content/uploads/2023/04/TTM33.pdf",
+    date: new Date("2023-04-01"),
+    metalArchivesAlbumId: 1104270,
+    source: "Transcending the Mundane",
+    pullQuote: "this is a band that should be enjoyed and not overlooked",
+  },
+  {
+    type: "concert",
+    url: "https://devilution.dk/anmeldelser/koncertanmeldelser/terminalist-loppen-08092023",
+    archiveUrl:
+      "https://web.archive.org/web/20250216075201/https://devilution.dk/anmeldelser/koncertanmeldelser/terminalist-loppen-08092023",
+    songkickId: 41289323,
+    date: new Date("2023-09-11"),
+    source: "Devilution",
+    pullQuote:
+      "genreclashet går rent ind her i live-konteksten med samspil og tekniske finesser i højsædet",
+  },
+  {
+    type: "concert",
+    url: "https://metaltone.dk/arkiver/3163",
+    archiveUrl:
+      "https://web.archive.org/web/20250216075201/https://metaltone.dk/arkiver/3163",
+    date: new Date("2023-09-12"),
+    songkickId: 41289323,
+    source: "METALTONE.DK",
+    pullQuote:
+      "en super forløsning af energi, som genrebetegnelsen ”power-thrash” lægger op til",
+    score: 4,
+    scoreMax: 5,
+  },
+  {
+    type: "concert",
+    url: "https://www.rockfreaks.net/gigs/1759",
+    archiveUrl:
+      "https://web.archive.org/web/20250525210333/https://www.rockfreaks.net/gigs/1759",
+    date: new Date("2023-09-11"),
+    songkickId: 41289323,
+    source: "Rockfreaks.net",
+    pullQuote:
+      "One cannot but admire the flair with which the four musicians are playing their songs, gritting teeth, headbanging, and kneeling down in the throes of passion",
+    score: 7,
+    scoreMax: 10,
+  },
+  {
+    type: "concert",
+    url: "https://heavymetal.dk/koncertanmeldelse/terminalist-loppen-8-september-2023",
+    archiveUrl:
+      "https://web.archive.org/web/20250525210333/https://heavymetal.dk/koncertanmeldelse/terminalist-loppen-8-september-2023",
+    date: new Date("2023-09-11"),
+    songkickId: 41289323,
+    source: "HEAVYMETAL.DK",
+    pullQuote:
+      "45 minutters forrygende underholdning og en åbningskoncert ikke set bedre i umindelige tider",
+    score: 9,
+    scoreMax: 10,
+  },
+  {
+    type: "concert",
+    url: "https://devilution.dk/artikler/reportager/doomed-basement-07102023",
+    archiveUrl:
+      "https://web.archive.org/web/20240416012832/https://devilution.dk/artikler/reportager/doomed-basement-07102023",
+    songkickId: 41051429,
+    date: new Date("2023-10-09"),
+    source: "Devilution",
+    pullQuote: "deres energiske drive går lige i nakkemusklerne",
+    score: 3,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    url: "https://mystificationzine.com/2023/12/13/ten-heavy-metal-albums-you-missed-2023/",
+    archiveUrl:
+      "https://web.archive.org/web/20250525223253/https://mystificationzine.com/2023/12/13/ten-heavy-metal-albums-you-missed-2023/",
+    date: new Date("2023-12-13"),
+    metalArchivesAlbumId: 1104270,
+    source: "Mystification Zine",
+    score: 79,
+    scoreMax: 100,
+    pullQuote:
+      "You’ll have to be a true thrash head -and- an 80’s power metal goon to truly appreciate the class with which they blend these energies into something which is both truly classicist but also approachable",
+  },
+  {
+    type: "concert",
+    songkickId: 41320670,
+    date: new Date("2024-02-09"),
+    source: "Metal Revolution",
+    pullQuote: "Exelerate showcase just how metal anno 2024 should sound",
+    url: "https://www.metal-revolution.com/live/artillery-manticora-demolizer-exelerate-9th-february-2024-studenterhuset-metalized-tour-2024-aalborg-denmark",
+    archiveUrl:
+      "https://web.archive.org/web/20240418062206/https://www.metal-revolution.com/live/artillery-manticora-demolizer-exelerate-9th-february-2024-studenterhuset-metalized-tour-2024-aalborg-denmark",
+    score: 7,
+    scoreMax: 10,
+  },
+  {
+    type: "concert",
+    songkickId: 41320674,
+    date: new Date("2024-02-20"),
+    source: "Devilution",
+    pullQuote: "en opgave som Exelerate løser til UG",
+    url: "https://devilution.dk/anmeldelser/koncertanmeldelser/metalized-tour-2024-odense-10-02-2024",
+    archiveUrl:
+      "https://web.archive.org/web/20240418062206/https://www.devilution.dk/anmeldelser/koncertanmeldelser/metalized-tour-2024-odense-10-02-2024",
+  },
+  /*
+  {
+    type: "concert",
+    songkickId: 41320674,
+    date: new Date("2024-02-24"),
+    source: "Selvtægt",
+    pullQuote:
+      "Nærværende artikel nævner Exelerates optræden, men vil afholde sig fra at beskæftige sig mere med den af hensyn til alles integritet, da skribentens bror spiller i bandet",
+    url: "https://www.selvtaegt.dk/reportage/metalized-tour-bliver-den-samme-leverpostej-smurt-for-tyndt-ud/",
+    archiveUrl:
+      "https://web.archive.org/web/20240418062206/https://www.selvtaegt.dk/reportage/metalized-tour-bliver-den-samme-leverpostej-smurt-for-tyndt-ud/",
+  },
+  */
+] satisfies Testimonial[];
