@@ -1,4 +1,4 @@
-import { DiscogsClient } from "@lionralfs/discogs-client";
+import type { Release } from "@lionralfs/discogs-client";
 import {
   compareDesc,
   formatDistanceToNowStrict,
@@ -10,6 +10,8 @@ import { Fragment } from "react";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
+
+const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
 export const revalidate = 600;
 
@@ -159,11 +161,6 @@ namespace Songkick {
     description: string;
   }
 }
-
-const discogsClient = new DiscogsClient({
-  userAgent: "exelerate.dk/1.0 +https://exelerate.dk",
-});
-const discogsDb = discogsClient.database();
 
 export default async function Home() {
   const nextShows: Songkick.Event[] | undefined = await fetch(
@@ -361,13 +358,31 @@ export default async function Home() {
                   : undefined;
 
                 const discogsRelease = testimonial.discogsId?.startsWith("r")
-                  ? await discogsDb
-                      .getRelease(testimonial.discogsId.replace("r", ""))
+                  ? await fetch(
+                      `https://api.discogs.com/releases/${testimonial.discogsId.replace(
+                        "r",
+                        ""
+                      )}`,
+                      {
+                        headers: { "User-Agent": userAgent },
+                        next: { revalidate: 12000 },
+                      }
+                    )
+                      .then((res) => res.json() as Promise<Release>)
                       .catch(() => {})
                   : undefined;
                 const discogsMaster = testimonial.discogsId?.startsWith("m")
-                  ? await discogsDb
-                      .getMaster(testimonial.discogsId.replace("m", ""))
+                  ? await fetch(
+                      `https://api.discogs.com/masters/${testimonial.discogsId.replace(
+                        "m",
+                        ""
+                      )}`,
+                      {
+                        headers: { "User-Agent": userAgent },
+                        next: { revalidate: 12000 },
+                      }
+                    )
+                      .then((res) => res.json() as Promise<Release>)
                       .catch(() => {})
                   : undefined;
 
@@ -446,12 +461,12 @@ export default async function Home() {
                           >
                             &quot;
                             {testimonial.discogsId?.startsWith("m")
-                              ? discogsMaster?.data.title
-                              : discogsRelease?.data.title}
+                              ? discogsMaster?.title
+                              : discogsRelease?.title}
                             &quot; (
                             {testimonial.discogsId?.startsWith("m")
-                              ? discogsMaster?.data.year
-                              : discogsRelease?.data.year}
+                              ? discogsMaster?.year
+                              : discogsRelease?.year}
                             )
                           </a>
                         ) : null}
