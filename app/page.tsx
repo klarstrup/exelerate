@@ -232,7 +232,7 @@ export default async function Home() {
         <a href="https://www.youtube.com/watch?v=enE63h_EOuc">THE MADNESS</a>
         &quot;
         <br />
-        OUT NOW
+        <span className="text-white">OUT NOW</span>
         <br />
       </div>
       <div className="my-[7vh] mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
