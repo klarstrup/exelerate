@@ -120,9 +120,9 @@ export const testimonials = [
   {
     type: "release",
     date: new Date("2022-11-25"),
-    url: "http://www.hardrockinfo.com/reviews/2022/november.html",
+    url: "http://www.hardrockinfo.com/reviews/2022/november.html#exelerate-god",
     archiveUrl:
-      "https://web.archive.org/web/20250315073601/http://www.hardrockinfo.com/reviews/2022/november.html",
+      "https://web.archive.org/web/20250315073601/http://www.hardrockinfo.com/reviews/2022/november.html#exelerate-god",
     metalArchivesAlbumId: 1099277,
     source: "HARD ROCK INFO",
     pullQuote: "a powerful heavy metal song with a pinch of thrash",
