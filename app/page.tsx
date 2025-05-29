@@ -9,6 +9,7 @@ import { Fragment } from "react";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
+import { twMerge } from "tailwind-merge";
 
 const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
@@ -212,6 +213,20 @@ export default async function Home() {
         }}
         className="mx-auto block"
       />
+      <a
+        href="https://fromthevaults.dk/"
+        target="_blank"
+        title="From The Vaults"
+        className="ftvLink fixed top-[3vh] right-[6vw]"
+      >
+        <Image
+          src={FTVLogo}
+          width={75}
+          height={85}
+          alt="From The Vaults"
+          className="h-auto max-w-[7.5vh]"
+        />
+      </a>
       <div className="text-center text-6xl lg:text-9xl my-[7vh] text-shadow-lg text-shadow-black/40">
         &quot;
         <a href="https://www.youtube.com/watch?v=enE63h_EOuc">THE MADNESS</a>
@@ -222,16 +237,10 @@ export default async function Home() {
       </div>
       <div className="my-[7vh] mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
         <div
-          className="max-w-[1440px] mx-auto mb-[7vh] leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0"
-          style={{
-            alignSelf: "stretch",
-            width: "100% !important",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            display: "flex",
-            justifyContent: "space-evenly",
-            ...(!nextShow ? { textAlign: "center" } : undefined),
-          }}
+          className={twMerge(
+            "max-w-[1440px] mx-auto mb-[7vh] leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
+            "self-stretch flex flex-row  justify-evenly flex-wrap"
+          )}
         >
           <a
             href="https://www.facebook.com/Exelerateband"
@@ -260,25 +269,6 @@ export default async function Home() {
             target="_blank"
           >
             YouTube
-          </a>
-          <a
-            href="https://fromthevaults.dk/"
-            target="_blank"
-            title="From The Vaults"
-            className="ftvLink fixed"
-            style={{ top: "4vh", right: "3vw" }}
-          >
-            <Image
-              src={FTVLogo}
-              width={75}
-              height={85}
-              alt="From The Vaults"
-              style={{
-                maxWidth: "7.5vh",
-                marginTop: "0.125em",
-              }}
-              className="h-auto"
-            />
           </a>
         </div>
         {nextShow ? (
@@ -357,7 +347,6 @@ export default async function Home() {
           </div>
         ) : null}
       </div>
-      {/* Testimonials section, styled with tailwind!!! */}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
         {await Promise.all(
           Array.from(testimonials)
