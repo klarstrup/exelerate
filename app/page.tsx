@@ -359,7 +359,7 @@ export default async function Home() {
           ) : null}
         </div>
         {/* Testimonials section, styled with tailwind!!! */}
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto px-4 py-8 gap-x-4 grid-flow-dense">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
           {await Promise.all(
             Array.from(testimonials)
               .sort((a, b) => compareDesc(a.date, b.date))
