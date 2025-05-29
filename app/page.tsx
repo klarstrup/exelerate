@@ -622,7 +622,7 @@ Z"
                     <div className="flex-1 flex flex-col justify-center items-center">
                       <p
                         className={
-                          "text-gray-900 text-shadow-md text-shadow-white/20 text-justify text-pretty " +
+                          "text-gray-900 text-shadow-md text-shadow-white/20 text-justify text-balance " +
                           (particularlyGood
                             ? testimonial.pullQuote.length > 160
                               ? "text-2xl lg:text-3xl"
