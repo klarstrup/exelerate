@@ -227,18 +227,17 @@ export default async function Home() {
           className="h-auto max-w-[7.5vh]"
         />
       </a>
-      <div className="text-center text-6xl lg:text-9xl my-[7vh] text-shadow-lg text-shadow-black/40">
+      <div className="text-center text-6xl lg:text-9xl my-[6vh] text-shadow-lg text-shadow-black/40">
+        <div className="text-white text-2xl lg:text-5xl leading-[1]">NEW SINGLE</div>
         &quot;
         <a href="https://www.youtube.com/watch?v=enE63h_EOuc">THE MADNESS</a>
         &quot;
-        <br />
-        <span className="text-white">OUT NOW</span>
-        <br />
+        <div className="text-white text-5xl lg:text-8xl leading-[0.8]">OUT NOW</div>
       </div>
-      <div className="my-[7vh] mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
+      <div className="my-[6vh] mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
         <div
           className={twMerge(
-            "max-w-[1440px] mx-auto mb-[7vh] leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
+            "max-w-[1440px] mx-auto leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
             "self-stretch flex flex-row  justify-evenly flex-wrap"
           )}
         >
