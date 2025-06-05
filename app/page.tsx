@@ -238,7 +238,7 @@ export default async function Home() {
         <div
           className={twMerge(
             "max-w-[1440px] mx-auto leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
-            "self-stretch flex flex-row  justify-evenly flex-wrap"
+            "self-stretch flex flex-row  justify-around flex-wrap"
           )}
         >
           <a
