@@ -247,8 +247,7 @@ export const testimonials = [
     metalArchivesAlbumId: 1104270,
     date: new Date("2023-03-11"),
     source: "Metallerium",
-    pullQuote:
-      "è praticamente impossibile rimanere fermi e non fare del furioso headbanging con canzoni decisamente azzeccate",
+    pullQuote: "Interesting classic metal album",
     score: 7.6,
     scoreMax: 10,
   },
