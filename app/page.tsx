@@ -1,4 +1,3 @@
-import type { Release } from "@lionralfs/discogs-client";
 import {
   compareDesc,
   formatDistanceToNowStrict,
@@ -10,6 +9,7 @@ import { Fragment } from "react";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
+import { twMerge } from "tailwind-merge";
 
 const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
@@ -209,316 +209,301 @@ export default async function Home() {
         style={{
           height: "40vh",
           width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
+          filter: "invert(1)",
         }}
         className="mx-auto block"
       />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+      <a
+        href="https://fromthevaults.dk/"
+        target="_blank"
+        title="From The Vaults"
+        className="ftvLink fixed top-[3vh] right-[6vw]"
       >
+        <Image
+          src={FTVLogo}
+          width={75}
+          height={85}
+          alt="From The Vaults"
+          className="h-auto max-w-[7.5vh]"
+        />
+      </a>
+      <div className="text-center text-6xl lg:text-9xl my-[6vh] text-shadow-lg text-shadow-black/40">
+        <div className="text-white text-2xl lg:text-5xl leading-[1]">NEW SINGLE</div>
+        &quot;
+        <a href="https://www.youtube.com/watch?v=enE63h_EOuc">THE MADNESS</a>
+        &quot;
+        <div className="text-white text-5xl lg:text-8xl leading-[0.8]">OUT NOW</div>
+      </div>
+      <div className="my-[6vh] mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
         <div
-          className="mainStuff"
-          style={!nextShow ? { gridTemplateColumns: "initial" } : undefined}
+          className={twMerge(
+            "max-w-[1440px] mx-auto leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
+            "self-stretch flex flex-row  justify-around flex-wrap"
+          )}
         >
-          <div
-            id="exeleLinks"
-            style={!nextShow ? { textAlign: "center" } : undefined}
+          <a
+            href="https://www.facebook.com/Exelerateband"
+            title="Main social"
+            target="_blank"
           >
-            <a
-              href="https://targetgroup.bandcamp.com/album/exelerate"
-              title="CD & LP"
-              target="_blank"
-            >
-              CD & LP
-            </a>
-            <a
-              href="https://www.facebook.com/Exelerateband"
-              title="Main social"
-              target="_blank"
-            >
-              Facebook
-            </a>
-            <a
-              href="https://www.instagram.com/exeleratedk"
-              title="Secondary social"
-              target="_blank"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://open.spotify.com/artist/0jRw54h5J5HeIkexDiOHZC"
-              title="song downloading/purchasing"
-              target="_blank"
-            >
-              Spotify
-            </a>
-            <a
-              href="https://youtube.com/user/ExelerateDK"
-              title="Videos"
-              target="_blank"
-            >
-              YouTube
-            </a>
-            <a
-              href="https://fromthevaults.dk/"
-              target="_blank"
-              title="From The Vaults"
-              className="ftvLink fixed"
-              style={{ top: "4vh", right: "3vw" }}
-            >
-              <Image
-                src={FTVLogo}
-                width={75}
-                height={85}
-                alt="From The Vaults"
-                style={{
-                  maxWidth: "7.5vh",
-                  marginTop: "0.125em",
-                }}
-                className="h-auto"
-              />
-            </a>
-          </div>
-          {nextShow ? (
-            <div className="nextGig">
-              Next show is
-              <div>
-                {isToday(new Date(nextShow.start.datetime)) ? null : <>in </>}
-                <a target="_blank" href={nextShow.uri}>
-                  <time
-                    title={`${nextShow.start.date}  ${nextShow.start.time}`}
-                    dateTime={nextShow.start.datetime || undefined}
-                  >
-                    {isToday(new Date(nextShow.start.datetime)) ? (
-                      <>today</>
-                    ) : (
-                      formatDistanceToNowStrict(
-                        new Date(
-                          nextShow.start.datetime ||
-                            setHours(new Date(nextShow.start.date), 16) ||
-                            ""
-                        ),
-                        { unit: "day" }
-                      )
-                    )}
-                  </time>
-                </a>{" "}
-                at
-              </div>
-              <a
-                className="venue"
-                target="_blank"
-                href={
-                  nextShow.venue?.website ||
-                  `https://maps.google.com/maps?q=${
-                    (nextShow.venue && nextShow.venue.displayName) ||
-                    nextShow.location.city
-                  }`
-                }
-              >
-                <span className="whitespace-nowrap">
-                  {nextShow.series?.displayName ||
-                    (nextShow.venue.id && nextShow.venue.displayName) ||
-                    nextShow.location.city}
-                </span>
-              </a>
-              {nextShow.performance.length > 1 ? (
-                <>
-                  <br />
-                  with{" "}
-                  <div className="otherHeadliners">
-                    {nextShow.performance
-                      .filter((p) => p.displayName !== "Exelerate")
-                      .map((p, i) => (
-                        <Fragment key={p.artist.id}>
-                          {i ? <> </> : null}
-                          <a target="_blank" href={p.artist.uri}>
-                            <em>{p.displayName.replace(" (DK)", "")}</em>
-                          </a>
-                        </Fragment>
-                      ))}
-                  </div>
-                </>
-              ) : null}
-              {nextShows && nextShows.length > 1 ? (
-                <div className="whitespace-nowrap">
-                  +{" "}
-                  <a
-                    target="_blank"
-                    href={`https://www.songkick.com/artists/6777179-exelerate`}
-                    style={{ fontSize: "0.8em" }}
-                  >
-                    <big>{nextShows.length - 1} future shows</big>
-                  </a>
-                </div>
-              ) : null}
-            </div>
-          ) : null}
+            Facebook
+          </a>
+          <a
+            href="https://www.instagram.com/exeleratedk"
+            title="Secondary social"
+            target="_blank"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://open.spotify.com/artist/0jRw54h5J5HeIkexDiOHZC"
+            title="song downloading/purchasing"
+            target="_blank"
+          >
+            Spotify
+          </a>
+          <a
+            href="https://youtube.com/user/ExelerateDK"
+            title="Videos"
+            target="_blank"
+          >
+            YouTube
+          </a>
         </div>
-        {/* Testimonials section, styled with tailwind!!! */}
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
-          {await Promise.all(
-            Array.from(testimonials)
-              .sort((a, b) => compareDesc(a.date, b.date))
-              .map(async (testimonial) => {
-                const songkickConcert = testimonial.songkickId
-                  ? await fetch(
-                      `https://api.songkick.com/api/3.0/events/${testimonial.songkickId}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-                      { next: { revalidate: 12000 } }
+        {nextShow ? (
+          <div className="nextGig">
+            Next show is
+            <div>
+              {isToday(new Date(nextShow.start.datetime)) ? null : <>in </>}
+              <a target="_blank" href={nextShow.uri}>
+                <time
+                  title={`${nextShow.start.date}  ${nextShow.start.time}`}
+                  dateTime={nextShow.start.datetime || undefined}
+                >
+                  {isToday(new Date(nextShow.start.datetime)) ? (
+                    <>today</>
+                  ) : (
+                    formatDistanceToNowStrict(
+                      new Date(
+                        nextShow.start.datetime ||
+                          setHours(new Date(nextShow.start.date), 16) ||
+                          ""
+                      ),
+                      { unit: "day" }
                     )
-                      .then((res) => res.json())
-                      .then(
-                        (res) =>
-                          res.resultsPage?.results?.event as
-                            | Songkick.EventDetails
-                            | undefined
-                      )
+                  )}
+                </time>
+              </a>{" "}
+              at
+            </div>
+            <a
+              className="venue"
+              target="_blank"
+              href={
+                nextShow.venue?.website ||
+                `https://maps.google.com/maps?q=${
+                  (nextShow.venue && nextShow.venue.displayName) ||
+                  nextShow.location.city
+                }`
+              }
+            >
+              <span className="whitespace-nowrap">
+                {nextShow.series?.displayName ||
+                  (nextShow.venue.id && nextShow.venue.displayName) ||
+                  nextShow.location.city}
+              </span>
+            </a>
+            {nextShow.performance.length > 1 ? (
+              <>
+                <br />
+                with{" "}
+                <div className="otherHeadliners">
+                  {nextShow.performance
+                    .filter((p) => p.displayName !== "Exelerate")
+                    .map((p, i) => (
+                      <Fragment key={p.artist.id}>
+                        {i ? <> </> : null}
+                        <a target="_blank" href={p.artist.uri}>
+                          <em>{p.displayName.replace(" (DK)", "")}</em>
+                        </a>
+                      </Fragment>
+                    ))}
+                </div>
+              </>
+            ) : null}
+            {nextShows && nextShows.length > 1 ? (
+              <div className="whitespace-nowrap">
+                +{" "}
+                <a
+                  target="_blank"
+                  href={`https://www.songkick.com/artists/6777179-exelerate`}
+                  style={{ fontSize: "0.8em" }}
+                >
+                  <big>{nextShows.length - 1} future shows</big>
+                </a>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
+        {await Promise.all(
+          Array.from(testimonials)
+            .sort((a, b) => compareDesc(a.date, b.date))
+            .map(async (testimonial) => {
+              const songkickConcert = testimonial.songkickId
+                ? await fetch(
+                    `https://api.songkick.com/api/3.0/events/${testimonial.songkickId}.json?apikey=${process.env.SONGKICK_APIKEY}`,
+                    { next: { revalidate: 12000 } }
+                  )
+                    .then((res) => res.json())
+                    .then(
+                      (res) =>
+                        res.resultsPage?.results?.event as
+                          | Songkick.EventDetails
+                          | undefined
+                    )
+                : undefined;
+
+              const metalArchivesAlbum =
+                "metalArchivesAlbumId" in testimonial &&
+                testimonial.metalArchivesAlbumId
+                  ? await fetch(
+                      `https://metal-api.dev/albums/${testimonial.metalArchivesAlbumId}`,
+                      {
+                        headers: { "User-Agent": userAgent },
+                        next: { revalidate: 12000 },
+                      }
+                    )
+                      .then((res) => res.json() as Promise<MetallumAlbum>)
+                      .catch(() => {})
                   : undefined;
 
-                const metalArchivesAlbum =
-                  "metalArchivesAlbumId" in testimonial &&
-                  testimonial.metalArchivesAlbumId
-                    ? await fetch(
-                        `https://metal-api.dev/albums/${testimonial.metalArchivesAlbumId}`,
-                        {
-                          headers: { "User-Agent": userAgent },
-                          next: { revalidate: 12000 },
-                        }
-                      )
-                        .then((res) => res.json() as Promise<MetallumAlbum>)
-                        .catch(() => {})
-                    : undefined;
+              const particularlyGood =
+                testimonial.score &&
+                Math.round(
+                  testimonial.scoreMax === 100
+                    ? testimonial.score! / 10
+                    : testimonial.score!
+                ) /
+                  (testimonial.scoreMax === 100 ? 10 : testimonial.scoreMax) >=
+                  0.8;
 
-                const particularlyGood =
-                  testimonial.score &&
-                  Math.round(
-                    testimonial.scoreMax === 100
-                      ? testimonial.score! / 10
-                      : testimonial.score!
-                  ) /
-                    (testimonial.scoreMax === 100
-                      ? 10
-                      : testimonial.scoreMax) >=
-                    0.8;
-
-                return (
-                  <li
-                    key={testimonial.url}
-                    className={
-                      "p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm " +
-                      (particularlyGood ? "md:col-span-2" : "")
-                    }
-                  >
-                    <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
-                      <div className="flex flex-col flex-1">
+              return (
+                <li
+                  key={testimonial.url}
+                  className={
+                    "p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm " +
+                    (particularlyGood ? "md:col-span-2" : "")
+                  }
+                >
+                  <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
+                    <div className="flex flex-col flex-1">
+                      <a
+                        href={testimonial.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-shadow-md text-shadow-black/40 font-bold text-xl whitespace-nowrap"
+                      >
+                        {testimonial.source}
+                      </a>
+                      {testimonial.type === "concert" && songkickConcert ? (
                         <a
-                          href={testimonial.url}
+                          href={`https://www.songkick.com/concerts/${testimonial.songkickId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-shadow-md text-shadow-black/40 font-bold text-xl whitespace-nowrap"
+                          style={{ color: "white !important" }}
+                          className="text-shadow-md text-shadow-black/40 whitespace-nowrap"
                         >
-                          {testimonial.source}
+                          {songkickConcert ? (
+                            <>
+                              <span>
+                                {songkickConcert.venue?.displayName ||
+                                  songkickConcert.location.city}
+                              </span>
+                              ,{" "}
+                              <time
+                                title={`${songkickConcert.start.date}  ${songkickConcert.start.time}`}
+                                dateTime={new Date(
+                                  songkickConcert.start.datetime ||
+                                    setHours(
+                                      new Date(songkickConcert.start.date),
+                                      16
+                                    ) ||
+                                    ""
+                                ).toString()}
+                              >
+                                {new Date(
+                                  songkickConcert.start.datetime ||
+                                    setHours(
+                                      new Date(songkickConcert.start.date),
+                                      16
+                                    ) ||
+                                    ""
+                                ).toLocaleDateString("da-DK")}
+                              </time>
+                            </>
+                          ) : (
+                            "Concert"
+                          )}
                         </a>
-                        {testimonial.type === "concert" && songkickConcert ? (
-                          <a
-                            href={`https://www.songkick.com/concerts/${testimonial.songkickId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ color: "white !important" }}
-                            className="text-shadow-md text-shadow-black/40 whitespace-nowrap"
-                          >
-                            {songkickConcert ? (
-                              <>
-                                <span>
-                                  {songkickConcert.venue?.displayName ||
-                                    songkickConcert.location.city}
-                                </span>
-                                ,{" "}
-                                <time
-                                  title={`${songkickConcert.start.date}  ${songkickConcert.start.time}`}
-                                  dateTime={new Date(
-                                    songkickConcert.start.datetime ||
-                                      setHours(
-                                        new Date(songkickConcert.start.date),
-                                        16
-                                      ) ||
-                                      ""
-                                  ).toString()}
-                                >
-                                  {new Date(
-                                    songkickConcert.start.datetime ||
-                                      setHours(
-                                        new Date(songkickConcert.start.date),
-                                        16
-                                      ) ||
-                                      ""
-                                  ).toLocaleDateString("da-DK")}
-                                </time>
-                              </>
-                            ) : (
-                              "Concert"
-                            )}
-                          </a>
-                        ) : testimonial.type === "release" &&
-                          testimonial.metalArchivesAlbumId ? (
-                          <a
-                            href={`https://www.metal-archives.com/albums/x/x/${testimonial.metalArchivesAlbumId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-shadow-md text-shadow-black/40"
-                            style={{ color: "white !important" }}
-                          >
-                            &quot;
-                            {metalArchivesAlbum?.name}
-                            &quot; (
-                            {metalArchivesAlbum?.releaseDate.split(", ")[1]})
-                          </a>
-                        ) : null}
-                      </div>
+                      ) : testimonial.type === "release" &&
+                        testimonial.metalArchivesAlbumId ? (
+                        <a
+                          href={`https://www.metal-archives.com/albums/x/x/${testimonial.metalArchivesAlbumId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-shadow-md text-shadow-black/40"
+                          style={{ color: "white !important" }}
+                        >
+                          &quot;
+                          {metalArchivesAlbum?.name}
+                          &quot; (
+                          {metalArchivesAlbum?.releaseDate.split(", ")[1]})
+                        </a>
+                      ) : null}
+                    </div>
 
-                      {testimonial.score
-                        ? new Array(
-                            testimonial.scoreMax === 100
-                              ? testimonial.scoreMax / 10
-                              : testimonial.scoreMax
-                          )
-                            .fill(0)
-                            .map((_, i) =>
-                              false ? (
-                                <svg
-                                  key={i}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  version="1.1"
-                                  preserveAspectRatio="none"
-                                  x="0px"
-                                  y="0px"
-                                  width="27.5px"
-                                  height="20px"
-                                  viewBox="0 0 550 400"
+                    {testimonial.score
+                      ? new Array(
+                          testimonial.scoreMax === 100
+                            ? testimonial.scoreMax / 10
+                            : testimonial.scoreMax
+                        )
+                          .fill(0)
+                          .map((_, i) =>
+                            false ? (
+                              <svg
+                                key={i}
+                                xmlns="http://www.w3.org/2000/svg"
+                                version="1.1"
+                                preserveAspectRatio="none"
+                                x="0px"
+                                y="0px"
+                                width="27.5px"
+                                height="20px"
+                                viewBox="0 0 550 400"
+                                style={{
+                                  color:
+                                    i <
+                                    Math.round(
+                                      testimonial.scoreMax === 100
+                                        ? testimonial.score! / 10
+                                        : testimonial.score!
+                                    )
+                                      ? "#ffd400"
+                                      : "rgba(255, 255, 255, 0.75)",
+                                  marginLeft: "-8px",
+                                }}
+                              >
+                                <path
+                                  fill="currentColor"
+                                  stroke="none"
                                   style={{
-                                    color:
-                                      i <
-                                      Math.round(
-                                        testimonial.scoreMax === 100
-                                          ? testimonial.score! / 10
-                                          : testimonial.score!
-                                      )
-                                        ? "#ffd400"
-                                        : "rgba(255, 255, 255, 0.75)",
-                                    marginLeft: "-8px",
+                                    filter:
+                                      "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
                                   }}
-                                >
-                                  <path
-                                    fill="currentColor"
-                                    stroke="none"
-                                    style={{
-                                      filter:
-                                        "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
-                                    }}
-                                    d="
+                                  d="
 M 463.15 316.5
 L 334.55 298.15
 Q 292.9 287.15 279.8 253.15 276.6 247.7 281.5 240.65
@@ -550,39 +535,39 @@ M 50.2 140.7
 L 50.2 122.2
 Q 50.45 112.75 69.5 105.2 92.15 106.55 104.9 127.7 91 154.9 64.65 164.6 49 170.25 43.35 159.7
 L 50.2 140.7 Z"
-                                  />
-                                </svg>
-                              ) : (
-                                <svg
-                                  key={i}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  version="1.1"
-                                  x="0px"
-                                  y="0px"
-                                  width="20px"
-                                  height="40px"
-                                  viewBox="260 0 360 500"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                key={i}
+                                xmlns="http://www.w3.org/2000/svg"
+                                version="1.1"
+                                x="0px"
+                                y="0px"
+                                width="20px"
+                                height="40px"
+                                viewBox="260 0 360 500"
+                                style={{
+                                  marginLeft: "-2px",
+                                  color:
+                                    i <
+                                    Math.round(
+                                      testimonial.scoreMax === 100
+                                        ? testimonial.score! / 10
+                                        : testimonial.score!
+                                    )
+                                      ? "#ffd400"
+                                      : "rgba(255, 255, 255, 0.75)",
+                                }}
+                              >
+                                <path
+                                  fill="currentColor"
                                   style={{
-                                    marginLeft: "-2px",
-                                    color:
-                                      i <
-                                      Math.round(
-                                        testimonial.scoreMax === 100
-                                          ? testimonial.score! / 10
-                                          : testimonial.score!
-                                      )
-                                        ? "#ffd400"
-                                        : "rgba(255, 255, 255, 0.75)",
+                                    filter:
+                                      "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
                                   }}
-                                >
-                                  <path
-                                    fill="currentColor"
-                                    style={{
-                                      filter:
-                                        "drop-shadow(0px 0px 24px rgba(0, 0, 0, 1))",
-                                    }}
-                                    stroke="none"
-                                    d="
+                                  stroke="none"
+                                  d="
 M 561.15 207
 L 543.1 244.15
 Q 540.2 250.85 543.75 257.15
@@ -613,50 +598,49 @@ Q 425.5 371.35 424 370.55
 M 458.4 309.55
 Q 445.3 301.6 450.4 287.05 490.05 271.2 534.05 275 535.9 287.7 530.25 300.2 524.5 312.65 492.95 317.45 470.9 318.75 458.4 309.55
 Z"
-                                  />
-                                </svg>
-                              )
+                                />
+                              </svg>
                             )
-                        : null}
-                    </div>
-                    <div className="flex-1 flex flex-col justify-center items-center">
-                      <p
-                        className={
-                          "text-gray-900 text-shadow-md text-shadow-white/20 text-justify text-balance " +
-                          (particularlyGood
-                            ? testimonial.pullQuote.length > 160
-                              ? "text-2xl lg:text-3xl"
-                              : testimonial.pullQuote.length > 80
-                              ? "text-3xl lg:text-4xl"
-                              : testimonial.pullQuote.length > 40
-                              ? "text-4xl lg:text-5xl"
-                              : testimonial.pullQuote.length > 20
-                              ? "text-5xl lg:text-6xl"
-                              : testimonial.pullQuote.length > 10
-                              ? "text-6xl lg:text-7xl"
-                              : "text-7xl lg:text-8xl"
-                            : testimonial.pullQuote.length > 160
-                            ? "text-lg lg:text-xl"
-                            : testimonial.pullQuote.length > 80
-                            ? "text-xl lg:text-2xl"
-                            : testimonial.pullQuote.length > 40
+                          )
+                      : null}
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center items-center">
+                    <p
+                      className={
+                        "text-gray-900 text-shadow-md text-shadow-white/10 text-justify text-pretty " +
+                        (particularlyGood
+                          ? testimonial.pullQuote.length > 160
                             ? "text-2xl lg:text-3xl"
-                            : testimonial.pullQuote.length > 20
+                            : testimonial.pullQuote.length > 80
                             ? "text-3xl lg:text-4xl"
-                            : testimonial.pullQuote.length > 10
+                            : testimonial.pullQuote.length > 40
                             ? "text-4xl lg:text-5xl"
-                            : "text-5xl lg:text-6xl")
-                        }
-                      >
-                        {testimonial.pullQuote}
-                      </p>
-                    </div>
-                  </li>
-                );
-              })
-          )}
-        </ul>
-      </div>
+                            : testimonial.pullQuote.length > 20
+                            ? "text-5xl lg:text-6xl"
+                            : testimonial.pullQuote.length > 10
+                            ? "text-6xl lg:text-7xl"
+                            : "text-7xl lg:text-8xl"
+                          : testimonial.pullQuote.length > 160
+                          ? "text-lg lg:text-xl"
+                          : testimonial.pullQuote.length > 80
+                          ? "text-xl lg:text-2xl"
+                          : testimonial.pullQuote.length > 40
+                          ? "text-2xl lg:text-3xl"
+                          : testimonial.pullQuote.length > 20
+                          ? "text-3xl lg:text-4xl"
+                          : testimonial.pullQuote.length > 10
+                          ? "text-4xl lg:text-5xl"
+                          : "text-5xl lg:text-6xl")
+                      }
+                    >
+                      {testimonial.pullQuote}
+                    </p>
+                  </div>
+                </li>
+              );
+            })
+        )}
+      </ul>
     </>
   );
 }

@@ -6,6 +6,7 @@ body {
   color: #ccc;
   height: 100%;
   text-rendering: optimizeLegibility;
+  font-display: swap;
   position: relative;
 }
 
@@ -18,22 +19,7 @@ a:hover,
 a:active {
   color: #fefa00;
 }
-.mainStuff {
-  text-transform: uppercase;
-  justify-content: space-evenly;
-  position: relative;
-  display: grid;
-  font-size: 3em;
-  text-shadow: 0 0 12px rgba(0, 0, 0, 1);
-  align-items: flex-start;
-  padding-top: 5vh;
-  padding-bottom: 10vh;
-}
-@media (min-width: 767px) {
-  .mainStuff {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+
 .nextGig {
   padding: 0 1vw;
   padding-bottom: 0;
@@ -48,29 +34,7 @@ a:active {
     text-align: left;
   }
 }
-#exeleLinks {
-  line-height: 1em;
-  padding: 0 1vw;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2.5%;
-  font-size: 1.25em;
-  text-align: center;
-}
-@media (min-width: 767px) {
-  #exeleLinks {
-    flex: 1;
-    text-align: right;
-  }
-}
-@media (max-width: 768px) {
-  .nextGig {
-    font-size: 0.75em;
-  }
-  #exeleLinks {
-    font-size: 1em;
-  }
-}
+
 a.ftvLink img {
   filter: invert(25%) sepia(85%) saturate(1638%) hue-rotate(2deg)
     brightness(108%) contrast(102%);
