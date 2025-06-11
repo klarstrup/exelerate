@@ -419,4 +419,14 @@ export const testimonials = [
       "https://web.archive.org/web/20240418062206/https://www.selvtaegt.dk/reportage/metalized-tour-bliver-den-samme-leverpostej-smurt-for-tyndt-ud/",
   },
   */
+  {
+    type: "release",
+    date: new Date("2025-06-05"),
+    url: "http://www.hardrockinfo.com/reviews/2025/june.html#exe-mad",
+    archiveUrl:
+      "https://web.archive.org/web/20250525223253/http://www.hardrockinfo.com/reviews/2025/june.html#exe-mad",
+    metalArchivesAlbumId: 1344323,
+    source: "HARD ROCK INFO",
+    pullQuote: "melodic power/thrash metal in its own league",
+  },
 ] satisfies Testimonial[];
