@@ -459,7 +459,7 @@ export default async function Home() {
                           &quot;
                           {metalArchivesAlbum?.name}
                           &quot; (
-                          {metalArchivesAlbum?.releaseDate.split(", ")[1]})
+                          {metalArchivesAlbum?.releaseDate?.split(", ")[1]})
                         </a>
                       ) : null}
                     </div>
