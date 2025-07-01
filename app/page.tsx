@@ -13,7 +13,7 @@ import { twMerge } from "tailwind-merge";
 
 const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
-export const revalidate = 600;
+export const revalidate = 6000;
 
 namespace Songkick {
   export interface Event {
