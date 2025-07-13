@@ -4,12 +4,13 @@ import {
   isToday,
   setHours,
 } from "date-fns";
+import { revalidateTag } from "next/cache";
 import Image from "next/image";
 import { Fragment } from "react";
+import { twMerge } from "tailwind-merge";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
-import { twMerge } from "tailwind-merge";
 
 const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
@@ -228,11 +229,15 @@ export default async function Home() {
         />
       </a>
       <div className="text-center text-6xl lg:text-9xl my-[6vh] text-shadow-lg text-shadow-black/40">
-        <div className="text-white text-2xl lg:text-5xl leading-[1]">NEW SINGLE</div>
+        <div className="text-white text-2xl lg:text-5xl leading-[1]">
+          NEW SINGLE
+        </div>
         &quot;
         <a href="https://www.youtube.com/watch?v=enE63h_EOuc">THE MADNESS</a>
         &quot;
-        <div className="text-white text-5xl lg:text-8xl leading-[0.8]">OUT NOW</div>
+        <div className="text-white text-5xl lg:text-8xl leading-[0.8]">
+          OUT NOW
+        </div>
       </div>
       <div className="my-[6vh] mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
         <div
@@ -372,12 +377,24 @@ export default async function Home() {
                       `https://metal-api.dev/albums/${testimonial.metalArchivesAlbumId}`,
                       {
                         headers: { "User-Agent": userAgent },
-                        next: { revalidate: 12000 },
+                        next: {
+                          revalidate: 12000,
+                          tags: ["metal-archives-album"],
+                        },
                       }
                     )
                       .then((res) => res.json() as Promise<MetallumAlbum>)
                       .catch(() => {})
                   : undefined;
+
+              if (
+                "metalArchivesAlbumId" in testimonial &&
+                testimonial.metalArchivesAlbumId &&
+                !metalArchivesAlbum
+              ) {
+                // Invalidate cache if fetching the album failed
+                revalidateTag("metal-archives-album");
+              }
 
               const particularlyGood =
                 testimonial.score &&
@@ -448,9 +465,9 @@ export default async function Home() {
                           )}
                         </a>
                       ) : testimonial.type === "release" &&
-                        testimonial.metalArchivesAlbumId ? (
+                        metalArchivesAlbum ? (
                         <a
-                          href={`https://www.metal-archives.com/albums/x/x/${testimonial.metalArchivesAlbumId}`}
+                          href={`https://www.metal-archives.com/albums/x/x/${metalArchivesAlbum.id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-shadow-md text-shadow-black/40"
