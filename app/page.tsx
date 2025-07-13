@@ -390,7 +390,7 @@ export default async function Home() {
               if (
                 "metalArchivesAlbumId" in testimonial &&
                 testimonial.metalArchivesAlbumId &&
-                !metalArchivesAlbum
+                !metalArchivesAlbum?.id
               ) {
                 // Invalidate cache if fetching the album failed
                 revalidateTag("metal-archives-album");
@@ -465,7 +465,7 @@ export default async function Home() {
                           )}
                         </a>
                       ) : testimonial.type === "release" &&
-                        metalArchivesAlbum ? (
+                        metalArchivesAlbum?.id ? (
                         <a
                           href={`https://www.metal-archives.com/albums/x/x/${metalArchivesAlbum.id}`}
                           target="_blank"
