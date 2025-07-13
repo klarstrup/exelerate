@@ -11,6 +11,7 @@ import { twMerge } from "tailwind-merge";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
+import { after } from "next/server";
 
 const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
@@ -393,7 +394,9 @@ export default async function Home() {
                 !metalArchivesAlbum?.id
               ) {
                 // Invalidate cache if fetching the album failed
-                revalidateTag("metal-archives-album");
+                after(() => {
+                  revalidateTag("metal-archives-album");
+                });
               }
 
               const particularlyGood =
