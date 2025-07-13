@@ -380,7 +380,7 @@ export default async function Home() {
                         headers: { "User-Agent": userAgent },
                         next: {
                           revalidate: 12000,
-                          tags: ["metal-archives-album"],
+                          tags: [String(testimonial.metalArchivesAlbumId)],
                         },
                       }
                     )
@@ -395,7 +395,7 @@ export default async function Home() {
               ) {
                 // Invalidate cache if fetching the album failed
                 after(() => {
-                  revalidateTag("metal-archives-album");
+                  revalidateTag(String(testimonial.metalArchivesAlbumId));
                 });
               }
 
