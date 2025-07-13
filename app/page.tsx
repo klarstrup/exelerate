@@ -379,7 +379,7 @@ export default async function Home() {
                       {
                         headers: { "User-Agent": userAgent },
                         next: {
-                          revalidate: 12000,
+                          revalidate: false,
                           tags: [String(testimonial.metalArchivesAlbumId)],
                         },
                       }
