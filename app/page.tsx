@@ -210,6 +210,32 @@ export default async function Home() {
         height={378}
         style={{
           height: "40vh",
+          filter: "blur(6px)",
+          width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
+        }}
+        className="mx-auto block"
+      />
+      <Image
+        src={logoImg.src}
+        alt="Exelelogo"
+        width={300}
+        height={378}
+        style={{
+          height: "40vh",
+          marginTop: "-40.125vh",
+          filter: "blur(3px)",
+          width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
+        }}
+        className="mx-auto block"
+      />
+      <Image
+        src={logoImg.src}
+        alt="Exelelogo"
+        width={300}
+        height={378}
+        style={{
+          height: "40vh",
+          marginTop: "-40.125vh",
           width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
           filter: "invert(1)",
         }}
