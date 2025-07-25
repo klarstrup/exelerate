@@ -229,14 +229,14 @@ export default async function Home() {
           className="h-auto max-w-[7.5vh]"
         />
       </a>
-      <div className="text-center text-6xl lg:text-9xl my-[4vh] text-shadow-lg text-shadow-black/40">
+      <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40">
         <div className="text-white text-2xl lg:text-5xl leading-[1]">
           NEW SINGLE
         </div>
         &quot;
-        <a href="https://www.youtube.com/watch?v=enE63h_EOuc">THE MADNESS</a>
+        <a href="https://www.youtube.com/watch?v=JEB49Paoqsc">IMPENDING DOOM</a>
         &quot;
-        <div className="text-white text-5xl lg:text-8xl leading-[0.8]">
+        <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
           OUT NOW
         </div>
       </div>
