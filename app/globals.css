@@ -21,8 +21,6 @@ a:active {
 }
 
 .nextGig {
-  padding: 0 1vw;
-  padding-bottom: 0;
   line-height: 1.225em;
   font-weight: lighter;
 
@@ -31,7 +29,6 @@ a:active {
 @media (min-width: 767px) {
   .nextGig {
     flex: 1;
-    text-align: left;
   }
 }
 
@@ -69,7 +66,6 @@ a.ftvLink:hover img {
 
 .otherHeadliners a {
   white-space: nowrap;
-  display: block;
 }
 
 .otherHeadliners a::after {

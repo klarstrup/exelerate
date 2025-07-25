@@ -229,7 +229,7 @@ export default async function Home() {
           className="h-auto max-w-[7.5vh]"
         />
       </a>
-      <div className="text-center text-6xl lg:text-9xl my-[6vh] text-shadow-lg text-shadow-black/40">
+      <div className="text-center text-6xl lg:text-9xl my-[4vh] text-shadow-lg text-shadow-black/40">
         <div className="text-white text-2xl lg:text-5xl leading-[1]">
           NEW SINGLE
         </div>
@@ -240,11 +240,87 @@ export default async function Home() {
           OUT NOW
         </div>
       </div>
-      <div className="my-[6vh] mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
+      <div className="mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
+        {nextShow ? (
+          <center className="nextGig text-3xl lg:text-6xl my-[4vh]">
+            Next show is{" "}
+            <span>
+              {isToday(new Date(nextShow.start.datetime)) ? null : <>in </>}
+              <a target="_blank" href={nextShow.uri}>
+                <time
+                  title={`${nextShow.start.date}  ${nextShow.start.time}`}
+                  dateTime={nextShow.start.datetime || undefined}
+                >
+                  {isToday(new Date(nextShow.start.datetime)) ? (
+                    <>today</>
+                  ) : (
+                    formatDistanceToNowStrict(
+                      new Date(
+                        nextShow.start.datetime ||
+                          setHours(new Date(nextShow.start.date), 16) ||
+                          ""
+                      ),
+                      { unit: "day" }
+                    )
+                  )}
+                </time>
+              </a>{" "}
+              at
+            </span>{" "}
+            <a
+              className="venue"
+              target="_blank"
+              href={
+                nextShow.venue?.website ||
+                `https://maps.google.com/maps?q=${
+                  (nextShow.venue && nextShow.venue.displayName) ||
+                  nextShow.location.city
+                }`
+              }
+            >
+              <span className="whitespace-nowrap">
+                {nextShow.series?.displayName ||
+                  (nextShow.venue.id && nextShow.venue.displayName) ||
+                  nextShow.location.city}
+              </span>
+            </a>
+            {nextShow.performance.length > 1 ? (
+              <>
+                {" "}
+                with{" "}
+                <span className="otherHeadliners">
+                  {nextShow.performance
+                    .filter((p) => p.displayName !== "Exelerate")
+                    .map((p, i) => (
+                      <Fragment key={p.artist.id}>
+                        {i ? <> </> : null}
+                        <a target="_blank" href={p.artist.uri}>
+                          <em>{p.displayName.replace(" (DK)", "")}</em>
+                        </a>
+                      </Fragment>
+                    ))}
+                </span>
+              </>
+            ) : null}
+            {nextShows && nextShows.length > 1 ? (
+              <span className="whitespace-nowrap">
+                +{" "}
+                <a
+                  target="_blank"
+                  href={`https://www.songkick.com/artists/6777179-exelerate`}
+                  style={{ fontSize: "0.8em" }}
+                >
+                  <big>{nextShows.length - 1} future shows</big>
+                </a>
+              </span>
+            ) : null}
+          </center>
+        ) : null}
         <div
           className={twMerge(
             "max-w-[1440px] mx-auto leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
-            "self-stretch flex flex-row  justify-around flex-wrap"
+            "self-stretch flex flex-row  justify-around flex-wrap",
+            "my-[4vh]"
           )}
         >
           <a
@@ -276,81 +352,6 @@ export default async function Home() {
             YouTube
           </a>
         </div>
-        {nextShow ? (
-          <div className="nextGig">
-            Next show is
-            <div>
-              {isToday(new Date(nextShow.start.datetime)) ? null : <>in </>}
-              <a target="_blank" href={nextShow.uri}>
-                <time
-                  title={`${nextShow.start.date}  ${nextShow.start.time}`}
-                  dateTime={nextShow.start.datetime || undefined}
-                >
-                  {isToday(new Date(nextShow.start.datetime)) ? (
-                    <>today</>
-                  ) : (
-                    formatDistanceToNowStrict(
-                      new Date(
-                        nextShow.start.datetime ||
-                          setHours(new Date(nextShow.start.date), 16) ||
-                          ""
-                      ),
-                      { unit: "day" }
-                    )
-                  )}
-                </time>
-              </a>{" "}
-              at
-            </div>
-            <a
-              className="venue"
-              target="_blank"
-              href={
-                nextShow.venue?.website ||
-                `https://maps.google.com/maps?q=${
-                  (nextShow.venue && nextShow.venue.displayName) ||
-                  nextShow.location.city
-                }`
-              }
-            >
-              <span className="whitespace-nowrap">
-                {nextShow.series?.displayName ||
-                  (nextShow.venue.id && nextShow.venue.displayName) ||
-                  nextShow.location.city}
-              </span>
-            </a>
-            {nextShow.performance.length > 1 ? (
-              <>
-                <br />
-                with{" "}
-                <div className="otherHeadliners">
-                  {nextShow.performance
-                    .filter((p) => p.displayName !== "Exelerate")
-                    .map((p, i) => (
-                      <Fragment key={p.artist.id}>
-                        {i ? <> </> : null}
-                        <a target="_blank" href={p.artist.uri}>
-                          <em>{p.displayName.replace(" (DK)", "")}</em>
-                        </a>
-                      </Fragment>
-                    ))}
-                </div>
-              </>
-            ) : null}
-            {nextShows && nextShows.length > 1 ? (
-              <div className="whitespace-nowrap">
-                +{" "}
-                <a
-                  target="_blank"
-                  href={`https://www.songkick.com/artists/6777179-exelerate`}
-                  style={{ fontSize: "0.8em" }}
-                >
-                  <big>{nextShows.length - 1} future shows</big>
-                </a>
-              </div>
-            ) : null}
-          </div>
-        ) : null}
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
         {await Promise.all(
