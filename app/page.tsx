@@ -353,6 +353,7 @@ export default async function Home() {
             href="https://www.facebook.com/Exelerateband"
             title="Main social"
             target="_blank"
+            className="flex-1 text-center"
           >
             Facebook
           </a>
@@ -360,6 +361,7 @@ export default async function Home() {
             href="https://www.instagram.com/exeleratedk"
             title="Secondary social"
             target="_blank"
+            className="flex-1 text-center"
           >
             Instagram
           </a>
@@ -367,6 +369,7 @@ export default async function Home() {
             href="https://open.spotify.com/artist/0jRw54h5J5HeIkexDiOHZC"
             title="song downloading/purchasing"
             target="_blank"
+            className="flex-1 text-center"
           >
             Spotify
           </a>
@@ -374,6 +377,7 @@ export default async function Home() {
             href="https://youtube.com/user/ExelerateDK"
             title="Videos"
             target="_blank"
+            className="flex-1 text-center"
           >
             YouTube
           </a>
