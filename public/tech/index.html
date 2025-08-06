@@ -22,8 +22,8 @@
       <h3 style="margin-top: 0; margin-bottom: 0">
         Per 2025.08.06 - tech@exelerate.dk
       </h3>
-      <h2 style="margin-bottom: 0; margin-top: 0">Stage Plot</h2>
-      <svg viewBox="0 0 1000 600">
+      <h2>Stage Plot</h2>
+      <svg viewBox="0 0 1000 500">
         <style>
           @media print {
             .no-print-fill {
@@ -33,7 +33,7 @@
         </style>
         <rect
           width="1000"
-          height="600"
+          height="500"
           style="
             fill: rgba(255, 127, 0, 0.25);
             stroke-width: 2;
@@ -42,7 +42,7 @@
           class="no-print-fill"
         ></rect>
         <text x="455" y="25" font-size="20">Upstage</text>
-        <text x="440" y="590" font-size="20">Downstage</text>
+        <text x="440" y="490" font-size="20">Downstage</text>
 
         <rect
           x="265"
@@ -111,42 +111,42 @@
 
         <rect
           x="215"
-          y="500"
+          y="400"
           width="105"
           height="45"
           style="fill: #fff; stroke-width: 2; stroke: rgb(0, 0, 0)"
           class="no-print-fill"
         ></rect>
-        <text x="210" y="470" font-size="40">Mads</text>
-        <text x="221" y="525">Vocal Mic</text>
-        <text x="221" y="535" font-size="12">on boom stand</text>
-        <text x="180" y="530" font-size="30">🔌</text>
+        <text x="210" y="370" font-size="40">Mads</text>
+        <text x="221" y="425">Vocal Mic</text>
+        <text x="221" y="435" font-size="12">on boom stand</text>
+        <text x="180" y="430" font-size="30">🔌</text>
 
         <rect
           x="445"
-          y="500"
+          y="400"
           width="105"
           height="45"
           style="fill: #fff; stroke-width: 2; stroke: rgb(0, 0, 0)"
           class="no-print-fill"
         ></rect>
-        <text x="430" y="470" font-size="40">Stefan</text>
-        <text x="451" y="525">Vocal Mic</text>
-        <text x="451" y="535" font-size="12">on boom stand</text>
-        <text x="410" y="530" font-size="30">🔌</text>
+        <text x="430" y="370" font-size="40">Stefan</text>
+        <text x="451" y="425">Vocal Mic</text>
+        <text x="451" y="435" font-size="12">on boom stand</text>
+        <text x="410" y="430" font-size="30">🔌</text>
 
         <rect
           x="700"
-          y="500"
+          y="400"
           width="105"
           height="45"
           style="fill: #fff; stroke-width: 2; stroke: rgb(0, 0, 0)"
           class="no-print-fill"
         ></rect>
-        <text x="737" y="470" font-size="40">Io</text>
-        <text x="705" y="525">Vocal Mic</text>
-        <text x="705" y="535" font-size="12">on boom stand</text>
-        <text x="665" y="530" font-size="30">🔌</text>
+        <text x="737" y="370" font-size="40">Io</text>
+        <text x="705" y="425">Vocal Mic</text>
+        <text x="705" y="435" font-size="12">on boom stand</text>
+        <text x="665" y="430" font-size="30">🔌</text>
 
         <rect
           x="375"
@@ -193,11 +193,9 @@
           }
         }
       </style>
-      <div
-        style="display: flex; justify-content: space-around; margin-top: -12px"
-      >
+      <div style="display: flex; justify-content: space-around">
         <div style="flex: 1; padding: 0 4px">
-          <h2 style="margin-bottom: 0">Input List</h2>
+          <h2>Input List</h2>
           <table border="1" style="border-collapse: collapse">
             <thead>
               <tr>
@@ -263,7 +261,7 @@
           </table>
         </div>
         <div style="flex: 1; padding: 0 4px">
-          <h2 style="margin-bottom: 0">Mix List</h2>
+          <h2>Mix List</h2>
           <table border="1" style="border-collapse: collapse">
             <thead>
               <tr>
@@ -293,15 +291,29 @@
           </p>
         </div>
       </div>
-      <a href="/">
+      <a href="/" style="position: relative">
         <img
           src="/img/exelerate_textlogo.png"
           alt="Exelelogo"
           style="
-            width: 25%;
+            width: 150mm;
             height: auto;
             margin-top: 1em;
             margin-bottom: 0.5em;
+            opacity: 0;
+          " />
+        <img
+          src="/img/exelerate_textlogo.png"
+          alt="Exelelogo"
+          style="
+            width: 150mm;
+            height: auto;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
           "
       /></a>
     </center>
