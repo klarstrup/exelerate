@@ -451,7 +451,7 @@ export const testimonials = [
     metalArchivesAlbumId: 1348855,
     source: "Obliveon",
     pullQuote:
-      "EXELERATE haben ihren Thrash Metal gut strukturiert, mit einer ansprechenden Melodik versehen und ausreichend Energie unterfüttert.",
+      "EXELERATE haben ihren Thrash Metal gut strukturiert, mit einer ansprechenden Melodik versehen und ausreichend Energie unterfüttert",
     score: 8.5,
     scoreMax: 10,
   },
