@@ -429,4 +429,30 @@ export const testimonials = [
     source: "HARD ROCK INFO",
     pullQuote: "melodic power/thrash metal in its own league",
   },
+  /* New reviews go here */
+  {
+    type: "release",
+    date: new Date("2025-08-17"),
+    url: "https://www.musika.be/2025/08/17/exelerate-hell-for-the-helpless/",
+    archiveUrl:
+      "https://web.archive.org/web/20250828183819/https://www.musika.be/2025/08/17/exelerate-hell-for-the-helpless/",
+    metalArchivesAlbumId: 1348855,
+    source: "Musika",
+    pullQuote: "een uiterst fris en enorm gevarieerd werkstuk",
+    score: 87,
+    scoreMax: 100,
+  },
+  {
+    type: "release",
+    date: new Date("2025-08-25"),
+    url: "https://obliveon.de/review/exelerate-hell-for-the-helpless/",
+    archiveUrl:
+      "https://web.archive.org/web/20250828183752/https://obliveon.de/review/exelerate-hell-for-the-helpless/",
+    metalArchivesAlbumId: 1348855,
+    source: "Obliveon",
+    pullQuote:
+      "EXELERATE haben ihren Thrash Metal gut strukturiert, mit einer ansprechenden Melodik versehen und ausreichend Energie unterfüttert.",
+    score: 8.5,
+    scoreMax: 10,
+  },
 ] satisfies Testimonial[];
