@@ -432,20 +432,30 @@ export default async function Home() {
 
               const particularlyGood =
                 testimonial.score &&
-                Math.round(
-                  testimonial.scoreMax === 100
-                    ? testimonial.score! / 10
-                    : testimonial.score!
-                ) /
+                (testimonial.scoreMax === 100
+                  ? testimonial.score! / 10
+                  : testimonial.score!) /
                   (testimonial.scoreMax === 100 ? 10 : testimonial.scoreMax) >=
                   0.8;
+
+              const extremelyGood =
+                testimonial.score &&
+                (testimonial.scoreMax === 100
+                  ? testimonial.score! / 10
+                  : testimonial.score!) /
+                  (testimonial.scoreMax === 100 ? 10 : testimonial.scoreMax) >=
+                  0.9;
 
               return (
                 <li
                   key={testimonial.url}
                   className={
                     "p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm " +
-                    (particularlyGood ? "md:col-span-2" : "")
+                    (extremelyGood
+                      ? "md:col-span-3"
+                      : particularlyGood
+                      ? "md:col-span-2"
+                      : "")
                   }
                 >
                   <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
@@ -659,7 +669,19 @@ Z"
                     <p
                       className={
                         "text-gray-900 text-shadow-md text-shadow-white/10 text-justify text-pretty " +
-                        (particularlyGood
+                        (extremelyGood
+                          ? testimonial.pullQuote.length > 160
+                            ? "text-3xl lg:text-4xl"
+                            : testimonial.pullQuote.length > 80
+                            ? "text-4xl lg:text-5xl"
+                            : testimonial.pullQuote.length > 40
+                            ? "text-5xl lg:text-6xl"
+                            : testimonial.pullQuote.length > 20
+                            ? "text-6xl lg:text-7xl"
+                            : testimonial.pullQuote.length > 10
+                            ? "text-7xl lg:text-8xl"
+                            : "text-8xl lg:text-9xl"
+                          : particularlyGood
                           ? testimonial.pullQuote.length > 160
                             ? "text-2xl lg:text-3xl"
                             : testimonial.pullQuote.length > 80
