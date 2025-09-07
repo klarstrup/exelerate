@@ -452,7 +452,7 @@ export default async function Home() {
                   className={
                     "p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm " +
                     (extremelyGood
-                      ? "md:col-span-3"
+                      ? "lg:col-span-3 md:col-span-2"
                       : particularlyGood
                       ? "md:col-span-2"
                       : "")
