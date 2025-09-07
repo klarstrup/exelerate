@@ -455,4 +455,17 @@ export const testimonials = [
     score: 8.5,
     scoreMax: 10,
   },
+  {
+    type: "release",
+    date: new Date("2025-09-04"),
+    url: "https://heavymetal.dk/anmeldelse/exelerate-hell-helpless",
+    archiveUrl:
+      "https://web.archive.org/web/20250907162119/https://heavymetal.dk/anmeldelse/exelerate-hell-helpless",
+    metalArchivesAlbumId: 1348855,
+    source: "HEAVYMETAL.DK",
+    pullQuote:
+      "Hell for the Helpless tør tage livtag med vores indre kaos og kaste lys på mørket – uden at miste den musikalske motor, der bragte dem fremad i første ombæring",
+    score: 9,
+    scoreMax: 10,
+  },
 ] satisfies Testimonial[];
