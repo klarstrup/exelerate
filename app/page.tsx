@@ -259,11 +259,11 @@ export default async function Home() {
         <div className="text-white text-2xl lg:text-5xl leading-[1]">
           NEW ALBUM
         </div>
-        &quot;
+        <span className="-ml-3">&quot;</span>
         <a href="https://exelerate.bandcamp.com/album/hell-for-the-helpless">
-          HELL FOR THE HELPLESS
+          HELL FOR <span className="whitespace-nowrap">THE HELPLESS</span>
         </a>
-        &quot;
+        <span className="tracking-[-2em]">&quot;</span>
         <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
           OUT NOW
         </div>
