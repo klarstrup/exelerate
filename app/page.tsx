@@ -260,7 +260,9 @@ export default async function Home() {
           NEW ALBUM
         </div>
         &quot;
-        <a href="https://www.youtube.com/watch?v=vQ95DzjEVxo">HELL FOR THE HELPLESS</a>
+        <a href="https://www.youtube.com/watch?v=vQ95DzjEVxo">
+          HELL FOR THE HELPLESS
+        </a>
         &quot;
         <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
           OUT NOW
@@ -330,6 +332,7 @@ export default async function Home() {
             ) : null}
             {nextShows && nextShows.length > 1 ? (
               <span className="whitespace-nowrap">
+                {" "}
                 +{" "}
                 <a
                   target="_blank"
