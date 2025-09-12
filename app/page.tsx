@@ -257,10 +257,10 @@ export default async function Home() {
       </a>
       <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40">
         <div className="text-white text-2xl lg:text-5xl leading-[1]">
-          NEW SINGLE
+          NEW ALBUM
         </div>
         &quot;
-        <a href="https://www.youtube.com/watch?v=JEB49Paoqsc">IMPENDING DOOM</a>
+        <a href="https://www.youtube.com/watch?v=vQ95DzjEVxo">HELL FOR THE HELPLESS</a>
         &quot;
         <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
           OUT NOW
