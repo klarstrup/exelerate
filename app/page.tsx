@@ -260,7 +260,7 @@ export default async function Home() {
           NEW ALBUM
         </div>
         &quot;
-        <a href="https://www.youtube.com/watch?v=vQ95DzjEVxo">
+        <a href="https://exelerate.bandcamp.com/album/hell-for-the-helpless">
           HELL FOR THE HELPLESS
         </a>
         &quot;
