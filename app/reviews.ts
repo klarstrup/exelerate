@@ -468,4 +468,30 @@ export const testimonials = [
     score: 9,
     scoreMax: 10,
   },
+  {
+    type: "release",
+    date: new Date("2025-09-12"),
+    url: "https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-hell-for-the-helpless",
+    archiveUrl:
+      "https://web.archive.org/web/20250913214806/https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-hell-for-the-helpless",
+    metalArchivesAlbumId: 1348855,
+    source: "Metal Factory",
+    pullQuote:
+      "Eine Truppe, die man sich anhören sollte und eine, die weiss, dass man nicht nur mit Härte, sondern auch mit Melodien überzeugen muss",
+    score: 8,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    date: new Date("2025-09-12"),
+    url: "https://powermetal.de/review/review-Exelerate/Hell_For_The_Helpless,44933.html",
+    archiveUrl:
+      "https://web.archive.org/web/20250913214934/https://powermetal.de/review/review-Exelerate/Hell_For_The_Helpless,44933.html",
+    metalArchivesAlbumId: 1348855,
+    source: "POWERMETAL.de",
+    pullQuote:
+      'Bei "Hell For The Helpless" muss man aber gar keine langen Ausflüchte suchen, nicht mit der Höchstnote zu wedeln, denn dieses Album ist klassischer Heavy Metal in Reinkultur und in absoluter Bestform',
+    score: 10,
+    scoreMax: 10,
+  },
 ] satisfies Testimonial[];
