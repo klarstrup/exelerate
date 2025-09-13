@@ -470,7 +470,7 @@ export const testimonials = [
   },
   {
     type: "release",
-    date: new Date("2025-09-12"),
+    date: new Date("2025-09-12 11:00"),
     url: "https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-hell-for-the-helpless",
     archiveUrl:
       "https://web.archive.org/web/20250913214806/https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-hell-for-the-helpless",
@@ -483,7 +483,7 @@ export const testimonials = [
   },
   {
     type: "release",
-    date: new Date("2025-09-12"),
+    date: new Date("2025-09-12 12:00"),
     url: "https://powermetal.de/review/review-Exelerate/Hell_For_The_Helpless,44933.html",
     archiveUrl:
       "https://web.archive.org/web/20250913214934/https://powermetal.de/review/review-Exelerate/Hell_For_The_Helpless,44933.html",
