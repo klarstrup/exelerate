@@ -386,7 +386,7 @@ export default async function Home() {
           </a>
         </div>
       </div>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
+      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
         {await Promise.all(
           Array.from(testimonials)
             .sort((a, b) => compareDesc(a.date, b.date))
@@ -439,7 +439,7 @@ export default async function Home() {
                   ? testimonial.score! / 10
                   : testimonial.score!) /
                   (testimonial.scoreMax === 100 ? 10 : testimonial.scoreMax) >=
-                  0.8;
+                  0.75;
 
               const extremelyGood =
                 testimonial.score &&
@@ -449,12 +449,22 @@ export default async function Home() {
                   (testimonial.scoreMax === 100 ? 10 : testimonial.scoreMax) >=
                   0.9;
 
+              const perfectlyGood =
+                testimonial.score &&
+                (testimonial.scoreMax === 100
+                  ? testimonial.score! / 10
+                  : testimonial.score!) /
+                  (testimonial.scoreMax === 100 ? 10 : testimonial.scoreMax) >=
+                  1;
+
               return (
                 <li
                   key={testimonial.url}
                   className={
                     "p-2 lg:p-4 rounded-lg bg-gray-200/50 text-white shadow-lg shadow-black/40 flex flex-col justify-between backdrop-blur-sm " +
-                    (extremelyGood
+                    (perfectlyGood
+                      ? "xl:col-span-4 lg:col-span-3 md:col-span-2"
+                      : extremelyGood
                       ? "lg:col-span-3 md:col-span-2"
                       : particularlyGood
                       ? "md:col-span-2"
@@ -554,12 +564,10 @@ export default async function Home() {
                               style={{
                                 marginLeft: "-2px",
                                 color:
-                                  i <
-                                  Math.round(
-                                    testimonial.scoreMax === 100
-                                      ? testimonial.score! / 10
-                                      : testimonial.score!
-                                  )
+                                  i + 1 <=
+                                  (testimonial.scoreMax === 100
+                                    ? testimonial.score! / 10
+                                    : testimonial.score!)
                                     ? "#ffd400"
                                     : "rgba(255, 255, 255, 0.75)",
                               }}
@@ -611,7 +619,19 @@ Z"
                     <p
                       className={
                         "text-gray-900 text-shadow-md text-shadow-white/10 text-justify text-pretty " +
-                        (extremelyGood
+                        (perfectlyGood
+                          ? testimonial.pullQuote.length > 160
+                            ? "text-4xl lg:text-5xl"
+                            : testimonial.pullQuote.length > 80
+                            ? "text-5xl lg:text-6xl"
+                            : testimonial.pullQuote.length > 40
+                            ? "text-6xl lg:text-7xl"
+                            : testimonial.pullQuote.length > 20
+                            ? "text-7xl lg:text-8xl"
+                            : testimonial.pullQuote.length > 10
+                            ? "text-8xl lg:text-9xl"
+                            : "text-9xl lg:text-[12rem]"
+                          : extremelyGood
                           ? testimonial.pullQuote.length > 160
                             ? "text-3xl lg:text-4xl"
                             : testimonial.pullQuote.length > 80
