@@ -6,12 +6,12 @@ import {
 } from "date-fns";
 import { revalidateTag } from "next/cache";
 import Image from "next/image";
+import { after } from "next/server";
 import { Fragment } from "react";
 import { twMerge } from "tailwind-merge";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
-import { after } from "next/server";
 
 const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
@@ -512,18 +512,24 @@ export default async function Home() {
                           )}
                         </a>
                       ) : testimonial.type === "release" &&
-                        metalArchivesAlbum?.id ? (
+                        (metalArchivesAlbum?.id || testimonial.release) ? (
                         <a
-                          href={`https://www.metal-archives.com/albums/x/x/${metalArchivesAlbum.id}`}
+                          href={`https://www.metal-archives.com/albums/x/x/${
+                            metalArchivesAlbum?.id ??
+                            testimonial.release?.metalArchivesAlbumId
+                          }`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-shadow-md text-shadow-black/40"
                           style={{ color: "white !important" }}
                         >
                           &quot;
-                          {metalArchivesAlbum?.name}
+                          {metalArchivesAlbum?.name ||
+                            testimonial.release?.title}
                           &quot; (
-                          {metalArchivesAlbum?.releaseDate?.split(", ")[1]})
+                          {metalArchivesAlbum?.releaseDate?.split(", ")[1] ||
+                            testimonial.release?.year}
+                          )
                         </a>
                       ) : null}
                     </div>

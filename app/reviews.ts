@@ -14,9 +14,25 @@ export interface ConcertReview extends Review {
 export interface ReleaseReview extends Review {
   type: "release";
   metalArchivesAlbumId?: number;
+  release?: Release;
 }
 
 export type Testimonial = ConcertReview | ReleaseReview;
+
+const hellForTheHelpLess = {
+  type: "album",
+  metalArchivesAlbumId: 1348855,
+  title: "Hell for the Helpless",
+  year: 2025,
+} as const;
+const exelerate = {
+  type: "album",
+  metalArchivesAlbumId: 1104270,
+  title: "Exelerate",
+  year: 2023,
+} as const;
+
+type Release = [typeof exelerate, typeof hellForTheHelpLess][number];
 
 export const testimonials = [
   {
@@ -432,6 +448,7 @@ export const testimonials = [
   /* New reviews go here */
   {
     type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-08-17"),
     url: "https://www.musika.be/2025/08/17/exelerate-hell-for-the-helpless/",
     archiveUrl:
@@ -444,6 +461,7 @@ export const testimonials = [
   },
   {
     type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-08-25"),
     url: "https://obliveon.de/review/exelerate-hell-for-the-helpless/",
     archiveUrl:
@@ -457,6 +475,7 @@ export const testimonials = [
   },
   {
     type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-09-04"),
     url: "https://heavymetal.dk/anmeldelse/exelerate-hell-helpless",
     archiveUrl:
@@ -470,6 +489,7 @@ export const testimonials = [
   },
   {
     type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-09-12 11:00"),
     url: "https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-hell-for-the-helpless",
     archiveUrl:
@@ -483,6 +503,7 @@ export const testimonials = [
   },
   {
     type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-09-12 12:00"),
     url: "https://powermetal.de/review/review-Exelerate/Hell_For_The_Helpless,44933.html",
     archiveUrl:
