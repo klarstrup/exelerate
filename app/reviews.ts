@@ -503,11 +503,12 @@ export const testimonials = [
   },
   {
     type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-09-08 17:42"),
     url: "http://www.metalnews.fr/chroniques/hell-for-the-helpless",
     archiveUrl:
       "https://web.archive.org/web/20250915141355/http://www.metalnews.fr/chroniques/hell-for-the-helpless",
-    metalArchivesAlbumId: 1099277,
+    metalArchivesAlbumId: 1348855,
     source: "Metalnews.fr",
     pullQuote: "Un futur classique?",
     score: 90,
@@ -582,11 +583,12 @@ export const testimonials = [
   },
   {
     type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-09-15"),
     url: "https://www.hardrockinfo.com/reviews/2025/sept.html#exe-hfth",
     archiveUrl:
       "https://web.archive.org/web/20250915141355/https://www.hardrockinfo.com/reviews/2025/sept.html#exe-hfth",
-    metalArchivesAlbumId: 1099277,
+    metalArchivesAlbumId: 1348855,
     source: "HARD ROCK INFO",
     pullQuote:
       "a powerful hybrid of fast-paced thrash and melodic, anthemic power metal",
