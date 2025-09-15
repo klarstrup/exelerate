@@ -503,6 +503,18 @@ export const testimonials = [
   },
   {
     type: "release",
+    date: new Date("2025-09-08 17:42"),
+    url: "http://www.metalnews.fr/chroniques/hell-for-the-helpless",
+    archiveUrl:
+      "https://web.archive.org/web/20250915141355/http://www.metalnews.fr/chroniques/hell-for-the-helpless",
+    metalArchivesAlbumId: 1099277,
+    source: "Metalnews.fr",
+    pullQuote: "Un futur classique?",
+    score: 90,
+    scoreMax: 100,
+  },
+  {
+    type: "release",
     release: hellForTheHelpLess,
     date: new Date("2025-09-11"),
     url: "https://wtrmag.com/exelerate-hell-for-the-helpless/",
