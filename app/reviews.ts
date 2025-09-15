@@ -568,4 +568,15 @@ export const testimonials = [
     pullQuote:
       "one of the most consistently impressive albums I’ve heard in quite some time",
   },
+  {
+    type: "release",
+    date: new Date("2025-09-15"),
+    url: "https://www.hardrockinfo.com/reviews/2025/sept.html#exe-hfth",
+    archiveUrl:
+      "https://web.archive.org/web/20250915141355/https://www.hardrockinfo.com/reviews/2025/sept.html#exe-hfth",
+    metalArchivesAlbumId: 1099277,
+    source: "HARD ROCK INFO",
+    pullQuote:
+      "a powerful hybrid of fast-paced thrash and melodic, anthemic power metal",
+  },
 ] satisfies Testimonial[];
