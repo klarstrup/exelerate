@@ -449,6 +449,20 @@ export const testimonials = [
   {
     type: "release",
     release: hellForTheHelpLess,
+    date: new Date("2025-07-21"),
+    url: "https://powermetal-warrior.blogspot.com/2025/07/exelerate-hell-for-helpless-2025.html",
+    archiveUrl:
+      "https://web.archive.org/web/20250915114222/https://powermetal-warrior.blogspot.com/2025/07/exelerate-hell-for-helpless-2025.html",
+    metalArchivesAlbumId: 1348855,
+    source: "Musika",
+    pullQuote:
+      "Mocne riffy, chwytliwe melodie i efektowne solówki — wszystko to zagrane z pasją i zaangażowaniem",
+    score: 7.5,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-08-17"),
     url: "https://www.musika.be/2025/08/17/exelerate-hell-for-the-helpless/",
     archiveUrl:
