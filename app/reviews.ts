@@ -490,6 +490,20 @@ export const testimonials = [
   {
     type: "release",
     release: hellForTheHelpLess,
+    date: new Date("2025-09-11"),
+    url: "https://wtrmag.com/exelerate-hell-for-the-helpless/",
+    archiveUrl:
+      "https://web.archive.org/web/20250915111742/https://wtrmag.com/exelerate-hell-for-the-helpless/",
+    metalArchivesAlbumId: 1348855,
+    source: "W.T.R. Mag’",
+    pullQuote:
+      "un album très recommandable pour tout petit thrasher qui se respecte",
+    score: 3,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-09-12 11:00"),
     url: "https://metalfactory.ch/music-reviews/aktuell/lp-cd-reviews/review/exelerate-hell-for-the-helpless",
     archiveUrl:
