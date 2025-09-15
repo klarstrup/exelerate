@@ -390,6 +390,24 @@ export default async function Home() {
         {await Promise.all(
           Array.from(testimonials)
             .sort((a, b) => compareDesc(a.date, b.date))
+            .sort((a, b) =>
+              a.score && a.scoreMax && b.score && b.scoreMax
+                ? b.score / b.scoreMax - a.score / a.scoreMax
+                : b.score && b.scoreMax
+                ? 1
+                : a.score && a.scoreMax
+                ? -1
+                : 0
+            )
+            .sort((a, b) =>
+              a.release?.releaseDate && b.release?.releaseDate
+                ? compareDesc(a.release.releaseDate, b.release.releaseDate)
+                : b.release?.releaseDate
+                ? 1
+                : a.release?.releaseDate
+                ? -1
+                : 0
+            )
             .map(async (testimonial) => {
               const songkickConcert = testimonial.songkickId
                 ? await fetch(
@@ -538,7 +556,7 @@ export default async function Home() {
                             testimonial.release?.title}
                           &quot; (
                           {metalArchivesAlbum?.releaseDate?.split(", ")[1] ||
-                            testimonial.release?.year}
+                            testimonial.release?.releaseDate.getFullYear()}
                           )
                         </a>
                       ) : null}

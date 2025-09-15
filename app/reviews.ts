@@ -23,13 +23,13 @@ const hellForTheHelpLess = {
   type: "album",
   metalArchivesAlbumId: 1348855,
   title: "Hell for the Helpless",
-  year: 2025,
+  releaseDate: new Date(2025, 8, 12),
 } as const;
 const exelerate = {
   type: "album",
   metalArchivesAlbumId: 1104270,
   title: "Exelerate",
-  year: 2023,
+  releaseDate: new Date(2023, 2, 3),
 } as const;
 
 type Release = [typeof exelerate, typeof hellForTheHelpLess][number];
@@ -552,7 +552,7 @@ export const testimonials = [
     metalArchivesAlbumId: 1348855,
     source: "POWERMETAL.de",
     pullQuote:
-      'Bei "Hell For The Helpless" muss man aber gar keine langen Ausflüchte suchen, nicht mit der Höchstnote zu wedeln, denn dieses Album ist klassischer Heavy Metal in Reinkultur und in absoluter Bestform',
+      "dieses Album ist klassischer Heavy Metal in Reinkultur und in absoluter Bestform",
     score: 10,
     scoreMax: 10,
   },
