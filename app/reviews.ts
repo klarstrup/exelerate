@@ -515,4 +515,29 @@ export const testimonials = [
     score: 10,
     scoreMax: 10,
   },
+  {
+    type: "release",
+    release: hellForTheHelpLess,
+    date: new Date("2025-09-14"),
+    url: "https://mystificationzine.com/2025/09/14/in-brief-september-25-pt-i/",
+    archiveUrl:
+      "https://web.archive.org/web/20250915101350/https://mystificationzine.com/2025/09/14/in-brief-september-25-pt-i/",
+    metalArchivesAlbumId: 1348855,
+    source: "Mystification Zine",
+    pullQuote: "I hate the idea of accusing an artist of “confidence”",
+    score: 80,
+    scoreMax: 100,
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLess,
+    date: new Date("2025-09-15"),
+    url: "https://sentineldaily.com.au/exelerate-hell-for-the-helpless-from-the-vaults/",
+    archiveUrl:
+      "https://web.archive.org/web/20250915102508/https://sentineldaily.com.au/exelerate-hell-for-the-helpless-from-the-vaults/",
+    metalArchivesAlbumId: 1348855,
+    source: "Sentinel Daily",
+    pullQuote:
+      "one of the most consistently impressive albums I’ve heard in quite some time",
+  },
 ] satisfies Testimonial[];
