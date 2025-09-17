@@ -497,7 +497,7 @@ export const testimonials = [
     metalArchivesAlbumId: 1348855,
     source: "HEAVYMETAL.DK",
     pullQuote:
-      "Hell for the Helpless tør tage livtag med vores indre kaos og kaste lys på mørket – uden at miste den musikalske motor, der bragte dem fremad i første ombæring",
+      "Hell for the Helpless tør tage livtag med vores indre kaos og kaste lys på mørket – uden at miste den musikalske motor",
     score: 9,
     scoreMax: 10,
   },
