@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  redirects: () => [
+    { source: "/tech", destination: "/rider", permanent: false },
+    { source: "/tech/iem", destination: "/rider", permanent: false },
+  ],
   rewrites: () => [
-    { source: "/tech", destination: "/tech/index.html" },
-    { source: "/tech/iem", destination: "/tech/index.html" },
+    { source: "/rider", destination: "/rider/index.html" },
     { source: "/tech/no-iem", destination: "/tech/no-iem.html" },
   ],
 };
