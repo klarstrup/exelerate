@@ -18,6 +18,7 @@
       }
       table {
         width: 100%;
+        border-collapse: collapse;
       }
       td {
         padding: 2px;
@@ -26,11 +27,6 @@
       th:first-child {
         text-align: center;
         font-size: 12px;
-      }
-      @media print {
-        tr {
-          background-color: transparent !important;
-        }
       }
       h1 {
         margin-bottom: 0;
@@ -44,6 +40,10 @@
         margin-bottom: 0;
         margin-top: 0.25em;
       }
+      h4 {
+        margin-bottom: 0;
+        margin-top: 0.125em;
+      }
       p,
       ul,
       td {
@@ -51,20 +51,21 @@
         letter-spacing: 0;
       }
       ul {
-        padding-inline-start: 20px;
+        padding-inline-start: 16px;
       }
       ul,
       p {
         font-size: 14px;
         margin-bottom: 0;
         margin-top: 0;
+        list-style-position: outside;
       }
     </style>
     <center>
       <h1>Exelerate - Tech &amp; Hospitality</h1>
-      <h3 style="margin-top: 0; margin-bottom: 0">
+      <h4>
         Per 2025.09.17 - rider@exelerate.dk - contact for show-specific details
-      </h3>
+      </h4>
       <h2 style="margin-bottom: 0; margin-top: 0.1em">Stage Plot</h2>
       <svg viewBox="0 0 800 260">
         <style>
@@ -155,7 +156,7 @@
       <div style="display: flex; justify-content: space-around; gap: 16px">
         <div style="flex: 2">
           <h2>Input List</h2>
-          <table border="1" style="border-collapse: collapse">
+          <table>
             <thead>
               <tr>
                 <th width="5%">#</th>
@@ -231,7 +232,7 @@
             </tbody>
           </table>
           <h2>Mix List</h2>
-          <table border="1" style="border-collapse: collapse">
+          <table>
             <thead>
               <tr>
                 <th width="5%">#</th>
