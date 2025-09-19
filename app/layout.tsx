@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Metadata } from "next";
 import { Bebas_Neue } from "next/font/google";
 import "./globals.css";
@@ -119,6 +120,7 @@ twq('config','ptxbg');
             <span itemProp="jobTitle">Drummer</span>
           </div>
         </div>
+        <Analytics />
       </body>
     </html>
   );
