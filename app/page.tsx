@@ -399,15 +399,18 @@ export default async function Home() {
                 ? -1
                 : 0
             )
-            .sort((a, b) =>
-              a.release?.releaseDate && b.release?.releaseDate
-                ? compareDesc(a.release.releaseDate, b.release.releaseDate)
-                : b.release?.releaseDate
+            .sort((a, b) => {
+              const aDate = a.release?.releaseDate ?? a.showTime;
+              const bDate = b.release?.releaseDate ?? b.showTime;
+
+              return aDate && bDate
+                ? compareDesc(aDate, bDate)
+                : bDate
                 ? 1
-                : a.release?.releaseDate
+                : aDate
                 ? -1
-                : 0
-            )
+                : 0;
+            })
             .map(async (testimonial) => {
               const songkickConcert = testimonial.songkickId
                 ? await fetch(

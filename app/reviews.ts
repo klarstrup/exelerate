@@ -10,6 +10,7 @@ export interface Review {
 export interface ConcertReview extends Review {
   type: "concert";
   songkickId?: number;
+  showTime?: Date;
 }
 export interface ReleaseReview extends Review {
   type: "release";
@@ -572,6 +573,18 @@ export const testimonials = [
   {
     type: "release",
     release: hellForTheHelpLess,
+    date: new Date("2025-09-14"),
+    url: "http://musikatlas.at/special-content/news-detail/news/exelerate-hell-for-the-helpless/?tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Baction%5D=detail&cHash=df736cf22d06061d608d48341c3c18f5",
+    archiveUrl:
+      "https://web.archive.org/web/20250915141355/http://musikatlas.at/special-content/news-detail/news/exelerate-hell-for-the-helpless/?tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Baction%5D=detail&cHash=df736cf22d06061d608d48341c3c18f5",
+    metalArchivesAlbumId: 1348855,
+    source: "Musikatlas.at",
+    pullQuote:
+      "Auf der Bühne bereits erfolgreich - jetzt auch mit diesem Album?",
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLess,
     date: new Date("2025-09-15"),
     url: "https://sentineldaily.com.au/exelerate-hell-for-the-helpless-from-the-vaults/",
     archiveUrl:
@@ -592,5 +605,30 @@ export const testimonials = [
     source: "HARD ROCK INFO",
     pullQuote:
       "a powerful hybrid of fast-paced thrash and melodic, anthemic power metal",
+  },
+  {
+    type: "concert",
+    songkickId: 42702899,
+    date: new Date("2025-09-16"),
+    showTime: new Date("2025-09-12"),
+    source: "Metal A Day",
+    pullQuote: "sand heltemetal",
+    url: "https://metaladay.dk/anmeldelse/mere-heltemetal-tak/",
+    archiveUrl:
+      "https://web.archive.org/web/20250918212312/https://metaladay.dk/anmeldelse/mere-heltemetal-tak/",
+    score: 3.5,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLess,
+    date: new Date("2025-09-17"),
+    url: "https://www.metalshock.it/exelerate-hell-for-the-helpless/",
+    archiveUrl:
+      "https://web.archive.org/web/20250918105755/https://www.metalshock.it/exelerate-hell-for-the-helpless/",
+    metalArchivesAlbumId: 1348855,
+    source: "Metalshock",
+    pullQuote:
+      "Gl’ Exelerate non stanno semplicemente omaggiando un genere: lo stanno portando avanti con convinzione, qualità e visione",
   },
 ] satisfies Testimonial[];
