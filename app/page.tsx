@@ -552,7 +552,12 @@ export default async function Home() {
                                     ? testimonial.score! / 10
                                     : testimonial.score!)
                                     ? "#ffd400"
-                                    : "rgba(255, 255, 255, 0.75)",
+                                    : i <
+                                      (testimonial.scoreMax === 100
+                                        ? testimonial.score! / 10
+                                        : testimonial.score!)
+                                    ? "rgba(243,221,115, 0.75)"
+                                    : "oklch(92.8% 0.006 264.531 / 50%)",
                               }}
                             >
                               <path
