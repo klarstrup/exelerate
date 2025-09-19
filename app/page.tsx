@@ -4,16 +4,12 @@ import {
   isToday,
   setHours,
 } from "date-fns";
-import { revalidateTag } from "next/cache";
 import Image from "next/image";
-import { after } from "next/server";
 import { Fragment } from "react";
 import { twMerge } from "tailwind-merge";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
-
-const userAgent = "Exelerate/1.0 (https://exelerate.dk)";
 
 export const revalidate = 6000;
 
@@ -426,34 +422,6 @@ export default async function Home() {
                     )
                 : undefined;
 
-              const metalArchivesAlbum =
-                "metalArchivesAlbumId" in testimonial &&
-                testimonial.metalArchivesAlbumId
-                  ? await fetch(
-                      `https://metal-api.dev/albums/${testimonial.metalArchivesAlbumId}`,
-                      {
-                        headers: { "User-Agent": userAgent },
-                        next: {
-                          revalidate: false,
-                          tags: [String(testimonial.metalArchivesAlbumId)],
-                        },
-                      }
-                    )
-                      .then((res) => res.json() as Promise<MetallumAlbum>)
-                      .catch(() => {})
-                  : undefined;
-
-              if (
-                "metalArchivesAlbumId" in testimonial &&
-                testimonial.metalArchivesAlbumId &&
-                !metalArchivesAlbum?.id
-              ) {
-                // Invalidate cache if fetching the album failed
-                after(() => {
-                  revalidateTag(String(testimonial.metalArchivesAlbumId));
-                });
-              }
-
               const particularlyGood =
                 testimonial.score &&
                 (testimonial.scoreMax === 100
@@ -543,24 +511,18 @@ export default async function Home() {
                           )}
                         </a>
                       ) : testimonial.type === "release" &&
-                        (metalArchivesAlbum?.id || testimonial.release) ? (
+                        testimonial.release ? (
                         <a
-                          href={`https://www.metal-archives.com/albums/x/x/${
-                            metalArchivesAlbum?.id ??
-                            testimonial.release?.metalArchivesAlbumId
-                          }`}
+                          href={`https://www.metal-archives.com/albums/x/x/${testimonial.release.metalArchivesAlbumId}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-shadow-md text-shadow-black/40"
                           style={{ color: "white !important" }}
                         >
                           &quot;
-                          {metalArchivesAlbum?.name ||
-                            testimonial.release?.title}
+                          {testimonial.release.title}
                           &quot; (
-                          {metalArchivesAlbum?.releaseDate?.split(", ")[1] ||
-                            testimonial.release?.releaseDate.getFullYear()}
-                          )
+                          {testimonial.release.releaseDate.getFullYear()})
                         </a>
                       ) : null}
                     </div>
