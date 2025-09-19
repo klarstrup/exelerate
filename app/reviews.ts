@@ -657,4 +657,14 @@ export const testimonials = [
     pullQuote:
       "Gl’ Exelerate non stanno semplicemente omaggiando un genere: lo stanno portando avanti con convinzione, qualità e visione",
   },
+  {
+    type: "release",
+    release: hellForTheHelpLessAlbum,
+    date: new Date("2025-09-18T09:19:59+00:00"),
+    url: "https://tempiduri.eu/exelerate-hell-for-the-helpless/",
+    archiveUrl:
+      "https://web.archive.org/web/20250918105755/https://tempiduri.eu/exelerate-hell-for-the-helpless/",
+    source: "Tempiduri",
+    pullQuote: "gran bel disco non c'è che dire",
+  },
 ] satisfies Testimonial[];
