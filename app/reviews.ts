@@ -667,4 +667,15 @@ export const testimonials = [
     source: "Tempiduri",
     pullQuote: "gran bel disco non c'è che dire",
   },
+  {
+    type: "release",
+    release: hellForTheHelpLessAlbum,
+    date: new Date("2025-09-20"),
+    url: "https://www.bleeding4metal.de/",
+    archiveUrl:
+      "https://web.archive.org/web/20250918105755/https://www.bleeding4metal.de/",
+    source: "Bleeding4Metal",
+    pullQuote:
+      "Der dänische Power Thrash fegt wie ein Wirbelstum durch die hörenden Massen",
+  },
 ] satisfies Testimonial[];
