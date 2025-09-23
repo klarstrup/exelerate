@@ -382,7 +382,7 @@ export default async function Home() {
           </a>
         </div>
       </div>
-      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-6 max-w-[1440px] mx-auto gap-x-4 grid-flow-dense">
+      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-6 max-w-[1600px] mx-auto gap-x-4 grid-flow-dense">
         {await Promise.all(
           Array.from(testimonials)
             .sort((a, b) => compareDesc(a.date, b.date))
