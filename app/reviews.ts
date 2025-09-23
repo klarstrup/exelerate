@@ -673,7 +673,7 @@ export const testimonials = [
     date: new Date("2025-09-21"),
     url: "https://www.bleeding4metal.de/index.php?show=review_de&id=16174",
     archiveUrl:
-      "https://web.archive.org/web/20250918105755/https://www.bleeding4metal.de/index.php?show=review_de&id=16174",
+      "https://web.archive.org/web/20250923102620/https://www.bleeding4metal.de/index.php?show=review_de&id=16174",
     source: "Bleeding4Metal",
     pullQuote:
       "es entbrennt ein Feuer, dessen lodernde Flamme erst nach dem zehnten, also dem letzten Titel erlischt",
