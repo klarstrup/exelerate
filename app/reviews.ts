@@ -670,12 +670,27 @@ export const testimonials = [
   {
     type: "release",
     release: hellForTheHelpLessAlbum,
-    date: new Date("2025-09-20"),
-    url: "https://www.bleeding4metal.de/",
+    date: new Date("2025-09-21"),
+    url: "https://www.bleeding4metal.de/index.php?show=review_de&id=16174",
     archiveUrl:
-      "https://web.archive.org/web/20250918105755/https://www.bleeding4metal.de/",
+      "https://web.archive.org/web/20250918105755/https://www.bleeding4metal.de/index.php?show=review_de&id=16174",
     source: "Bleeding4Metal",
     pullQuote:
-      "Der dänische Power Thrash fegt wie ein Wirbelstum durch die hörenden Massen",
+      "es entbrennt ein Feuer, dessen lodernde Flamme erst nach dem zehnten, also dem letzten Titel erlischt",
+    score: 8.5,
+    scoreMax: 10,
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLessAlbum,
+    date: new Date("2025-09-21"),
+    url: "https://1984benchan.blog.fc2.com/blog-entry-1749.html",
+    archiveUrl:
+      "https://web.archive.org/web/20250922222704/https://1984benchan.blog.fc2.com/blog-entry-1749.html",
+    source: "メタルシニア",
+    pullQuote:
+      "基本は私の大好きなスタイルなのですが、デビュー作で見られた「練り上げられた個性的なリフ」が影を潜めました。",
+    score: 2,
+    scoreMax: 5,
   },
 ] satisfies Testimonial[];
