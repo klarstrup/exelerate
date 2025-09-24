@@ -527,15 +527,12 @@ export const testimonials = [
   {
     type: "release",
     release: hellForTheHelpLessAlbum,
-    date: new Date("2025-09-04"),
-    url: "https://heavymetal.dk/anmeldelse/exelerate-hell-helpless",
+    date: new Date("2025-09-08 09:00"),
+    url: "https://www.facebook.com/RancorMetalzine/posts/pfbid022ym4s1qzXX2juwBpsTa82kv4o7rrLa7NoTuxkDFtynVSKSzAZpbA8dRw2waErtsel",
     archiveUrl:
-      "https://web.archive.org/web/20250907162119/https://heavymetal.dk/anmeldelse/exelerate-hell-helpless",
-    source: "HEAVYMETAL.DK",
-    pullQuote:
-      "Hell for the Helpless tør tage livtag med vores indre kaos og kaste lys på mørket – uden at miste den musikalske motor",
-    score: 9,
-    scoreMax: 10,
+      "https://web.archive.org/web/20250915141355/https://www.facebook.com/RancorMetalzine/posts/pfbid022ym4s1qzXX2juwBpsTa82kv4o7rrLa7NoTuxkDFtynVSKSzAZpbA8dRw2waErtsel",
+    source: "Rancor Metalzine",
+    pullQuote: "et stærkt album",
   },
   {
     type: "release",
@@ -548,6 +545,19 @@ export const testimonials = [
     pullQuote: "Un futur classique?",
     score: 90,
     scoreMax: 100,
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLessAlbum,
+    date: new Date("2025-09-04"),
+    url: "https://heavymetal.dk/anmeldelse/exelerate-hell-helpless",
+    archiveUrl:
+      "https://web.archive.org/web/20250907162119/https://heavymetal.dk/anmeldelse/exelerate-hell-helpless",
+    source: "HEAVYMETAL.DK",
+    pullQuote:
+      "Hell for the Helpless tør tage livtag med vores indre kaos og kaste lys på mørket – uden at miste den musikalske motor",
+    score: 9,
+    scoreMax: 10,
   },
   {
     type: "release",
