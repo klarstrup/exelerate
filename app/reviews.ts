@@ -530,7 +530,7 @@ export const testimonials = [
     date: new Date("2025-09-08 09:00"),
     url: "https://www.facebook.com/RancorMetalzine/posts/pfbid022ym4s1qzXX2juwBpsTa82kv4o7rrLa7NoTuxkDFtynVSKSzAZpbA8dRw2waErtsel",
     archiveUrl:
-      "https://web.archive.org/web/20250915141355/https://www.facebook.com/RancorMetalzine/posts/pfbid022ym4s1qzXX2juwBpsTa82kv4o7rrLa7NoTuxkDFtynVSKSzAZpbA8dRw2waErtsel",
+      "https://web.archive.org/web/20250924154615/https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FRancorMetalzine%2Fposts%2F783320454444665",
     source: "Rancor Metalzine",
     pullQuote: "et stærkt album",
   },
