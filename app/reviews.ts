@@ -703,4 +703,17 @@ export const testimonials = [
     score: 2,
     scoreMax: 5,
   },
+  {
+    type: "release",
+    release: hellForTheHelpLessAlbum,
+    date: new Date("2025-09-28"),
+    url: "https://metalgodstv.com/exelerate-album-review-hell-for-the-helpless/",
+    archiveUrl:
+      "https://web.archive.org/web/20250929082253/https://metalgodstv.com/exelerate-album-review-hell-for-the-helpless/",
+    source: "Metal Gods TV",
+    pullQuote:
+      "Exelerate are at full tilt, powering across the land with rabid urgency and intent",
+    score: 9.5,
+    scoreMax: 10,
+  },
 ] satisfies Testimonial[];
