@@ -160,27 +160,6 @@ namespace Songkick {
   }
 }
 
-interface MetallumAlbum {
-  id: string;
-  name: string;
-  type: string;
-  releaseDate: string;
-  catalogID: string;
-  versionDescription: string;
-  label: string;
-  format: string;
-  limitations: string;
-  reviews: string;
-  coverUrl: string;
-  songs: {
-    id: string;
-    number: string;
-    name: string;
-    length: string;
-    lyrics: string;
-  }[];
-}
-
 export default async function Home() {
   const nextShows: Songkick.Event[] | undefined = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
@@ -188,14 +167,27 @@ export default async function Home() {
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
-  const nextShow: Songkick.EventDetails | undefined =
-    nextShows &&
-    (await fetch(
-      `https://api.songkick.com/api/3.0/events/${nextShows[0].id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-      { next: { revalidate: 12000 } }
-    )
-      .then((res) => res.json())
-      .then((res) => res.resultsPage?.results?.event));
+  const [nextShow, ticketLink] = nextShows?.[0].uri
+    ? await Promise.all([
+        fetch(
+          `https://api.songkick.com/api/3.0/events/${nextShows[0].id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
+          { next: { revalidate: 12000 } }
+        )
+          .then((res) => res.json())
+          .then(
+            (res) =>
+              res.resultsPage?.results?.event as
+                | Songkick.EventDetails
+                | undefined
+          ),
+        fetch(nextShows[0].uri, { next: { revalidate: 12000 } })
+          .then((r) => r.text())
+          .then((html) => {
+            const path = html.match(/(\/tickets\/[0-9]+\?)/)?.[1];
+            return path ? new URL(path, "https://www.songkick.com").href : null;
+          }),
+      ])
+    : [];
 
   return (
     <>
@@ -205,9 +197,9 @@ export default async function Home() {
         width={300}
         height={378}
         style={{
-          height: "40vh",
+          height: "35vh",
           filter: "blur(6px)",
-          width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
+          width: `${0.35 * (logoImg.width / logoImg.height) * 100}vh`,
         }}
         className="mx-auto block"
       />
@@ -217,10 +209,10 @@ export default async function Home() {
         width={300}
         height={378}
         style={{
-          height: "40vh",
-          marginTop: "-40.125vh",
+          height: "35vh",
+          marginTop: "-35.125vh",
           filter: "blur(3px)",
-          width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
+          width: `${0.35 * (logoImg.width / logoImg.height) * 100}vh`,
         }}
         className="mx-auto block"
       />
@@ -230,9 +222,9 @@ export default async function Home() {
         width={300}
         height={378}
         style={{
-          height: "40vh",
-          marginTop: "-40.125vh",
-          width: `${0.4 * (logoImg.width / logoImg.height) * 100}vh`,
+          height: "35vh",
+          marginTop: "-35.125vh",
+          width: `${0.35 * (logoImg.width / logoImg.height) * 100}vh`,
           filter: "invert(1)",
         }}
         className="mx-auto block"
@@ -252,7 +244,7 @@ export default async function Home() {
         />
       </a>
       <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40">
-        <div className="text-white text-2xl lg:text-5xl leading-[1]">
+        <div className="text-[#ccc] text-2xl lg:text-5xl leading-[1]">
           NEW ALBUM
         </div>
         <span className="-ml-3">&quot;</span>
@@ -261,13 +253,13 @@ export default async function Home() {
         </a>
         <span className="tracking-[-2em]">&quot;</span>
         <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
-          OUT NOW
+          STREAMING EVERYWHERE
         </div>
       </div>
       <div className="mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
         {nextShow ? (
           <center className="nextGig text-3xl lg:text-6xl my-[4vh]">
-            Next show is{" "}
+            Next show{" "}
             <span>
               {isToday(new Date(nextShow.start.datetime)) ? null : <>in </>}
               <a target="_blank" href={nextShow.uri}>
@@ -338,6 +330,18 @@ export default async function Home() {
                   <big>{nextShows.length - 1} future shows</big>
                 </a>
               </span>
+            ) : null}
+            {ticketLink ? (
+              <>
+                <br />
+                <a
+                  target="_blank"
+                  href={ticketLink}
+                  style={{ fontSize: "1.25em" }}
+                >
+                  Get tickets
+                </a>
+              </>
             ) : null}
           </center>
         ) : null}
