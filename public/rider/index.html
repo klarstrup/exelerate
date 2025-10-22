@@ -20,8 +20,10 @@
         width: 100%;
         border-collapse: collapse;
       }
-      td {
+     tbody td {
         padding: 2px;
+        border-style: solid;
+        border-width: 1px 0 1px 0;
       }
       td:first-child,
       th:first-child {
@@ -230,26 +232,11 @@
                 <td>Mics ad libitum</td>
               </tr>
             </tbody>
-          </table>
-          <h2>Mix List</h2>
-          <table>
-            <thead>
-              <tr>
-                <th width="5%">#</th>
-                <th width="50%">Mix</th>
-                <th width="50%">Destination</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Drumkit Submix</td>
-                <td>IEM rig input</td>
-              </tr>
+            <tfoot>
               <tr>
                 <td colspan="3">Band does own IEM mixes</td>
               </tr>
-            </tbody>
+            </tfoot>
           </table>
         </div>
         <div style="flex: 3; text-align: left">
