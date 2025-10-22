@@ -716,4 +716,16 @@ export const testimonials = [
     score: 9.5,
     scoreMax: 10,
   },
+  {
+    type: "release",
+    release: hellForTheHelpLessAlbum,
+    date: new Date("2025-10-21"),
+    url: "https://www.angrymetalguy.com/exelerate-hell-for-the-helpless-review/",
+    archiveUrl:
+      "https://web.archive.org/web/20251022152605/https://www.angrymetalguy.com/exelerate-hell-for-the-helpless-review/",
+    source: "Angry Metal Guy",
+    pullQuote: "Hell for the Helpless is a bundle of fun",
+    score: 3,
+    scoreMax: 5,
+  },
 ] satisfies Testimonial[];
