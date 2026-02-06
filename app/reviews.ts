@@ -62,7 +62,7 @@ type Release = [
   typeof godOfManSingle,
   typeof theMadnessSingle,
   typeof exelerateAlbum,
-  typeof hellForTheHelpLessAlbum
+  typeof hellForTheHelpLessAlbum,
 ][number];
 
 export const testimonials = [
@@ -726,6 +726,18 @@ export const testimonials = [
     source: "Angry Metal Guy",
     pullQuote: "Hell for the Helpless is a bundle of fun",
     score: 3,
+    scoreMax: 5,
+  },
+  {
+    type: "release",
+    release: hellForTheHelpLessAlbum,
+    date: new Date("2026-02-06"),
+    url: "https://devilution.dk/anmeldelser/pladeanmeldelser/exelerate-hell-for-the-helpless",
+    archiveUrl:
+      "https://web.archive.org/web/20260206124823/https://devilution.dk/anmeldelser/pladeanmeldelser/exelerate-hell-for-the-helpless",
+    source: "Devilution",
+    pullQuote: "Stærk dansk power-thrash",
+    score: 4,
     scoreMax: 5,
   },
 ] satisfies Testimonial[];
