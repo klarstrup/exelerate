@@ -740,4 +740,16 @@ export const testimonials = [
     score: 4,
     scoreMax: 5,
   },
+  {
+    type: "concert",
+    songkickId: 42948196,
+    date: new Date("2026-05-14T16:29:27.977Z"),
+    showTime: new Date("2026-05-14T16:00:00.000Z"),
+    source: "Nordica LIVE Music Magazine",
+    pullQuote:
+      "en energisk koncert fyldt med melodisk heavy metal, speed metal og klassiske thrash inspirerede riffs",
+    url: "https://www.nordica.live/post/exelerate-i-nordic-noise",
+    archiveUrl:
+      "https://web.archive.org/web/20260628114044/https://www.nordica.live/post/exelerate-i-nordic-noise",
+  },
 ] satisfies Testimonial[];
