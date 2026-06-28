@@ -163,7 +163,7 @@ namespace Songkick {
 export default async function Home() {
   const nextShows: Songkick.Event[] | undefined = await fetch(
     `https://api.songkick.com/api/3.0/artists/6777179-exelerate/calendar.json?apikey=${process.env.SONGKICK_APIKEY}`,
-    { next: { revalidate: 12000 } }
+    { next: { revalidate: 12000 } },
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
@@ -171,14 +171,14 @@ export default async function Home() {
     ? await Promise.all([
         fetch(
           `https://api.songkick.com/api/3.0/events/${nextShows[0].id}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-          { next: { revalidate: 12000 } }
+          { next: { revalidate: 12000 } },
         )
           .then((res) => res.json())
           .then(
             (res) =>
               res.resultsPage?.results?.event as
                 | Songkick.EventDetails
-                | undefined
+                | undefined,
           ),
         fetch(nextShows[0].uri, { next: { revalidate: 12000 } })
           .then((r) => r.text())
@@ -244,7 +244,7 @@ export default async function Home() {
         />
       </a>
       <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40">
-        <div className="text-[#ccc] text-2xl lg:text-5xl leading-[1]">
+        <div className="text-[#ccc] text-2xl lg:text-5xl leading-none">
           NEW ALBUM
         </div>
         <span className="-ml-3">&quot;</span>
@@ -259,7 +259,7 @@ export default async function Home() {
       <div className="mx-auto text-shadow-lg text-shadow-black/80 items-start relative">
         {nextShow ? (
           <center className="nextGig text-3xl lg:text-6xl my-[4vh]">
-            Next show{" "}
+            Next show is{" "}
             <span>
               {isToday(new Date(nextShow.start.datetime)) ? null : <>in </>}
               <a target="_blank" href={nextShow.uri}>
@@ -274,9 +274,9 @@ export default async function Home() {
                       new Date(
                         nextShow.start.datetime ||
                           setHours(new Date(nextShow.start.date), 16) ||
-                          ""
+                          "",
                       ),
-                      { unit: "day" }
+                      { unit: "day" },
                     )
                   )}
                 </time>
@@ -307,9 +307,9 @@ export default async function Home() {
                 <span className="otherHeadliners">
                   {nextShow.performance
                     .filter((p) => p.displayName !== "Exelerate")
-                    .map((p, i) => (
+                    .map((p, i, arr) => (
                       <Fragment key={p.artist.id}>
-                        {i ? <> </> : null}
+                        {i === arr.length - 1 ? <> and </> : i ? <>, </> : null}
                         <a target="_blank" href={p.artist.uri}>
                           <em>{p.displayName.replace(" (DK)", "")}</em>
                         </a>
@@ -347,9 +347,9 @@ export default async function Home() {
         ) : null}
         <div
           className={twMerge(
-            "max-w-[1440px] mx-auto leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
+            "max-w-360 mx-auto leading-none text-4xl lg:text-7xl gap-x-[6vw] lg:gap-x-0 gap-y-[1vh] lg:gap-y-0",
             "self-stretch flex flex-row  justify-around flex-wrap",
-            "my-[4vh]"
+            "my-[4vh]",
           )}
         >
           <a
@@ -386,7 +386,7 @@ export default async function Home() {
           </a>
         </div>
       </div>
-      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-6 max-w-[1600px] mx-auto gap-x-4 grid-flow-dense">
+      <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-6 max-w-400 mx-auto gap-x-4 grid-flow-dense">
         {await Promise.all(
           Array.from(testimonials)
             .sort((a, b) => compareDesc(a.date, b.date))
@@ -394,10 +394,10 @@ export default async function Home() {
               a.score && a.scoreMax && b.score && b.scoreMax
                 ? b.score / b.scoreMax - a.score / a.scoreMax
                 : b.score && b.scoreMax
-                ? 1
-                : a.score && a.scoreMax
-                ? -1
-                : 0
+                  ? 1
+                  : a.score && a.scoreMax
+                    ? -1
+                    : 0,
             )
             .sort((a, b) => {
               const aDate = a.release?.releaseDate ?? a.showTime;
@@ -406,23 +406,23 @@ export default async function Home() {
               return aDate && bDate
                 ? compareDesc(aDate, bDate)
                 : bDate
-                ? 1
-                : aDate
-                ? -1
-                : 0;
+                  ? 1
+                  : aDate
+                    ? -1
+                    : 0;
             })
             .map(async (testimonial) => {
               const songkickConcert = testimonial.songkickId
                 ? await fetch(
                     `https://api.songkick.com/api/3.0/events/${testimonial.songkickId}.json?apikey=${process.env.SONGKICK_APIKEY}`,
-                    { next: { revalidate: 12000 } }
+                    { next: { revalidate: 12000 } },
                   )
                     .then((res) => res.json())
                     .then(
                       (res) =>
                         res.resultsPage?.results?.event as
                           | Songkick.EventDetails
-                          | undefined
+                          | undefined,
                     )
                 : undefined;
 
@@ -458,10 +458,10 @@ export default async function Home() {
                     (perfectlyGood
                       ? "xl:col-span-4 lg:col-span-3 md:col-span-2"
                       : extremelyGood
-                      ? "lg:col-span-3 md:col-span-2"
-                      : particularlyGood
-                      ? "md:col-span-2"
-                      : "")
+                        ? "lg:col-span-3 md:col-span-2"
+                        : particularlyGood
+                          ? "md:col-span-2"
+                          : "")
                   }
                 >
                   <div className="flex items-start text-shadow-md text-shadow-black/40 justify-between">
@@ -495,18 +495,18 @@ export default async function Home() {
                                   songkickConcert.start.datetime ||
                                     setHours(
                                       new Date(songkickConcert.start.date),
-                                      16
+                                      16,
                                     ) ||
-                                    ""
+                                    "",
                                 ).toString()}
                               >
                                 {new Date(
                                   songkickConcert.start.datetime ||
                                     setHours(
                                       new Date(songkickConcert.start.date),
-                                      16
+                                      16,
                                     ) ||
-                                    ""
+                                    "",
                                 ).toLocaleDateString("da-DK")}
                               </time>
                             </>
@@ -535,7 +535,7 @@ export default async function Home() {
                       ? new Array(
                           testimonial.scoreMax === 100
                             ? testimonial.scoreMax / 10
-                            : testimonial.scoreMax
+                            : testimonial.scoreMax,
                         )
                           .fill(0)
                           .map((_, i) => (
@@ -557,11 +557,11 @@ export default async function Home() {
                                     : testimonial.score!)
                                     ? "#ffd400"
                                     : i <
-                                      (testimonial.scoreMax === 100
-                                        ? testimonial.score! / 10
-                                        : testimonial.score!)
-                                    ? "rgba(243,221,115, 0.75)"
-                                    : "oklch(92.8% 0.006 264.531 / 50%)",
+                                        (testimonial.scoreMax === 100
+                                          ? testimonial.score! / 10
+                                          : testimonial.score!)
+                                      ? "rgba(243,221,115, 0.75)"
+                                      : "oklch(92.8% 0.006 264.531 / 50%)",
                               }}
                             >
                               <path
@@ -615,49 +615,49 @@ Z"
                           ? testimonial.pullQuote.length > 160
                             ? "text-4xl lg:text-5xl"
                             : testimonial.pullQuote.length > 80
-                            ? "text-5xl lg:text-6xl"
-                            : testimonial.pullQuote.length > 40
-                            ? "text-6xl lg:text-7xl"
-                            : testimonial.pullQuote.length > 20
-                            ? "text-7xl lg:text-8xl"
-                            : testimonial.pullQuote.length > 10
-                            ? "text-8xl lg:text-9xl"
-                            : "text-9xl lg:text-[12rem]"
+                              ? "text-5xl lg:text-6xl"
+                              : testimonial.pullQuote.length > 40
+                                ? "text-6xl lg:text-7xl"
+                                : testimonial.pullQuote.length > 20
+                                  ? "text-7xl lg:text-8xl"
+                                  : testimonial.pullQuote.length > 10
+                                    ? "text-8xl lg:text-9xl"
+                                    : "text-9xl lg:text-[12rem]"
                           : extremelyGood
-                          ? testimonial.pullQuote.length > 160
-                            ? "text-3xl lg:text-4xl"
-                            : testimonial.pullQuote.length > 80
-                            ? "text-4xl lg:text-5xl"
-                            : testimonial.pullQuote.length > 40
-                            ? "text-5xl lg:text-6xl"
-                            : testimonial.pullQuote.length > 20
-                            ? "text-6xl lg:text-7xl"
-                            : testimonial.pullQuote.length > 10
-                            ? "text-7xl lg:text-8xl"
-                            : "text-8xl lg:text-9xl"
-                          : particularlyGood
-                          ? testimonial.pullQuote.length > 160
-                            ? "text-2xl lg:text-3xl"
-                            : testimonial.pullQuote.length > 80
-                            ? "text-3xl lg:text-4xl"
-                            : testimonial.pullQuote.length > 40
-                            ? "text-4xl lg:text-5xl"
-                            : testimonial.pullQuote.length > 20
-                            ? "text-5xl lg:text-6xl"
-                            : testimonial.pullQuote.length > 10
-                            ? "text-6xl lg:text-7xl"
-                            : "text-7xl lg:text-8xl"
-                          : testimonial.pullQuote.length > 160
-                          ? "text-lg lg:text-xl"
-                          : testimonial.pullQuote.length > 80
-                          ? "text-xl lg:text-2xl"
-                          : testimonial.pullQuote.length > 40
-                          ? "text-2xl lg:text-3xl"
-                          : testimonial.pullQuote.length > 20
-                          ? "text-3xl lg:text-4xl"
-                          : testimonial.pullQuote.length > 10
-                          ? "text-4xl lg:text-5xl"
-                          : "text-5xl lg:text-6xl")
+                            ? testimonial.pullQuote.length > 160
+                              ? "text-3xl lg:text-4xl"
+                              : testimonial.pullQuote.length > 80
+                                ? "text-4xl lg:text-5xl"
+                                : testimonial.pullQuote.length > 40
+                                  ? "text-5xl lg:text-6xl"
+                                  : testimonial.pullQuote.length > 20
+                                    ? "text-6xl lg:text-7xl"
+                                    : testimonial.pullQuote.length > 10
+                                      ? "text-7xl lg:text-8xl"
+                                      : "text-8xl lg:text-9xl"
+                            : particularlyGood
+                              ? testimonial.pullQuote.length > 160
+                                ? "text-2xl lg:text-3xl"
+                                : testimonial.pullQuote.length > 80
+                                  ? "text-3xl lg:text-4xl"
+                                  : testimonial.pullQuote.length > 40
+                                    ? "text-4xl lg:text-5xl"
+                                    : testimonial.pullQuote.length > 20
+                                      ? "text-5xl lg:text-6xl"
+                                      : testimonial.pullQuote.length > 10
+                                        ? "text-6xl lg:text-7xl"
+                                        : "text-7xl lg:text-8xl"
+                              : testimonial.pullQuote.length > 160
+                                ? "text-lg lg:text-xl"
+                                : testimonial.pullQuote.length > 80
+                                  ? "text-xl lg:text-2xl"
+                                  : testimonial.pullQuote.length > 40
+                                    ? "text-2xl lg:text-3xl"
+                                    : testimonial.pullQuote.length > 20
+                                      ? "text-3xl lg:text-4xl"
+                                      : testimonial.pullQuote.length > 10
+                                        ? "text-4xl lg:text-5xl"
+                                        : "text-5xl lg:text-6xl")
                       }
                     >
                       {testimonial.pullQuote}
@@ -665,7 +665,7 @@ Z"
                   </div>
                 </li>
               );
-            })
+            }),
         )}
       </ul>
     </>

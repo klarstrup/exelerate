@@ -68,17 +68,6 @@ a.ftvLink:hover img {
   white-space: nowrap;
 }
 
-.otherHeadliners a::after {
-  white-space: normal;
-  content: ", ";
-  font-weight: inherit;
-  color: #ccc;
-  font-size: 0.9em;
-}
-.otherHeadliners a:last-child::after {
-  content: "";
-}
-
 .otherHeadliners a::before {
   white-space: normal;
   content: "";
