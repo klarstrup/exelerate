@@ -742,6 +742,20 @@ export const testimonials = [
   },
   {
     type: "concert",
+    songkickId: 42841495,
+    date: new Date("2025-12-09T17:05:03+00:00"),
+    showTime: new Date("2025-12-05T18:00:00+00:00"),
+    source: "Metal A Day",
+    pullQuote:
+      "Har du lyst til øl, fræsende riffs og metal med et glimt i øjet, så snyd ikke dig selv for de herrer i Exelerate.",
+    url: "https://metaladay.dk/anmeldelse/genopstandelsens-maalbevidste-succes/",
+    archiveUrl:
+      "https://web.archive.org/web/20260206124823/https://metaladay.dk/anmeldelse/genopstandelsens-maalbevidste-succes/",
+    score: 3,
+    scoreMax: 5,
+  },
+  {
+    type: "concert",
     songkickId: 42948196,
     date: new Date("2026-05-14T16:29:27.977Z"),
     showTime: new Date("2026-05-14T16:00:00.000Z"),
