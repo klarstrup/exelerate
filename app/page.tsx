@@ -524,7 +524,7 @@ Z"
             }),
         )}
       </ul>
-      <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40">
+      <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40" id="playmates">
         <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
           FRIENDS, FAMILY &amp; PLAYMATES:
         </div>
