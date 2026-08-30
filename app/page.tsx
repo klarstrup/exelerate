@@ -7,158 +7,13 @@ import {
 import Image from "next/image";
 import { Fragment } from "react";
 import { twMerge } from "tailwind-merge";
+import { getBandsWeHavePlayedWith } from "./actions";
 import FTVLogo from "./ftv-logo.png";
 import logoImg from "./logo.png";
 import { testimonials } from "./reviews";
+import { Songkick } from "./songkick";
 
 export const revalidate = 6000;
-
-namespace Songkick {
-  export interface Event {
-    id: number;
-    displayName: string;
-    type: Type;
-    uri: string;
-    status: Status;
-    popularity: number;
-    start: End;
-    performance: Performance[];
-    ageRestriction: null | string;
-    flaggedAsEnded?: boolean;
-    venue: Venue;
-    location: Location;
-    end?: End;
-    series?: Series;
-  }
-
-  export interface End {
-    date: Date;
-    time: null | string;
-    datetime: null | string;
-  }
-
-  export interface Location {
-    city: string;
-    lat: number;
-    lng: number;
-  }
-
-  export interface Performance {
-    id: number;
-    displayName: string;
-    billing: Billing;
-    billingIndex: number;
-    artist: MetroArea;
-  }
-
-  export interface MetroArea {
-    id: number;
-    displayName: string;
-    uri: string;
-    identifier?: Identifier[];
-    country?: Series;
-  }
-
-  export interface Series {
-    displayName: string;
-  }
-
-  export interface Identifier {
-    mbid: string;
-    href: string;
-  }
-
-  export enum Billing {
-    Headline = "headline",
-    Support = "support",
-  }
-
-  export enum Status {
-    Ok = "ok",
-  }
-
-  export enum Type {
-    Concert = "Concert",
-    Festival = "Festival",
-  }
-
-  export interface Venue {
-    id: number | null;
-    displayName: string;
-    uri: null | string;
-    metroArea: MetroArea;
-    lat: number | null;
-    lng: number | null;
-  }
-
-  export interface EventDetails {
-    location: Location;
-    popularity: number;
-    uri: string;
-    displayName: string;
-    id: number;
-    type: string;
-    start: Start;
-    ageRestriction: string;
-    performance: Performance[];
-    venue: VenueDetails;
-    status: string;
-    series?: Series;
-  }
-
-  export interface Location {
-    city: string;
-    lng: number;
-    lat: number;
-  }
-
-  export interface Performance {
-    artist: City;
-    displayName: string;
-    billingIndex: number;
-    id: number;
-    billing: Billing;
-  }
-
-  export interface City {
-    uri: string;
-    displayName: string;
-    id: number;
-    identifier?: Identifier[];
-    country?: Country;
-  }
-
-  export interface Country {
-    displayName: string;
-  }
-
-  export interface Identifier {
-    href: string;
-    mbid: string;
-  }
-
-  export interface Start {
-    time: string;
-    date: Date;
-    datetime: string;
-  }
-
-  export interface VenueDetails {
-    metroArea: City;
-    city: City;
-    zip: string;
-    lat: number;
-    lng: number;
-    uri: string;
-    displayName: string;
-    street: string;
-    id: number;
-    website: string;
-    phone: string;
-    capacity: number;
-    description: string;
-  }
-}
 
 export default async function Home() {
   const nextShows: Songkick.Event[] | undefined = await fetch(
@@ -167,6 +22,7 @@ export default async function Home() {
   )
     .then((res) => res.json())
     .then((res) => res.resultsPage?.results?.event);
+  const bandsWeHavePlayedWith = await getBandsWeHavePlayedWith();
   const [nextShow, ticketLink] = nextShows?.[0].uri
     ? await Promise.all([
         fetch(
@@ -668,6 +524,61 @@ Z"
             }),
         )}
       </ul>
+      <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40">
+        <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
+          FRIENDS, FAMILY &amp; PLAYMATES:
+        </div>
+      </div>
+      <div className="grid gap-4 max-w-400 mx-auto my-[4vh] text-shadow-lg justify-center items-center place-content-center content-center text-shadow-black/40 grid-cols-[repeat(auto-fill,minmax(120px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
+        {bandsWeHavePlayedWith
+          .filter((band) => band.knownToHaveAProfilePicture)
+          .map((band) => (
+            <a
+              key={band.id}
+              href={band.uri}
+              target="_blank"
+              className="flex flex-1 rounded-[33%] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none aspect-square text-center hover:scale-110 transition-transform duration-300"
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                backgroundImage: `url(https://images.sk-static.com/images/media/profile_images/artists/${band.id}/huge_avatar)`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                padding: "7.5% 0.75em",
+                color: "white",
+                textShadow:
+                  "0 0 5rem black,0 0 4rem black,0 0 3rem black,0 0 2rem black",
+                width: "100%",
+              }}
+            >
+              {band.displayName.replace(" (DK)", "")}
+            </a>
+          ))}
+      </div>
+      <div className="grid gap-4 max-w-400 mx-auto my-[4vh] text-shadow-lg justify-center items-center place-content-center content-center text-shadow-black/40 grid-cols-[repeat(auto-fill,minmax(120px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
+        {bandsWeHavePlayedWith
+          .filter((band) => !band.knownToHaveAProfilePicture)
+          .map((band) => (
+            <a
+              key={band.id}
+              href={band.uri}
+              target="_blank"
+              className="flex flex-1 rounded-[33px] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none text-center hover:scale-110 transition-transform duration-300"
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                backgroundImage: `url(https://images.sk-static.com/images/media/profile_images/artists/${band.id}/huge_avatar)`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                padding: "7.5% 0.75em",
+                color: "white",
+                textShadow:
+                  "0 0 5rem black,0 0 4rem black,0 0 3rem black,0 0 2rem black",
+                width: "100%",
+              }}
+            >
+              {band.displayName.replace(" (DK)", "")}
+            </a>
+          ))}
+      </div>
     </>
   );
 }
