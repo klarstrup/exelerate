@@ -96,7 +96,7 @@ export default async function Home() {
           width={75}
           height={85}
           alt="From The Vaults"
-          className="h-auto max-w-[7.5vh]"
+          className="h-auto w-auto max-w-[7.5vh]"
         />
       </a>
       <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40">
@@ -524,7 +524,10 @@ Z"
             }),
         )}
       </ul>
-      <div className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40" id="playmates">
+      <div
+        className="text-center text-5xl lg:text-8xl my-[4vh] text-shadow-lg text-shadow-black/40"
+        id="playmates"
+      >
         <div className="text-white text-4xl lg:text-7xl leading-[0.8]">
           FRIENDS, FAMILY &amp; PLAYMATES:
         </div>
@@ -537,7 +540,7 @@ Z"
               key={band.id}
               href={band.uri}
               target="_blank"
-              className="flex flex-1 rounded-[33%] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none aspect-square text-center hover:scale-110 transition-transform duration-300"
+              className="flex flex-1 rounded-[33%] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none aspect-square text-center"
               style={{
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                 backgroundImage: `url(https://images.sk-static.com/images/media/profile_images/artists/${band.id}/huge_avatar)`,
@@ -562,7 +565,7 @@ Z"
               key={band.id}
               href={band.uri}
               target="_blank"
-              className="flex flex-1 rounded-[33px] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none text-center hover:scale-110 transition-transform duration-300"
+              className="flex flex-1 rounded-[33px] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none text-center"
               style={{
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                 backgroundImage: `url(https://images.sk-static.com/images/media/profile_images/artists/${band.id}/huge_avatar)`,
