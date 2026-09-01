@@ -534,7 +534,11 @@ Z"
       </div>
       <div className="grid gap-4 max-w-400 mx-auto my-[4vh] text-shadow-lg justify-center items-center place-content-center content-center text-shadow-black/40 grid-cols-[repeat(auto-fill,minmax(120px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
         {bandsWeHavePlayedWith
-          .filter((band) => band.knownToHaveAProfilePicture)
+          .filter(
+            (band) =>
+              "knownToHaveAProfilePicture" in band &&
+              band.knownToHaveAProfilePicture,
+          )
           .map((band) => (
             <a
               key={band.id}
@@ -559,7 +563,13 @@ Z"
       </div>
       <div className="grid gap-4 max-w-400 mx-auto my-[4vh] text-shadow-lg justify-center items-center place-content-center content-center text-shadow-black/40 grid-cols-[repeat(auto-fill,minmax(120px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
         {bandsWeHavePlayedWith
-          .filter((band) => !band.knownToHaveAProfilePicture)
+          .filter(
+            (band) =>
+              !(
+                "knownToHaveAProfilePicture" in band &&
+                band.knownToHaveAProfilePicture
+              ),
+          )
           .map((band) => (
             <a
               key={band.id}

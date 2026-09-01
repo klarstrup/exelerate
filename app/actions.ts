@@ -25,10 +25,39 @@ const getPastEvents = (artistId: number) =>
     resultsPage.totalEntries ? resultsPage.results.event : [],
   );
 
-const bandIdsKnownToHaveAProfilePicture = new Set([
-  6777179, 8972589, 9117009, 287767, 6647854, 7659254, 7737794, 97697, 496765,
-  8065348, 8717679, 701479, 5336153, 10151949, 9543069, 8706753, 173674,
-  5216478, 1654632, 33969, 477845, 10095150,
+type BandMetaData = {
+  knownToHaveAProfilePicture?: boolean;
+  uri?: string;
+};
+const bandMetaData = new Map<number, BandMetaData>([
+  [6777179, { knownToHaveAProfilePicture: true }],
+  [8972589, { knownToHaveAProfilePicture: true }],
+  [9117009, { knownToHaveAProfilePicture: true }],
+  [287767, { knownToHaveAProfilePicture: true }],
+  [6647854, { knownToHaveAProfilePicture: true }],
+  [7659254, { knownToHaveAProfilePicture: true }],
+  [7737794, { knownToHaveAProfilePicture: true }],
+  [97697, { knownToHaveAProfilePicture: true }],
+  [496765, { knownToHaveAProfilePicture: true }],
+  [8065348, { knownToHaveAProfilePicture: true }],
+  [8717679, { knownToHaveAProfilePicture: true }],
+  [701479, { knownToHaveAProfilePicture: true }],
+  [5336153, { knownToHaveAProfilePicture: true }],
+  [10151949, { knownToHaveAProfilePicture: true }],
+  [9543069, { knownToHaveAProfilePicture: true }],
+  [8706753, { knownToHaveAProfilePicture: true }],
+  [173674, { knownToHaveAProfilePicture: true }],
+  [5216478, { knownToHaveAProfilePicture: true }],
+  [1654632, { knownToHaveAProfilePicture: true }],
+  [
+    33969, // Manticora
+    {
+      knownToHaveAProfilePicture: true,
+      uri: "https://www.manticora.dk/",
+    },
+  ],
+  [477845, { knownToHaveAProfilePicture: true }],
+  [10095150, { knownToHaveAProfilePicture: true }],
 ]);
 
 export async function getBandsWeHavePlayedWith() {
@@ -39,7 +68,6 @@ export async function getBandsWeHavePlayedWith() {
     Songkick.MetroArea & {
       playedWithCount: number;
       mostRecentlyAt: Date;
-      knownToHaveAProfilePicture: boolean;
     }
   >();
   for (const event of events) {
@@ -53,13 +81,12 @@ export async function getBandsWeHavePlayedWith() {
           existingEntry.mostRecentlyAt > new Date(event.start.date)
             ? existingEntry.mostRecentlyAt
             : new Date(event.start.date);
+        const bandMeta = bandMetaData.get(performance.artist.id);
         bandsWeHavePlayedWith.set(performance.artist.id, {
           ...performance.artist,
           playedWithCount,
           mostRecentlyAt,
-          knownToHaveAProfilePicture: bandIdsKnownToHaveAProfilePicture.has(
-            performance.artist.id,
-          ),
+          ...bandMeta,
         });
       }
     }
@@ -68,8 +95,10 @@ export async function getBandsWeHavePlayedWith() {
     .sort((a, b) => b.mostRecentlyAt.getTime() - a.mostRecentlyAt.getTime())
     .sort((a, b) => b.playedWithCount - a.playedWithCount)
     .sort((a, b) => {
-      const aHasProfilePicture = a.knownToHaveAProfilePicture;
-      const bHasProfilePicture = b.knownToHaveAProfilePicture;
+      const aHasProfilePicture =
+        "knownToHaveAProfilePicture" in a && a.knownToHaveAProfilePicture;
+      const bHasProfilePicture =
+        "knownToHaveAProfilePicture" in b && b.knownToHaveAProfilePicture;
       if (aHasProfilePicture && !bHasProfilePicture) return -1;
       if (!aHasProfilePicture && bHasProfilePicture) return 1;
       return 0;
