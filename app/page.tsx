@@ -548,7 +548,7 @@ Z"
               key={band.id}
               href={band.uri}
               target="_blank"
-              className="flex flex-1 rounded-[33%] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none aspect-square text-center"
+              className="shadow-lg shadow-black/40 flex flex-1 rounded-[33%] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none aspect-square text-center"
               style={{
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                 backgroundImage: `url(https://images.sk-static.com/images/media/profile_images/artists/${band.id}/huge_avatar)`,
@@ -579,7 +579,7 @@ Z"
               key={band.id}
               href={band.uri}
               target="_blank"
-              className="flex flex-1 rounded-[33px] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none text-center"
+              className="shadow-lg shadow-black/40 lex flex-1 rounded-[33px] justify-self-center items-end justify-center gap-2 text-xl lg:text-3xl leading-none text-center"
               style={{
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                 backgroundImage: `url(https://images.sk-static.com/images/media/profile_images/artists/${band.id}/huge_avatar)`,
