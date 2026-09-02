@@ -11,15 +11,15 @@
   "dependencies": {
     "@lionralfs/discogs-client": "^4.1.4",
     "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "26.4.0",
+    "@types/node": "26.4.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
     "@vercel/analytics": "^2.0.1",
     "autoprefixer": "10.5.4",
     "date-fns": "^4.4.0",
     "eslint": "10.9.1",
-    "eslint-config-next": "16.3.3",
-    "next": "16.3.3",
+    "eslint-config-next": "16.3.4",
+    "next": "16.3.4",
     "postcss": "8.5.26",
     "react": "19.2.8",
     "react-dom": "19.2.8",
@@ -29,7 +29,7 @@
     "typescript": "7.0.2"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.6",
+    "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1"
   }
 }
