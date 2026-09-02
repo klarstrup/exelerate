@@ -174,19 +174,6 @@ export default async function Home() {
                 </span>
               </>
             ) : null}
-            {nextShows && nextShows.length > 1 ? (
-              <span className="whitespace-nowrap">
-                {" "}
-                +{" "}
-                <a
-                  target="_blank"
-                  href={`https://www.songkick.com/artists/6777179-exelerate`}
-                  style={{ fontSize: "0.8em" }}
-                >
-                  <big>{nextShows.length - 1} future shows</big>
-                </a>
-              </span>
-            ) : null}
             {ticketLink ? (
               <>
                 <br />
@@ -198,6 +185,23 @@ export default async function Home() {
                   Get tickets
                 </a>
               </>
+            ) : null}
+            {nextShows && nextShows.length > 1 ? (
+              <span
+                className="whitespace-nowrap"
+                style={{ fontSize: "0.75em" }}
+              >
+                <br />+
+                <a
+                  target="_blank"
+                  href={`https://www.songkick.com/artists/6777179-exelerate`}
+                >
+                  <big>
+                    {nextShows.length - 1} future{" "}
+                    {nextShows.length - 1 === 1 ? "show" : "shows"}
+                  </big>
+                </a>
+              </span>
             ) : null}
           </center>
         ) : null}
