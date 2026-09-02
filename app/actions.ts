@@ -72,6 +72,7 @@ const bandMetaData = new Map<number, BandMetaData>([
   [9563419, { knownToHaveAProfilePicture: true, hasExelerater: true }],
   [7313689, { knownToHaveAProfilePicture: true }],
   [10413808, { knownToHaveAProfilePicture: true }],
+  [1156526, { knownToHaveAProfilePicture: true }],
 
   [6777179, { knownToHaveAProfilePicture: true }],
   [8972589, { knownToHaveAProfilePicture: true }],
@@ -105,7 +106,7 @@ const bandMetaData = new Map<number, BandMetaData>([
 
 export async function getBandsWeHavePlayedWith() {
   const [events, ...additionalArtists] = await Promise.all([
-    getPastEvents(6777179), // Street Fighter
+    getPastEvents(6777179), // Exelerate
     getArtistById(1156526), // Street Fighter
     getArtistById(10189431), // Vulvatorious
     getArtistById(10413608), // Dødnavn!
