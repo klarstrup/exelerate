@@ -33,9 +33,16 @@ export namespace Songkick {
     displayName: string;
     billing: Billing;
     billingIndex: number;
-    artist: MetroArea;
+    artist: Artist;
   }
 
+  export interface Artist {
+    id: number;
+    displayName: string;
+    uri: string;
+    identifier?: Identifier[];
+    country?: Series;
+  }
   export interface MetroArea {
     id: number;
     displayName: string;

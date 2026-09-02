@@ -25,6 +25,45 @@ const getPastEvents = (artistId: number) =>
     resultsPage.totalEntries ? resultsPage.results.event : [],
   );
 
+const getUpcomingEvents = (artistId: number) =>
+  fetchSongKick<{
+    resultsPage: {
+      status: string;
+      results: { event: Songkick.Event[] };
+      perPage: number;
+      page: number;
+      totalEntries: number;
+    };
+  }>(`artists/${artistId}/calendar.json`).then(({ resultsPage }) =>
+    resultsPage.totalEntries ? resultsPage.results.event : [],
+  );
+
+const searchArtists = (query: string) =>
+  fetchSongKick<{
+    resultsPage: {
+      status: string;
+      results: { artist: Songkick.Artist[] };
+      perPage: number;
+      page: number;
+      totalEntries: number;
+    };
+  }>(`search/artists.json?query=${encodeURIComponent(query)}`).then(
+    ({ resultsPage }) =>
+      resultsPage.totalEntries ? resultsPage.results.artist : [],
+  );
+const getArtistById = (artistId: number) =>
+  fetchSongKick<{
+    resultsPage: {
+      status: string;
+      results: { artist: Songkick.Artist[] };
+      perPage: number;
+      page: number;
+      totalEntries: number;
+    };
+  }>(`artists/${artistId}.json`).then(({ resultsPage }) =>
+    resultsPage.totalEntries ? resultsPage.results.artist[0] : null,
+  );
+
 type BandMetaData = {
   knownToHaveAProfilePicture?: boolean;
   uri?: string;
@@ -61,11 +100,16 @@ const bandMetaData = new Map<number, BandMetaData>([
 ]);
 
 export async function getBandsWeHavePlayedWith() {
-  const events = await getPastEvents(6777179);
+  const [events, ...additionalArtists] = await Promise.all([
+    getPastEvents(1156526), // Street Fighter
+    getArtistById(10189431), // Vulvatorious
+    getArtistById(10413608), // Dødnavn!
+    getArtistById(9563419), // Ethereal Kingdoms
+  ]);
 
   const bandsWeHavePlayedWith = new Map<
     number,
-    Songkick.MetroArea & {
+    Songkick.Artist & {
       playedWithCount: number;
       mostRecentlyAt: Date;
     }
@@ -90,6 +134,19 @@ export async function getBandsWeHavePlayedWith() {
         });
       }
     }
+  }
+  for (const artist of additionalArtists) {
+    if (!artist) continue;
+    const existingEntry = bandsWeHavePlayedWith.get(artist.id);
+    const playedWithCount = existingEntry?.playedWithCount || 0;
+    const mostRecentlyAt = existingEntry?.mostRecentlyAt || new Date();
+    const bandMeta = bandMetaData.get(artist.id);
+    bandsWeHavePlayedWith.set(artist.id, {
+      ...artist,
+      playedWithCount,
+      mostRecentlyAt,
+      ...bandMeta,
+    });
   }
   return Array.from(bandsWeHavePlayedWith.values())
     .sort((a, b) => b.mostRecentlyAt.getTime() - a.mostRecentlyAt.getTime())
