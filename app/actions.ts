@@ -55,7 +55,7 @@ export const getArtistById = async (artistId: number) =>
   fetchSongKick<{
     resultsPage: {
       status: string;
-      results: { artist: Songkick.Artist };
+      results: { artist: Songkick.Artist & { onTourUntil?: string } };
     };
   }>(`artists/${artistId}.json`).then(
     ({ resultsPage }) => resultsPage.results.artist ?? null,
@@ -67,9 +67,9 @@ type BandMetaData = {
   hasExelerater?: boolean;
 };
 const bandMetaData = new Map<number, BandMetaData>([
-  [10189431, { knownToHaveAProfilePicture: true, hasExelerater: true }],
+  [10189431, { knownToHaveAProfilePicture: true }],
   [10413608, { knownToHaveAProfilePicture: true }],
-  [9563419, { knownToHaveAProfilePicture: true, hasExelerater: true }],
+  [9563419, { knownToHaveAProfilePicture: true }],
   [7313689, { knownToHaveAProfilePicture: true }],
   [10413808, { knownToHaveAProfilePicture: true }],
   [1156526, { knownToHaveAProfilePicture: true }],
@@ -93,6 +93,8 @@ const bandMetaData = new Map<number, BandMetaData>([
   [173674, { knownToHaveAProfilePicture: true }],
   [5216478, { knownToHaveAProfilePicture: true }],
   [1654632, { knownToHaveAProfilePicture: true }],
+  [8446963, { knownToHaveAProfilePicture: true }],
+  [4876603, { knownToHaveAProfilePicture: true }],
   [
     33969, // Manticora
     {
@@ -102,10 +104,14 @@ const bandMetaData = new Map<number, BandMetaData>([
   ],
   [477845, { knownToHaveAProfilePicture: true }],
   [10095150, { knownToHaveAProfilePicture: true }],
+  [10326019, { knownToHaveAProfilePicture: true }],
+  [10408671, { knownToHaveAProfilePicture: true }],
 ]);
 
 export async function getBandsWeHavePlayedWith() {
-  const [events, ...additionalArtists] = await Promise.all([
+  const now = new Date();
+  const [upcomingEvents, pastEvents, ...additionalArtists] = await Promise.all([
+    getUpcomingEvents(6777179), // Exelerate
     getPastEvents(6777179), // Exelerate
     getArtistById(1156526), // Street Fighter
     getArtistById(10189431), // Vulvatorious
@@ -120,9 +126,10 @@ export async function getBandsWeHavePlayedWith() {
     Songkick.Artist & {
       playedWithCount: number;
       mostRecentlyAt: Date;
+      soonestAt: Date;
     }
   >();
-  for (const event of events) {
+  for (const event of [...upcomingEvents, ...pastEvents]) {
     if (event.type !== "Concert") continue;
     for (const performance of event.performance) {
       if (performance.artist.id === 6777179) continue;
@@ -138,6 +145,7 @@ export async function getBandsWeHavePlayedWith() {
         ...performance.artist,
         playedWithCount,
         mostRecentlyAt,
+        soonestAt: new Date(event.start.date),
         ...bandMeta,
       });
     }
@@ -152,6 +160,9 @@ export async function getBandsWeHavePlayedWith() {
       ...artist,
       playedWithCount,
       mostRecentlyAt,
+      soonestAt: artist.onTourUntil
+        ? new Date(artist.onTourUntil)
+        : new Date(0),
       ...bandMeta,
     });
   }
@@ -161,6 +172,12 @@ export async function getBandsWeHavePlayedWith() {
     .sort((a, b) => b.mostRecentlyAt.getTime() - a.mostRecentlyAt.getTime())
     .sort((a, b) => b.playedWithCount - a.playedWithCount)
     .sort((a, b) => {
+      if (b.soonestAt < now && a.soonestAt < now) return 0;
+      if (b.soonestAt < now) return -1;
+      if (a.soonestAt < now) return 1;
+      return a.soonestAt.getTime() - b.soonestAt.getTime();
+    })
+    .sort((a, b) => {
       const aHasProfilePicture =
         "knownToHaveAProfilePicture" in a && a.knownToHaveAProfilePicture;
       const bHasProfilePicture =
@@ -168,6 +185,5 @@ export async function getBandsWeHavePlayedWith() {
       if (aHasProfilePicture && !bHasProfilePicture) return -1;
       if (!aHasProfilePicture && bHasProfilePicture) return 1;
       return 0;
-    })
-    .sort((band) => ("hasExelerater" in band && band.hasExelerater ? -1 : 1));
+    });
 }
