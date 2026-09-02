@@ -12,7 +12,7 @@ const fetchSongKick = async <T>(input: string | URL, init?: RequestInit) => {
   return fetchJson<T>(url, init);
 };
 
-const getPastEvents = (artistId: number) =>
+export const getPastEvents = async (artistId: number) =>
   fetchSongKick<{
     resultsPage: {
       status: string;
@@ -25,7 +25,7 @@ const getPastEvents = (artistId: number) =>
     resultsPage.totalEntries ? resultsPage.results.event : [],
   );
 
-const getUpcomingEvents = (artistId: number) =>
+export const getUpcomingEvents = async (artistId: number) =>
   fetchSongKick<{
     resultsPage: {
       status: string;
@@ -38,7 +38,7 @@ const getUpcomingEvents = (artistId: number) =>
     resultsPage.totalEntries ? resultsPage.results.event : [],
   );
 
-const searchArtists = (query: string) =>
+export const searchArtists = async (query: string) =>
   fetchSongKick<{
     resultsPage: {
       status: string;
@@ -51,24 +51,28 @@ const searchArtists = (query: string) =>
     ({ resultsPage }) =>
       resultsPage.totalEntries ? resultsPage.results.artist : [],
   );
-const getArtistById = (artistId: number) =>
+export const getArtistById = async (artistId: number) =>
   fetchSongKick<{
     resultsPage: {
       status: string;
-      results: { artist: Songkick.Artist[] };
-      perPage: number;
-      page: number;
-      totalEntries: number;
+      results: { artist: Songkick.Artist };
     };
-  }>(`artists/${artistId}.json`).then(({ resultsPage }) =>
-    resultsPage.totalEntries ? resultsPage.results.artist[0] : null,
+  }>(`artists/${artistId}.json`).then(
+    ({ resultsPage }) => resultsPage.results.artist ?? null,
   );
 
 type BandMetaData = {
   knownToHaveAProfilePicture?: boolean;
   uri?: string;
+  hasExelerater?: boolean;
 };
 const bandMetaData = new Map<number, BandMetaData>([
+  [10189431, { knownToHaveAProfilePicture: true, hasExelerater: true }],
+  [10413608, { knownToHaveAProfilePicture: true }],
+  [9563419, { knownToHaveAProfilePicture: true, hasExelerater: true }],
+  [7313689, { knownToHaveAProfilePicture: true }],
+  [10413808, { knownToHaveAProfilePicture: true }],
+
   [6777179, { knownToHaveAProfilePicture: true }],
   [8972589, { knownToHaveAProfilePicture: true }],
   [9117009, { knownToHaveAProfilePicture: true }],
@@ -101,10 +105,13 @@ const bandMetaData = new Map<number, BandMetaData>([
 
 export async function getBandsWeHavePlayedWith() {
   const [events, ...additionalArtists] = await Promise.all([
-    getPastEvents(1156526), // Street Fighter
+    getPastEvents(6777179), // Street Fighter
+    getArtistById(1156526), // Street Fighter
     getArtistById(10189431), // Vulvatorious
     getArtistById(10413608), // Dødnavn!
     getArtistById(9563419), // Ethereal Kingdoms
+    getArtistById(7313689), // Maelsteria
+    getArtistById(10413808), // Praeludium
   ]);
 
   const bandsWeHavePlayedWith = new Map<
@@ -117,29 +124,28 @@ export async function getBandsWeHavePlayedWith() {
   for (const event of events) {
     if (event.type !== "Concert") continue;
     for (const performance of event.performance) {
-      if (performance.artist.id !== 6777179) {
-        const existingEntry = bandsWeHavePlayedWith.get(performance.artist.id);
-        const playedWithCount = (existingEntry?.playedWithCount || 0) + 1;
-        const mostRecentlyAt =
-          existingEntry?.mostRecentlyAt &&
-          existingEntry.mostRecentlyAt > new Date(event.start.date)
-            ? existingEntry.mostRecentlyAt
-            : new Date(event.start.date);
-        const bandMeta = bandMetaData.get(performance.artist.id);
-        bandsWeHavePlayedWith.set(performance.artist.id, {
-          ...performance.artist,
-          playedWithCount,
-          mostRecentlyAt,
-          ...bandMeta,
-        });
-      }
+      if (performance.artist.id === 6777179) continue;
+      const existingEntry = bandsWeHavePlayedWith.get(performance.artist.id);
+      const playedWithCount = (existingEntry?.playedWithCount || 0) + 1;
+      const mostRecentlyAt =
+        existingEntry?.mostRecentlyAt &&
+        existingEntry.mostRecentlyAt > new Date(event.start.date)
+          ? existingEntry.mostRecentlyAt
+          : new Date(event.start.date);
+      const bandMeta = bandMetaData.get(performance.artist.id);
+      bandsWeHavePlayedWith.set(performance.artist.id, {
+        ...performance.artist,
+        playedWithCount,
+        mostRecentlyAt,
+        ...bandMeta,
+      });
     }
   }
   for (const artist of additionalArtists) {
     if (!artist) continue;
     const existingEntry = bandsWeHavePlayedWith.get(artist.id);
     const playedWithCount = existingEntry?.playedWithCount || 0;
-    const mostRecentlyAt = existingEntry?.mostRecentlyAt || new Date();
+    const mostRecentlyAt = existingEntry?.mostRecentlyAt || new Date(0);
     const bandMeta = bandMetaData.get(artist.id);
     bandsWeHavePlayedWith.set(artist.id, {
       ...artist,
@@ -148,7 +154,9 @@ export async function getBandsWeHavePlayedWith() {
       ...bandMeta,
     });
   }
+
   return Array.from(bandsWeHavePlayedWith.values())
+    .sort((a, b) => a.displayName.localeCompare(b.displayName))
     .sort((a, b) => b.mostRecentlyAt.getTime() - a.mostRecentlyAt.getTime())
     .sort((a, b) => b.playedWithCount - a.playedWithCount)
     .sort((a, b) => {
@@ -159,5 +167,6 @@ export async function getBandsWeHavePlayedWith() {
       if (aHasProfilePicture && !bHasProfilePicture) return -1;
       if (!aHasProfilePicture && bHasProfilePicture) return 1;
       return 0;
-    });
+    })
+    .sort((band) => ("hasExelerater" in band && band.hasExelerater ? -1 : 1));
 }
