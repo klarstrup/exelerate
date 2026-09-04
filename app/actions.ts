@@ -81,7 +81,14 @@ const bandMetaData = new Map<number, BandMetaData>([
   ],
   [7313689, { knownToHaveAProfilePicture: true }],
   [10413808, { knownToHaveAProfilePicture: true }],
-  [1156526, { knownToHaveAProfilePicture: true }],
+  [
+    1156526,
+    {
+      knownToHaveAProfilePicture: true,
+      mostRecentlyAt: new Date("2024-05-11"),
+      playedWithCount: 3,
+    },
+  ],
 
   [6777179, { knownToHaveAProfilePicture: true }],
   [8972589, { knownToHaveAProfilePicture: true }],
