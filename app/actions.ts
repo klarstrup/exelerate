@@ -65,11 +65,18 @@ type BandMetaData = {
   knownToHaveAProfilePicture?: boolean;
   uri?: string;
   hasExelerater?: boolean;
+  mostRecentlyAt?: Date;
 };
 const bandMetaData = new Map<number, BandMetaData>([
   [10189431, { knownToHaveAProfilePicture: true }],
   [10413608, { knownToHaveAProfilePicture: true }],
-  [9563419, { knownToHaveAProfilePicture: true }],
+  [
+    9563419,
+    {
+      knownToHaveAProfilePicture: true,
+      mostRecentlyAt: new Date("2022-08-27"),
+    },
+  ],
   [7313689, { knownToHaveAProfilePicture: true }],
   [10413808, { knownToHaveAProfilePicture: true }],
   [1156526, { knownToHaveAProfilePicture: true }],
