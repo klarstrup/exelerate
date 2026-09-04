@@ -127,6 +127,7 @@ const bandMetaData = new Map<number, BandMetaData>([
   [4242016, { knownToHaveAProfilePicture: true }],
   [10089035, { knownToHaveAProfilePicture: true }],
   [9476064, { knownToHaveAProfilePicture: true }],
+  [7641719, { knownToHaveAProfilePicture: true }],
 ]);
 
 export async function getBandsWeHavePlayedWith() {

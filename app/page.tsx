@@ -574,6 +574,7 @@ Z"
                 band.knownToHaveAProfilePicture
               ),
           )
+          .sort((a, b) => a.displayName.localeCompare(b.displayName))
           .map((band) => (
             <a
               key={band.id}
@@ -592,7 +593,7 @@ Z"
                 width: "100%",
               }}
             >
-              {band.displayName.replace(" (DK)", "")}
+              {band.displayName.replace(" (DK)", "")} ({band.playedWithCount})
             </a>
           ))}
       </div>
