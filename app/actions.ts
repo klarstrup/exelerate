@@ -73,7 +73,7 @@ const bandMetaData = new Map<number, BandMetaData>([
   [10413608, { knownToHaveAProfilePicture: true }],
   [
     9563419,
-    {
+    { // Ethereal Kingdoms
       knownToHaveAProfilePicture: true,
       mostRecentlyAt: new Date("2022-08-27"),
       playedWithCount: 6,
@@ -83,7 +83,7 @@ const bandMetaData = new Map<number, BandMetaData>([
   [10413808, { knownToHaveAProfilePicture: true }],
   [
     1156526,
-    {
+    { // Street Fighter
       knownToHaveAProfilePicture: true,
       mostRecentlyAt: new Date("2024-05-11"),
       playedWithCount: 3,
