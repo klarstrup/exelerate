@@ -66,6 +66,7 @@ type BandMetaData = {
   uri?: string;
   hasExelerater?: boolean;
   mostRecentlyAt?: Date;
+  playedWithCount?: number;
 };
 const bandMetaData = new Map<number, BandMetaData>([
   [10189431, { knownToHaveAProfilePicture: true }],
@@ -75,6 +76,7 @@ const bandMetaData = new Map<number, BandMetaData>([
     {
       knownToHaveAProfilePicture: true,
       mostRecentlyAt: new Date("2022-08-27"),
+      playedWithCount: 6,
     },
   ],
   [7313689, { knownToHaveAProfilePicture: true }],
@@ -169,6 +171,7 @@ export async function getBandsWeHavePlayedWith() {
     const mostRecentlyAt = existingEntry?.mostRecentlyAt || new Date(0);
     const bandMeta = bandMetaData.get(artist.id);
     bandsWeHavePlayedWith.set(artist.id, {
+      ...existingEntry,
       ...artist,
       playedWithCount,
       mostRecentlyAt,
