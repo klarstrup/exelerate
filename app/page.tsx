@@ -592,8 +592,9 @@ Z"
                   "0 0 5rem black,0 0 4rem black,0 0 3rem black,0 0 2rem black",
                 width: "100%",
               }}
+              title={JSON.stringify(band, null, 2)}
             >
-              {band.displayName.replace(" (DK)", "")} ({band.playedWithCount})
+              {band.displayName.replace(" (DK)", "")}
             </a>
           ))}
       </div>
