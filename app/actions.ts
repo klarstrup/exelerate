@@ -73,7 +73,8 @@ const bandMetaData = new Map<number, BandMetaData>([
   [10413608, { knownToHaveAProfilePicture: true }],
   [
     9563419,
-    { // Ethereal Kingdoms
+    {
+      // Ethereal Kingdoms
       knownToHaveAProfilePicture: true,
       mostRecentlyAt: new Date("2022-08-27"),
       playedWithCount: 6,
@@ -83,7 +84,8 @@ const bandMetaData = new Map<number, BandMetaData>([
   [10413808, { knownToHaveAProfilePicture: true }],
   [
     1156526,
-    { // Street Fighter
+    {
+      // Street Fighter
       knownToHaveAProfilePicture: true,
       mostRecentlyAt: new Date("2024-05-11"),
       playedWithCount: 3,
@@ -128,6 +130,12 @@ const bandMetaData = new Map<number, BandMetaData>([
   [10089035, { knownToHaveAProfilePicture: true }],
   [9476064, { knownToHaveAProfilePicture: true }],
   [7641719, { knownToHaveAProfilePicture: true }],
+  [7313694, { knownToHaveAProfilePicture: true }],
+  [7860594, { knownToHaveAProfilePicture: true }],
+  [4956413, { knownToHaveAProfilePicture: true }],
+  [8704733, { knownToHaveAProfilePicture: true }],
+  [10338546, { knownToHaveAProfilePicture: true }],
+  [7313684, { knownToHaveAProfilePicture: true }],
 ]);
 
 export async function getBandsWeHavePlayedWith() {
