@@ -70,7 +70,14 @@ type BandMetaData = {
 };
 const bandMetaData = new Map<number, BandMetaData>([
   [10189431, { knownToHaveAProfilePicture: true }],
-  [10413608, { knownToHaveAProfilePicture: true }],
+  [
+    10413608,
+    {
+      knownToHaveAProfilePicture: true,
+      playedWithCount: 1,
+      mostRecentlyAt: new Date("2026-09-11"),
+    },
+  ],
   [
     9563419,
     {
