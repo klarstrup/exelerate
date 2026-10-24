@@ -144,6 +144,7 @@ const bandMetaData = new Map<number, BandMetaData>([
   [10338546, { knownToHaveAProfilePicture: true }],
   [7313684, { knownToHaveAProfilePicture: true }],
   [137334, { knownToHaveAProfilePicture: true }],
+  [10418182, { knownToHaveAProfilePicture: true }],
 ]);
 
 export async function getBandsWeHavePlayedWith() {
@@ -157,6 +158,7 @@ export async function getBandsWeHavePlayedWith() {
     getArtistById(9563419), // Ethereal Kingdoms
     getArtistById(7313689), // Maelsteria
     getArtistById(10413808), // Praeludium
+    getArtistById(10418182), // Liuwina
   ]);
 
   const bandsWeHavePlayedWith = new Map<
